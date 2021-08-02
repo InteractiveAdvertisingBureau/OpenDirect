@@ -10,7 +10,4 @@ OpenDirect-OOH is an extension of the OpenDirect schema, particularly around the
 
 OpenDirect-OOH uses the concept of ‘OOHbjects’ which are used to discover and target the multidimensional aspect of OOH media. An OOH media owner/ publisher can use one or more OOHbjects to translate their sales policy into DealIDs or Products that can then be discovered, targeted and traded programmatically.
 
-Creative Assignment has been omitted from the OpenDirect-OOH 1.5.1 document as this will be addressed in OpenDirect (OOH) 2.0 using the AdCom model as described in the IAB Tech Lab's OpenDirect 2.0 documentation for Video and OOH media support.
-
-
-The detailed changes be found in [OpenDirect_OOH_1-5-1_v1-0.pdf](OpenDirect_OOH_1-5-1_v1-0.pdf)
+Full implementation documentation, schemas and examples for OpenDirect OOH can be found here [OpenDirect_OOH_1-5-1_v1-2](https://github.com/Outsmart-OOH/ooh_open_direct/blob/master/docs/v1-2/OpenDirect_OOH_1-5-1_v1-2.md)
