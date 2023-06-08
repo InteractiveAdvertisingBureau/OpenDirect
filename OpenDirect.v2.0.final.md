@@ -1,6 +1,6 @@
 ![IAB Tech Lab](https://drive.google.com/uc?id=10yoBoG5uRETSXRrnJPUDuONujvADrSG1)
 
-# **OpenDirect Specification v2.0**
+# **OpenDirect Specification v2.1**
 
 #### FINAL v2.0
 
