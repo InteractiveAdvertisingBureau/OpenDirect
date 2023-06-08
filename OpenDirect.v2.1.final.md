@@ -2,9 +2,7 @@
 
 # **OpenDirect Specification v2.1**
 
-#### FINAL v2.0
-
-**February 2019**
+**August 2023**
 
 **About the IAB Technology Lab**
 
