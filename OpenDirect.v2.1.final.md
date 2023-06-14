@@ -267,7 +267,9 @@ The OrderSearch object can be used to search for orders that have an order statu
 |**comments**|Optional comments as to why the Change is being requested/proposed. |string _(1000)_ |
 |**contacts**|The list of contacts to use for this change. This list of contacts is in addition to the buyer’s and advertiser’s list of contacts.<p>The list must contain unique contact types (for example, only one billing contact).|[CONTACT](#object_contact) array
 |**orderid***|The ID of the Order that the Change is Requested for.| string _(36)_ |
+|**lineid**|The ID of the Line in the Order that the Change is Requested for (if the Change Request is needed at line level)| string _(36)_ |
 |**requesterid***|The OrganisationID of the Change Requester usually the AgencyID if the change was requested by an Agency or the PublisherID if the change was requested by the Vendor. | string _(36)_ |
+|**providerdata**|The ProviderData object is used for buyers to detail structured information that may be used to identify their order in a seller's system using their own IDs or references. |object|
 |**status**|Specifies the Status of the Change Request. |enum (PENDING, APPROVED, REJECTED)
 |**webhook**|URI which is called when the change is approved, rejected or modified by the Seller.<p>URI is called with a PUT request containing the Change Request ID. | string _(36)_ |
 |**ext**|Optional vendor-specific extensions. |ext object|
