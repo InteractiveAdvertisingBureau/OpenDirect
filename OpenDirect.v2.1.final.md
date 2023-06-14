@@ -38,6 +38,7 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  Creative](#object_creative)
     - [Object:  Line](#object_line)
     - [Object:  Message](#object_message)
+    - [Object:  OOHbject](#object_oohbject)
     - [Object:  Order](#object_order)
     - [Object:  Organization](#object_organization)
     - [Object:  Placement](#object_placement)
@@ -334,6 +335,7 @@ _Notes: The user may update a line only if it’s in the Draft state. If the lin
 |**frequencyinterval**|Defines the frequency cap intervals that the API supports.<p>The frequency interval specifies the units in which the frequency count is expressed. For example, if a line’s frequency count is 2 and interval is Day, display the ad to the same user a Max 2 times in the same calendar day.|enum (Day, Month, Week, Hour, LineDuration)
 |**reservedexpirydate** |The date and time that the reserved inventory will expire.<p>If the line is reserved, the expiry date must be set.|string (date-time)
 |**targeting**|The creative assigned to the LINE resource is display when the line includes user segments and the delivery engine can determine whether the user matches the specified segments.|[AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
+|**targeting**|The segments used to target users and determine product availability.| OOHbject array |
 |**providerdata**|The ProviderData object is used for buyers to detail structured information that may be used to identify their order in a seller's system using their own IDs or references. |object|
 |**pmp** | | |
 |**ext**|Optional vendor-specific extensions. |ext object|
