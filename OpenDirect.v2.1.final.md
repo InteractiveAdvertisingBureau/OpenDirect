@@ -32,6 +32,7 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  Account](#object_account)   
     - [Object:  AdUnit](#object_adunit)
     - [Object:  Address](#object_address)
+    - [Object: AdvertiserBrand](#object_advertiserbrand)
     - [Object:  Assignment](#object_assignment)
     - [Object:  ChangeRequest](#object_changerequest)
     - [Object:  Contact](#object_contact)
@@ -223,7 +224,9 @@ Ad Unit contains exactly one AdCOM Ad Specification
 |**name** |A name to identify this Ad Unit |string _(255)_ |
 |**spec*** |The technical specifications of this Ad Unit|[AdCOM **Placement** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_placement)
 |
+
 _* required_
+
 
 ## Object:  Address <a name="object_address"></a>
 
@@ -238,7 +241,20 @@ The address object is used to provide values for the [ORGANIZATION](#object:_org
 |**addressline2** |The optional second line of the address. |string _(255)_ |
 |**postalcode**|The postal or ZIP code for the address. |string _(15)_ |
 |**state** |The state or province for the address. |string _(36)_ |
+
 _* required_
+
+
+## Object: AdvertiserBrand <a name="object_advertiserbrand"></a>
+
+Defines the details of a Brand associated with an organization
+
+| Attribute            | Description                                                     | Type         |
+| -------------------- | --------------------------------------------------------------- | ------------ |
+| **id***                   | A system-generated opaque ID that uniquely identifies the brand | String (255) |
+| **name***                 | The brand's display name                                        | String (255) |
+| **organizationid***       | The ID of the organization that owns the brand                  | String (36)  |
+| eids                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the AdvertiderBrand to the buyer                       | Array                                  |
 
 
 ## Object:  Assignment <a name="object_assignment"></a>
