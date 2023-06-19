@@ -46,6 +46,8 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  Product](#object_product)
     - [Object:  ProviderData](#object_providerdata)
     - [Object:  Stats](#object_stats)
+    - [Object: EID](#object_eid)
+    - [Object: TPID](#object_tpid)
     - [Collection Objects](#collection_objects)
     - [General Support Requirements](#general_support_requirements)
     - [Authentication](#authentication)
@@ -254,7 +256,7 @@ Defines the details of a Brand associated with an organization
 | **id***                   | A system-generated opaque ID that uniquely identifies the brand | String (255) |
 | **name***                 | The brand's display name                                        | String (255) |
 | **organizationid***       | The ID of the organization that owns the brand                  | String (36)  |
-| eids                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the AdvertiderBrand to the buyer                       | Array                                  |
+| **eids**                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the AdvertiderBrand to the buyer                       | Array                                  |
 
 
 ## Object:  Assignment <a name="object_assignment"></a>
@@ -532,6 +534,68 @@ The Stats resource contains reporting data about a Line.
 |**clicks**|**The number of clicks to date. The value must be zero if no clicks have occurred.| integer
 |**ctr**|The click through rate to date. The formula to calculate CTR is (clicks / impressions) x 100 | number
 |**spend**|The amount spent to date. | number
+
+
+## Object: EID <a name="object_eid"></a>
+
+Extended identifiers support in the OpenDirect specification allows buyers to use third party identifiers in ther trading process. This object can contain one or more TPIDs from a single source or a technology provider. The publisher should ensure that business agreements allow for the sending of this data.
+
+
+<table>
+  <tr>
+    <td><strong>Attribute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td><strong>Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td><strong>Description</strong></td>
+  </tr>
+  <tr>
+    <td><code>source</code></td>
+    <td>string</td>
+    <td>Source or technology provider responsible for the set of included IDs. Expressed as a top-level domain.</td>
+  </tr>
+  <tr>
+    <td><code>name</code></td>
+    <td>string</td>
+    <td>Name of Source or technology provider responsible for the set of included IDs.</td>
+  </tr>
+  <tr>
+    <td><code>tpids</code></td>
+    <td>object array</td>
+    <td>Array of third party IDs <code>TPID</code> objects from the given source. Refer to 3.11 Extended Identifier UIDs</td>
+ </tr>
+  <tr>
+    <td><code>ext</code></td>
+    <td>object</td>
+    <td>Placeholder for exchange-specific extensions to OpenDirect.</td>
+     </td>
+     </td>
+  </tr>
+</table>
+
+
+## Object: TPID <a name="object_tpid"></a>
+
+This object contains a single third party identifier provided as part of extended identifiers. The publisher should ensure that business agreements allow for the sending of this data.
+
+
+<table>
+  <tr>
+    <td><strong>Attribute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td><strong>Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td><strong>Description</strong></td>
+  </tr>
+  <tr>
+    <td><code>id</code></td>
+    <td>string</td>
+    <td>The identifier for the Third Party.</td>
+  </tr>
+  <tr>
+    <td><code>ext</code></td>
+    <td>object</td>
+    <td>Placeholder for specific extensions to this object.</td>
+     </td>
+     </td>
+  </tr>
+</table>
 
 
 # Collection Objects <a name="collection_objects"></a>
