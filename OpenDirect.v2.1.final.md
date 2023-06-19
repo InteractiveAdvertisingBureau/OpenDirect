@@ -207,7 +207,9 @@ The Account owns the orders and creative.
 |**buyerid*** |An Id that identifies the organization that is acting as the buyer. The Publisher generates the BuyerId. If the advertiser is performing their own buys, AdvertiserId and BuyerId must be the same.|string _(36)_ |
 |**thirdpartyid** |An ID that identifies the organization upon who's behalf an Order is being placed (e.g. a group media agency).|string _(36)_ |
 |**name***|The name of the account. Used for display purposes. |string _(255)_ |
+|**status** | A value that indicates the current state of the Account. The following are the possible values.<br>• Pending – The account is yet to be approved; however, the buyer may create a draft order and have the ability to reserve this order at the publishers discretion.<br>• Approved – The account is approved and can be used for trading.<br>• Disapproved – The account’s identity could not be verified. The account may not create and book orders. <br>  | enum (Pending, Approved, Disapproved)| 
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 
