@@ -452,6 +452,7 @@ A publisher may also create an organization for itself for the purpose of reques
 |**name*** |The organization’s display name.<p>Cannot be an empty string. Must be unique. |string _(120)_
 |**phone** |The organization’s phone number. |string _(20)_
 |**status*** |A value that indicates the current state of the approval process. <p>The approval process confirms the organization’s identity. |enum (Pending, Approved, Disapproved, Limited)
+|**organizationtype***| The core activity that an organisation undertakes as a business e.g. advertiser, OOH Specialist or Media Agency| enum (Advertiser, Buyer, Agency)      |
 |**url** |A URL to the organization’s website. |string _(1024)_
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
