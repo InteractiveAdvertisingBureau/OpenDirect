@@ -540,11 +540,19 @@ The Stats resource contains reporting data about a Line.
 |Attribute|Description|Type|
 |---|---|---|
 |**reportdate**|A system-generated opaque ID that uniquely identifies this resource.|string _datetime_ |
-|**impressions:**| **The number of impressions served to date.<p />The value must be zero if no impressions have been served | integer
-|**clicks**|**The number of clicks to date. The value must be zero if no clicks have occurred.| integer
+|**impressions**| The number of impressions served to date.<p />The value must be zero if no impressions have been served | integer
+|**clicks**|The number of clicks to date. The value must be zero if no clicks have occurred.| integer
 |**ctr**|The click through rate to date. The formula to calculate CTR is (clicks / impressions) x 100 | number
 |**spend**|The amount spent to date. | number
-
+|**accountid**     | The Account the Stats are for                                                      | string (36)                                                                                                                    |
+|**orderid**         | The Order the Stats are for                                                        | string (36)                                                                                                                    |
+|**lineid**        | The Orderline the Stats are for                                                   | string (36)                                                                                                                    |
+|**reportstarttime** | The date report will start. if left blank, it will revert to the LineID start date | ISO-8601                                                                                                                       |
+|**reportendtime**   | The date report will end. if left blank, it will revert to the LineID end date     | ISO-8601                                                                                                                       |
+|**reportfields**    | Array fields that are to be included in the Stats report                             | array of enum (StartTime, EndTime, SpotLength, ShareOfTime, FrameReference, FrameID, CreativeID, BookedPlays, DeliveredPlays, Delivery) |
+|**timegranularity** | The time granularity of the Stats report                                           | enum (All, Week, Day, Hour, Spot)                                                                                              |
+|**reportformat**| requests the rerport output as a Verbose or Non-Verbose data format                | enum (Verbose, NonVerbose)                                                                                                     |
+|**webhook**| URI of the webhook to respond to                                                   | string (1024)                                                                                                                  |
 
 ## Object: EID <a name="object_eid"></a>
 
