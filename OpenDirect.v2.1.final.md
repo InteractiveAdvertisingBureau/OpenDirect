@@ -500,9 +500,14 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**retirementaate** |The date and time, in UTC, that the product may be removed from the bookable inventory.|string (date-time)
 |**tz** |The time zone that the product runs in.|string
 |**url** |A URL to the specification that describes the creative requirements.|string
-|**context** | | [AdCOM **Context** Object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_context)|
-|**source** ||<<definitions.adoc#_openrtb_source,OpenRTB.Source>>
-|**pmp** ||<<definitions.adoc#_openrtb_pmp,OpenRTB.PMP>>
+|**context** |Indicates the type of content being used or consumed by the user in which ads may appear. This table has values derived from the TAG Inventory Quality Guidelines (IQG). | [AdCOM **Context** Object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#list--content-contexts-)|
+|**source** |This object describes the nature and behavior of the entity that is the source of the bid request upstream from the exchange. The primary purpose of this object is to define post-auction or upstream decisioning when the exchange itself does not control the final decision. A common example of this is header bidding, but it can also apply to upstream server entities such as another RTB exchange, a mediation platform, or an ad server combines direct campaigns with 3rd party demand in decisioning.|[OpenRTB Source](https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/main/2.6.md#3222---object-segment-)
+|**pmp** |This object is the private marketplace container for direct deals between buyers and sellers that may pertain to this Product|[OpenRTB PMP](https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/main/2.6.md#3211---object-pmp-)
+|**producttargeting** | Array of producttargeting objects used to describe the product inventory and sales rules                                                                                  | producttargeting object |
+|**reservedexpirytime** | Defines the day of the week and time of day that represents the cut off point for expiry of a Line for the Product when it is “reserved”. | Date                    |
+|**advertiseridaccess**| List of AdvertiserIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
+|**buyeridaccess**| List of BuyerIDs with access to this Product. NULL = all accounts can access this product.                                                | Array                   |
+|**thirdpartyidaccess**| List of ThirdPartyIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
     
