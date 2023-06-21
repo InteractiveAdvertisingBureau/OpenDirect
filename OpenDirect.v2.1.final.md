@@ -273,7 +273,7 @@ Notes: The assignment must fail if the following are true.
 |**placementid***|The ID of the placement that will display the creative.|string _(36)_ |
 |**status**|A value that determines whether the creative serves.<p>The status may not transition from Inactive to Active.|enum (Active, Inactive)
 |**weight** |Determines how much the creative is displayed relative to the other creative assigned to the same line.<p>To provide even rotation, do not specify a weight.<p>If weight is specified, all assignments that specify the same line must specify a weight and the weight of all the assignments must add up to 100. If the weight of all assignments does not add up to 100, even rotation is applied.<p>Assignments with heavier weight get proportionally more rotation compared to those with lesser weight.<p>For example, if the line has 2 creative, A and B, assigned with the same dates, and A has weight 25 and B has weight 75, B will serve three times as often as A.| integer (1-100)
-|**targeting**|Object that assigns creative to play at the right place at the right time |OOHbject array|
+|**producttargeting**|Object that assigns creative to play at the right place at the right time |producttargeting array|
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
 
