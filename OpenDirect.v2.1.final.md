@@ -188,6 +188,7 @@ OpenDirect users include:
 * **Organization:** All organizations that work with the publisher must obtain an Organization ID, whether they are a buyer, or a brand advertiser.  
 * **Buyer:** The buyer is the organization that places orders and usually represents an agency acting on behalf of the advertiser, or the advertiser that places orders directly. If the buyer represents advertisers, the buyer must obtain formal consent for acting on behalf of the advertiser and provide proof of that consent to the publisher.
 * **Advertisers:** Advertisers represent the brands that purchase publisher inventory for advertising their brands. An advertiser may also be a buyer, but if the advertiser works with a buyer, the advertiser must provide formal consent to allow the buyer to act on its behalf. The Advertiser ID can be used to set up advertiser accounts in an agency or publisher’s OpenDirect system.
+* **Intermediary:** An intermidiary is a non-advertiser organization upon who's behalf an order is being placed (e.g. a group media agency).
 
 
 # SPECIFICATION <a name="specification"></a>
@@ -225,7 +226,7 @@ Ad Unit contains exactly one AdCOM Ad Specification
 |**id***|An Id to uniquely identify this Ad Unit within the product|string _(36)_|
 |**name** |A name to identify this Ad Unit |string _(255)_ |
 |**spec*** |The technical specifications of this Ad Unit|[AdCOM **Placement** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_placement)
-|
+
 
 _* required_
 
