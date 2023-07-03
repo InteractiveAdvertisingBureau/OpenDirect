@@ -975,7 +975,32 @@ AccessToken: <OAuth token>
 {
     "creativeid":"394857",
     "placementid":"394578",
-    "weight":75
+    "weight":75,
+    "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "dataSource": "Space",
+            "target": "tv_area",
+            "targetvalues": [
+                "North East"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [
+                "1",
+                "2",
+                "3",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    ]
 }
 ```
 
@@ -984,12 +1009,37 @@ AccessToken: <OAuth token>
 HTTP/1.1 200 OK
 Location: https://<host>/<path>/<version>/accounts/23873345/assignments/34534
 Content-Type: application/json
-Content-Length: 187
+Content-Length: 689
 {
     "creativeid":"394857",
-    "Pplacementid":"394578",
-    "id":"34534",
+    "placementid":"394578",
     "weight":75,
+    "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "dataSource": "Space",
+            "target": "tv_area",
+            "targetvalues": [
+                "North East"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [
+                "1",
+                "2",
+                "3",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    ],
+    "id":"34534",
     "status":"Active"
 }
 ```
@@ -1005,20 +1055,44 @@ AccessToken: <OAuth token>
 ```json
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 387
+Content-Length: 1171
 {
     "assignments":[
         {
             "creativeid":"394857",
             "placementid":"394578",
             "weight":75,
+            "producttargeting": [
+                {
+                    "name": "inventory",
+                    "type": "frames",
+                    "dataSource": "Space",
+                    "target": "tv_area",
+                    "targetvalues": [
+                        "North East"
+                    ]
+                },
+                {
+                    "name": "delivery",
+                    "type": "frames",
+                    "datasource": "time",
+                    "target": "days",
+                    "targetvalues": [
+                                "1",
+                                "2",
+                                "3",
+                                "8",
+                                "9",
+                                "10"
+                    ]
+                }
+            ],
             "id":"34534",
             "status":"Active"
         },
         {
             "creativeid":"54345",
             "placementid":"394578",
-            "weight":25,
             "id":"453365",
             "status":"Active"
         }
@@ -1054,18 +1128,17 @@ Content-Length: 108
 {
     "creativeid":"54345",
     "placementid":"394578",
-    "weight":25,
     "id":"453365",
     "status":"Active"
 }
 ```
 #### Example PATCH Request ####
 ```json
-PATCH https://<host>/<path>/<version>/accounts/23873345/assignments/453365 HTTP/1.1
+PATCH https://<host>/<path>/<version>/accounts/23873345/assignments/34534 HTTP/1.1
 Content-Type: application/json
 AccessToken: <OAuth token>
 {
-    "weight":30
+    "weight":80
 }
 ```
 
@@ -1073,12 +1146,37 @@ AccessToken: <OAuth token>
 ```json
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 108
+Content-Length: 689
 {
-    "creativeid":"54345",
+    "creativeid":"394857",
     "placementid":"394578",
-    "weight":30,
-    "id":"453365",
+    "weight":80,
+    "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "dataSource": "Space",
+            "target": "tv_area",
+            "targetvalues": [
+                "North East"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [
+                "1",
+                "2",
+                "3",
+                "8",
+                "9",
+                "10"
+            ]
+        }
+    ],
+    "id":"34534",
     "status":"Active"
 }
 ```
@@ -1094,7 +1192,7 @@ The user must have permissions to access the assignment. For example, advertiser
 
 #### Example Request ####
 ```json
-PATCH https://<host>/<path>/<version>/accounts/23873345/assignments/453365 HTTP/1.1
+PATCH https://<host>/<path>/<version>/accounts/23873345/assignments/453365?disable HTTP/1.1
 Content-Type: application/json
 AccessToken: <OAuth token>
 ```
@@ -1107,7 +1205,6 @@ Content-Length: 108
 {
     "creativeid":"54345",
     "placementid":"394578",
-    "weight":30,
     "id":"453365",
     "status":"Inactive"
 }
@@ -1118,44 +1215,72 @@ Content-Length: 108
 Gets a list of Assignments that match the specified filter criteria.
 
 #### Verb ####
-* **GET**: The response must support pagination. See Paging Query Parameters. The caller may use OData expressions with the following Assignment properties:
-    * CreativeId
-    * PlacementId
-    * StartDate
-    * EndDate
+* **GET**: The response must support pagination. See Paging Query Parameters. The user may use filter expressions with any of the Assignment properties:
+    * creativeid
+    * placementid
+    * status
+    * weight
+    * producttargeting
+
 
 #### Rules ####
 The user must have permissions to access the assignment. For example, advertisers and agencies may get assignments that they own. In addition, an agency may get assignments that belong to the accounts that they manage on behalf of advertisers.
 
 #### Example GET Request ####
 ```json
-GET https://<host>/<path>/<version>/accounts/23873345/assignments?$filter=LineId+eq+394578 HTTP/1.1
+GET https://<host>/<path>/<version>/accounts/23873345/assignments?placementid=394578 HTTP/1.1
 Accept: application/json
 AccessToken: <OAuth token>
 ```
 
 #### Example GET Response ####
 ```json
-HTTP/1.1 200 OK Content-Type: application/json Content-Length: 108
+HTTP/1.1 200 OK Content-Type: application/json
+Content-Length: 1171
 {
     "assignments":[
         {
             "creativeid":"394857",
             "placementid":"394578",
             "weight":75,
-            "id":"65433",
+            "producttargeting": [
+                {
+                    "name": "inventory",
+                    "type": "frames",
+                    "dataSource": "Space",
+                    "target": "tv_area",
+                    "targetvalues": [
+                        "North East"
+                    ]
+                },
+                {
+                    "name": "delivery",
+                    "type": "frames",
+                    "datasource": "time",
+                    "target": "days",
+                    "targetvalues": [
+                                "1",
+                                "2",
+                                "3",
+                                "8",
+                                "9",
+                                "10"
+                    ]
+                }
+            ],
+            "id":"34534",
             "status":"Active"
-        }, 
+        },
         {
             "creativeid":"54345",
             "placementid":"394578",
-            "weight":25,
             "id":"453365",
             "status":"Active"
         }
     ]
 }
 ```
+
 
 ## Path:  Accounts Creatives <a name="path_accounts_creatives"></a>
 
