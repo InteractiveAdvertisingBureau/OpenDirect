@@ -812,6 +812,7 @@ AccessToken: <OAuth token>
 {
     "advertiserid":"1234987",
     "buyerid":"34587",
+    "intermediaryid":"9876543",
     "name":"Brand A"
 }
 ```
@@ -825,8 +826,10 @@ Content-Length: 379
 {
     "advertiserid":"1234987",
     "buyerid":"34587",
-    "id":"23873345",
-    "name":"Brand A"
+    "intermediaryid":"9876543",
+    "name":"Brand A",
+    "status":"approved",
+    "id":"23873345"
 }
 ```
 
@@ -849,14 +852,17 @@ Content-Length: 187
         {
             "advertiserid":"1234987",
             "buyerid":"1234987",
-            "id":"9876542",
-            "name":"Brand B"
+            "name":"Brand B",
+            "status":"pending",
+            "id":"9876542"
         },
         {
             "advertiserid":"1234987",
             "buyerid":"34587",
-            "id":"23873345",
-            "name":"Brand A"
+            "intermediaryid":"9876543",
+            "name":"Brand A",
+            "status":"approved",
+            "id":"23873345"
         }
     ]
 }
@@ -886,8 +892,10 @@ Content-Length: 187
 {
     "advertiserid":"1234987",
     "buyerid":"34587",
-    "id":"23873345",
-    "name":"Brand A"
+    "intermediaryid":"9876543",
+    "name":"Brand A",
+    "status":"approved",
+    "id":"23873345"
 }
 ```
 
@@ -895,18 +903,22 @@ Content-Length: 187
 The response must support pagination. See Paging Query Parameters.
 
 #### Verb ####
-* **GET**: Gets a list of accounts that match the specified filter criteria. The user may use OData expressions with the following Account properties:
+* **GET**: Gets a list of accounts that match the specified filter criteria. The user may use filter expressions with any of the Account properties:
     * AdvertiserId
     * BuyerId
+    * intermediaryid
+    * name
+    * status
+    * id
 
 May also support getting a list of IDs.
 
 #### Rules ####
-Only an advertiser or a buyer who own the accounts can issue the request. User should be able to filter the accounts by any of the fields or field values of the owned account. Logical AND/OR condition of the fields shall be allowed.
+Only an advertiser or a buyer who own the accounts can issue the request. User should be able to filter the accounts by any of the fields or field values of the owned account. Logical AND/OR condition of the fields may be allowed.
 
 #### Example Request ####
 ```json
-GET Error! Hyperlink reference not valid.Error! Hyperlink reference not valid. HTTP/1.1
+GET https://<host>/<path>/<version>/accounts?name=*Brand*  HTTP/1.1
 Accept: application/json
 AccessToken: <OAuth token>
 ```
@@ -919,16 +931,19 @@ Content-Length: 187
 {
     "Accounts":[
         {
-            "advertiserid":"1234568",
-            "buyerid":"34587",
-            "id":"23873450",
-            "name":"Brand B"
+            "advertiserid":"1234987",
+            "buyerid":"1234987",
+            "name":"Brand B",
+            "status":"pending",
+            "id":"9876542"
         },
         {
             "advertiserid":"1234987",
             "buyerid":"34587",
-            "id":"23873345",
-            "name":"Brand A"
+            "intermediaryid":"9876543",
+            "name":"Brand A",
+            "status":"approved",
+            "id":"23873345"
         }
     ]
 }
