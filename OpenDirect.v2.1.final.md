@@ -2032,7 +2032,34 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1240
 
          }
         ]
-       } 
+      },
+      {
+        "id":"345234",
+        "bookingstatus":"Draft",
+        "comment":"Free form comment",
+        "enddate":"2014-12-10T18:00:00.000Z",
+        "frequencycount":3,
+        "frequencyinterval":"Day",
+        "name":"My Line 1",
+        "productid":"888899",
+        "ratetype":"CPM",
+        "rate":25.00,
+        "quantity":3000000,
+        "cost": 75000.00,
+        "startdate":"2014-12-05T06:00:00.000Z",
+        "targeting":[
+                {
+                  "id":"ABCD1234",
+                  "name":"Age",
+                  "value":"25-34"
+                },
+                {
+                  "id":"ABCD1235",  
+                  "name":"Gender",
+                  "value":"Male"
+                }
+              ]
+        }
     ]
 }
 ```
