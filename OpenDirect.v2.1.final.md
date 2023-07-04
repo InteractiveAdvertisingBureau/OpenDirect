@@ -400,7 +400,7 @@ To specify the individual line item details of the order, use the [LINE](#object
 |**brand** |A descriptive name for the brand being advertised. |string _(25)_
 |**currency*** |The publisher may enforce that all lines of the order specify products that use the same currency.<p>Uses ISO-4217 currency codes|string _(3_)
 |**budget** |The order’s estimated budget. The budget is directional; it is not used to limit the amount of money that the order spends. To determine the projected spend based on quantity, aggregate the Cost property for each line of the order.|number
-|**orderstatus*** |Specifies the Status of the Order.|enum (PENDING, OPTIONED, APPROVED, REJECTED)
+|**orderstatus*** |Specifies the Status of the Order.|enum (PENDING, APPROVED, REJECTED)
 |**packageonly** |Identifies whether the order is only available as a package or if specific items can be separated from the inventory.<p> A value of TRUE means the inventory is only available as a package.<p> A value of FALSE allows the buyer to select specific items from inventory.|boolean
 |**preferredbillingmethod** |The preferred billing method for this order.<p>The default is Electronic.<p>If the billing contact is not specified in the order, the billing contact comes from buyer’s list of contacts.|enum (Electronic, Postal)
 |**providerdata**|The ProviderData object is used for buyers to detail structured information that may be used to identify their order in a seller's system using their own IDs or references. |object|
@@ -1707,8 +1707,8 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
             "salesorderreference":"SO678",
             "barterorganisationid":"BO808",
             "other":{}
-      }
-
+       }
+     }
   ]
 }
 ```
@@ -1865,30 +1865,52 @@ POST https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines HTTP
 Content-Type: application/json
 AccessToken: <OAuth token>
 {
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "frequencycount":3,
-  "frequencyinterval":"Day",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+    "comment": "Free form comment",
+    "enddate": "2014-12-10T18:00:00.000Z",
+    "name": "My Line 1",
+    "productid": "456366",
+    "providerdata":  { "ponumber": "88873" } ,
+    "startdate": "2014-12-05T06:00:00.000Z",
+    "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["20"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["5"]
+
+        }
+
+    ]
+} 
 ```
 
 #### Example POST Response
@@ -1897,34 +1919,56 @@ AccessToken: <OAuth token>
 HTTP/1.1 200 OK
 Location: https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines/345233 
 Content-Type: application/json
-Content-Length: 878
+Content-Length: 1234
 {
   "id":"345233",
   "bookingstatus":"Draft",
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "frequencycount":3,
-  "frequencyinterval":"Day",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+  "comment": "Free form comment",
+  "enddate": "2014-12-10T18:00:00.000Z",
+  "name": "My Line 1",
+  "productid": "456366",
+  "providerdata":  { "ponumber": "88873" } ,
+  "startdate": "2014-12-05T06:00:00.000Z",
+  "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["20"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["5"]
+
+        }
+
+    ]
+} 
 ```
 
 #### Example GET Request
@@ -1938,37 +1982,58 @@ AccessToken: <OAuth token>
 #### Example GET Response
 
 ```json
-HTTP/1.1 200 OK Content-Type: application/json Content-Length: 587
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1240
 {
   "lines":[
     {
-        "id":"345233",
-        "bookingstatus":"Booked",
-        "comment":"Free form comment",
-        "enddate":"2014-12-10T18:00:00.000Z",
-        "frequencycount":3,
-        "frequencyinterval":"Day",
-        "name":"My Line 1",
-        "productid":"456366",
-        "ratetype":"CPM",
-        "rate":25.00,
-        "quantity":3000000,
-        "cost": 75000.00,
-        "startdate":"2014-12-05T06:00:00.000Z",
-        "targeting":[
-            {
-            "id":"ABCD1234",
-            "name":"Age",
-            "value":"25-34"
-            },
-            {
-            "id":"ABCD1235",  
-            "name":"Gender",
-            "value":"Male"
-            }
+      "id":"345233",
+      "bookingstatus":"Draft",
+      "comment": "Free form comment",
+      "enddate": "2014-12-10T18:00:00.000Z",
+      "name": "My Line 1",
+      "productid": "456366",
+      "providerdata":  { "ponumber": "88873" } ,
+      "startdate": "2014-12-05T06:00:00.000Z",
+      "producttargeting": [
+         {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+         },
+         {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6" ]
+
+         },
+         {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["20"]
+
+         },
+         {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["5"]
+
+         }
         ]
-    }
-  ]
+       } 
+    ]
 }
 ```
 
@@ -1995,34 +2060,56 @@ GET https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines/34523
 Accept: application/json
 AccessToken: <OAuth token>
 Example GET Response
-HTTP/1.1 200 OK Content-Type: application/json Content-Length: 158
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1234
 {
   "id":"345233",
   "bookingstatus":"Draft",
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "frequencycount":3,
-  "frequencyinterval":"Day",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+  "comment": "Free form comment",
+  "enddate": "2014-12-10T18:00:00.000Z",
+  "name": "My Line 1",
+  "productid": "456366",
+  "providerdata":  { "ponumber": "88873" } ,
+  "startdate": "2014-12-05T06:00:00.000Z",
+  "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["20"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["5"]
+
+        }
+
+    ]
+} 
 ```
 
 #### Example PATCH Request
@@ -2032,40 +2119,89 @@ PATCH https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines/345
 Content-Type: application/json
 AccessToken: <OAuth token>
 {
-  "frequencycount":NULL,
-  "frequencyinterval":NULL,
+  "producttargeting": [
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6", "7","8" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["30"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["10"]
+
+        }
+
+    ]
 }
 ```
 
 #### Example PATCH Response
 
 ```json
-HTTP/1.1 200 OK Content-Type: application/json Content-Length: 458
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1240
 {
   "id":"345233",
   "bookingstatus":"Draft",
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+  "comment": "Free form comment",
+  "enddate": "2014-12-10T18:00:00.000Z",
+  "name": "My Line 1",
+  "productid": "456366",
+  "providerdata":  { "ponumber": "88873" } ,
+  "startdate": "2014-12-05T06:00:00.000Z",
+  "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6", "7", "8" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["30"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["10"]
+
+        }
+
+    ]
+} 
 ```
 
 ### /accounts/{id}/orders/{id}/lines?$filter=
@@ -2124,32 +2260,56 @@ AccessToken: <OAuth token>
 #### Example Response
 
 ```json
-HTTP/1.1 200 OK Content-Type: application/json Content-Length: 458
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1239
 {
   "id":"345233",
   "bookingstatus":"PendingBooking",
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+  "comment": "Free form comment",
+  "enddate": "2014-12-10T18:00:00.000Z",
+  "name": "My Line 1",
+  "productid": "456366",
+  "providerdata":  { "ponumber": "88873" } ,
+  "startdate": "2014-12-05T06:00:00.000Z",
+  "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6", "7", "8" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["30"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["10"]
+
+        }
+
+    ]
+} 
 ```
 
 ### /accounts/{id}/orders/{id}/lines/{id}?reserve
@@ -2186,28 +2346,52 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 458
 {
   "id":"345233",
   "bookingstatus":"PendingReservation",
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+  "comment": "Free form comment",
+  "enddate": "2014-12-10T18:00:00.000Z",
+  "name": "My Line 1",
+  "productid": "456366",
+  "providerdata":  { "ponumber": "88873" } ,
+  "startdate": "2014-12-05T06:00:00.000Z",
+  "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6", "7", "8" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["30"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["10"]
+
+        }
+
+    ]
+} 
 ```
 
 ### /accounts/{id}/orders/{id}/lines/{id}?cancel
@@ -2239,29 +2423,53 @@ AccessToken: <OAuth token>
 HTTP/1.1 200 OK Content-Type: application/json Content-Length: 658
 {
   "id":"345233",
-  "bookingstatus":"Canceled",
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+  "bookingstatus":"Cancelled",
+  "comment": "Free form comment",
+  "enddate": "2014-12-10T18:00:00.000Z",
+  "name": "My Line 1",
+  "productid": "456366",
+  "providerdata":  { "ponumber": "88873" } ,
+  "startdate": "2014-12-05T06:00:00.000Z",
+  "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6", "7", "8" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["30"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["10"]
+
+        }
+
+    ]
+} 
 ```
 
 ### /accounts/{id}/orders/{id}/lines/{id}?reset
@@ -2294,28 +2502,52 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 458
 {
   "id":"345233",
   "bookingstatus":"Draft",
-  "comment":"Free form comment",
-  "enddate":"2014-12-10T18:00:00.000Z",
-  "name":"My Line 1",
-  "productid":"456366",
-  "ratetype":"CPM",
-  "rate":25.00,
-  "quantity":3000000,
-  "cost": 75000.00,
-  "startdate":"2014-12-05T06:00:00.000Z",
-  "targeting":[
-    {
-      "id":"ABCD1234",
-      "name":"Age",
-      "value":"25-34"
-    },
-    {
-      "id":"ABCD1235",  
-      "name":"Gender",
-      "value":"Male"
-    }
-  ]
-}
+  "comment": "Free form comment",
+  "enddate": "2014-12-10T18:00:00.000Z",
+  "name": "My Line 1",
+  "productid": "456366",
+  "providerdata":  { "ponumber": "88873" } ,
+  "startdate": "2014-12-05T06:00:00.000Z",
+  "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6", "7", "8" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["30"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["10"]
+
+        }
+
+    ]
+} 
 ```
 
 ## Path:  Organizations <a name="path_organizations"></a>
