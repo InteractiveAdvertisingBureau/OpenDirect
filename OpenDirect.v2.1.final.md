@@ -278,6 +278,7 @@ Notes: The assignment must fail if the following are true.
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
 
+
 ## Object:  ChangeRequest <a name="object_changerequest"></a>
 When an order has already been placed and a change is needed, the ChangeRequest resource can be used to request a change and subsequently modify the order pending the approval of the change request.
 
@@ -492,38 +493,57 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
 
+
+## Object: ProductAvailsSearch <a name="object_productavailssearch"></a>
+
+Defines search criteria used for requesting product availability and pricing within the given search criteria. 
+
+| Attribute          | Description                                                                                                                                                      | Type               |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| **productids**         | A list of IDs that identify the products on which to get availability and pricing information                                                                    | Array              |
+| **targeting**          | The segments to target. For example, behavioral, age, and gender segments.                                 | [AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
+| **producttargeting**          | The Inventory, Delivery, Investement and Distribution ProductTargeting objects to be targeted for the availability request                                             | producttargeting object array |
+| **accountid**          | The ID of the account that identifies the buyer, advertiser and any other stakeholders                                                                           | String(36)         |
+| **currency**           | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | Max 3 Char         |
+| **advertiserbrandid**  | An ID that uniquely identifies the Brand being advertised                                                                                                        | String (36)        |
+| **availabilityfields** | Defines the ProductTargeting object metrics that availability is returned as                                                                                                    | producttargeting object array |
+| **grouping**           | Defines the ProductTargeting object metrics that the availability output is grouped as                                                                                           | producttargeting object array |
+| **startdate**          | The desired start date for inventory delivery                                                                                                                    | ISO-8601           |
+| **enddate**            | The desired end date for inventory delivery                                                                                                                      | ISO-8601           |
+
+
 ## Object: ProductAvails <a name="object_productavails"></a>
 
 Defines the response to a request for product availability and pricing information at product Level
 
 | Attribute    | Description                                                                                                                                                      | Type                    |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| productid    | ID that identifies the product for which availability and pricing information is provided                                                                        | String(36)              |
-| accountid    | The ID of the account that identifies the buyer, advertiser and any other stakeholders.                                                                          | String(36)              |
-| availability | An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of ProductTargeting objects                                | Object                  |
-| currency     | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | String (3) \[ISO-4217\] |
-| price        | The product’s price based on OOHbject Targeting                                                                                                                  | Decimal                 |
-| startdate          | The requested start date for inventory delivery                                                                                                                    | ISO-8601           |
-| enddate            | The requested end date for inventory delivery                                                                                                                      | ISO-8601           |
+| **productid**    | ID that identifies the product for which availability and pricing information is provided                                                                        | String(36)              |
+| **accountid**    | The ID of the account that identifies the buyer, advertiser and any other stakeholders.                                                                          | String(36)              |
+| **availability** | The quantity available for booking for the specified date range. Availability for a given date range may vary.
+In order for products to be returned in a PRODUCT AVAILS SEARCH, product availability must be equal to or less than the value provided in the Quantity property of the PRODUCT AVAILS SEARCH object.
+
+For example, if Quantity is set to 500,000 in PRODUCT AVAILS SEARCH, impression availability for the product must be at least 500,000. However, if only 250,000 impressions are available, the product is not returned.
+
+Publishers may set an artificial limit on the maximum number of available impressions. If the quantity field in PRODUCT AVAILS SEARCH is not provided, all products matching other criteria are returned showing maximum availability.                                | Integer                 |
+| **productavailability** | An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of ProductTargeting objects                                | productavailability Object                  |
+| **currency**     | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | String (3) \[ISO-4217\] |
+| **pric**e        | The product’s price based on OOHbject Targeting                                                                                                                  | Decimal                 |
+| **startdate**          | The requested start date for inventory delivery                                                                                                                    | ISO-8601           |
+| **enddate**            | The requested end date for inventory delivery                                                                                                                      | ISO-8601           |
 
 
-## Object: ProductAvailsSearch <a name="object_productavailssearch"></a>
+## Object: ProductAvailability <a name="object_productavailability"></a>
 
-Defines search criteria used for requesting product availability and pricing within the given search criteria. This object is returned at OOHbject Level based on the OOHbject targeting criteria submitted.
+An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of producttargeting objects
 
-| Attribute          | Description                                                                                                                                                      | Type               |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| productids         | A list of IDs that identify the products on which to get availability and pricing information                                                                    | Array              |
-| targeting          | The segments to target. For example, behavioral, age, and gender segments.                                 | [AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
-| producttargeting          | The Inventory, Delivery, Investement and Distribution ProductTargeting objects to be targeted for the availability request                                             | producttargeting object array |
-| accountid          | The ID of the account that identifies the buyer, advertiser and any other stakeholders                                                                           | String(36)         |
-| currency           | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | Max 3 Char         |
-| advertiserbrandid  | An ID that uniquely identifies the Brand being advertised                                                                                                        | String (36)        |
-| availabilityfields | Defines the ProductTargeting object metrics that availability is returned as                                                                                                    | producttargeting object array |
-| grouping           | Defines the ProductTargeting object metrics that the availability output is grouped as                                                                                           | producttargeting object array |
-| startdate          | The desired start date for inventory delivery                                                                                                                    | ISO-8601           |
-| enddate            | The desired end date for inventory delivery                                                                                                                      | ISO-8601           |
-
+| Attribute | Description                                                                                                                                               | Type   |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **status**    | Summary definition of the inventory described in the Targeting Array as <ul><li>Available</li><li>Partially Available</li><li>Unavailable</li></ul> | String |
+| **reason**    | State the reason if Partially Available or Unavailable from the list <ul><li>Booked</li><li>Optioned</li><li>Excluded</li><li>OutOfCharge</li><li>Prohibited</li><li>Manual Trade Only</li><li>InvalidPeriodLength</li><li>InvalidFrameID</li><li>InvalidBudget</li><li>InvalidPrice</li><li>ClientDuplication</li><li>LocationDuplication</li><li>LocationJuxta</li></ul>| String |
+| **comment**   | Free text for an availability comment                                                                                                                     | String |
+| **context**   | Array of ProductTargeting objects describing the context of any Partially Available or Unavailable status e.g. this could be a frame that is causing a duplication error | Object |
+| **producttargeting** | Array of ProductTargeting objects describing the inventory that is at Available,  Partially Available or Unavailable status                                               | Object |
 
 ## Object:  ProductTargeting <a name="object_producttargeting"></a>
     
@@ -3372,163 +3392,163 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
 {
     "avails": [
         {
-            "Currency": "GBP",
-            "ProductId": "456366",
-            "Availability": [
+            "currency": "GBP",
+            "productid": "456366",
+            "productavailability": [
                 {
-                    "Status": "Available",
-                    "Reason": "",
-                    "Comment": "",
-                    "Context": [],
-                    "Targeting": [
+                    "status": "available",
+                    "reason": "",
+                    "comment": "",
+                    "context": [],
+                    "producttargeting": [
                         [
                             {
-                                "Name": "Inventory",
-                                "Type": "Frames",
-                                "DataSource": "Space",
-                                "Target": "frame_id",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "frames",
+                                "datasource": "SPACE",
+                                "target": "frame_id",
+                                "targetvalues": [
                                     "1234931339"
                                 ]
                             },
                             {
-                                "Name": "Delivery",
-                                "Type": "Frames",
-                                "DataSource": "ShareOfDisplay",
-                                "Target": "ShareOfTime",
-                                "TargetValues": [
+                                "name": "delivery",
+                                "type": "frames",
+                                "dataSource": "shareofdisplay",
+                                "Target": "shareoftime",
+                                "targetvalues": [
                                     "20"
                                 ]
                             },
                             {
-                                "Name": "Inventory",
-                                "Type": "Audience",
-                                "DataSource": "Metrics",
-                                "Target": "Impacts",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "audience",
+                                "datasource": "metrics",
+                                "target": "impacts",
+                                "targetvalues": [
                                     "15000"
                                 ]
                             },
                             {
-                                "Name": "Investment",
-                                "Type": "Frames",
-                                "DataSource": "GBP",
-                                "Target": "Fixed",
-                                "TargetValues": [
+                                "name": "investment",
+                                "type": "frames",
+                                "datasource": "GBP",
+                                "target": "fixed",
+                                "targetvalues": [
                                     "150"
                                 ]
                             }
                         ],
                         [
                             {
-                                "Name": "Inventory",
-                                "Type": "Frames",
-                                "DataSource": "Space",
-                                "Target": "frame_id",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "frames",
+                                "datasource": "SPACE",
+                                "target": "frame_id",
+                                "targetvalues": [
                                     "1235190735"
                                 ]
                             },
                             {
-                                "Name": "Delivery",
-                                "Type": "Frames",
-                                "DataSource": "ShareOfDisplay",
-                                "Target": "ShareOfTime",
-                                "TargetValues": [
+                                "name": "delivery",
+                                "type": "frames",
+                                "dataSource": "shareofdisplay",
+                                "Target": "shareoftime",
+                                "targetvalues": [
                                     "20"
                                 ]
                             },
                             {
-                                "Name": "Inventory",
-                                "Type": "Audience",
-                                "DataSource": "Metrics",
-                                "Target": "Impacts",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "audience",
+                                "datasource": "metrics",
+                                "target": "impacts",
+                                "targetvalues": [
                                     "25000"
                                 ]
                             },
                             {
-                                "Name": "Investment",
-                                "Type": "Frames",
-                                "DataSource": "GBP",
-                                "Target": "Fixed",
-                                "TargetValues": [
+                                "name": "investment",
+                                "type": "frames",
+                                "datasource": "GBP",
+                                "target": "fixed",
+                                "targetvalues": [
                                     "250"
                                 ]
                             }
                         ],
                         [
                             {
-                                "Name": "Inventory",
-                                "Type": "Frames",
-                                "DataSource": "Space",
-                                "Target": "frame_id",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "frames",
+                                "datasource": "SPACE",
+                                "target": "frame_id",
+                                "targetvalues": [
                                     "1234931338"
                                 ]
                             },
                             {
-                                "Name": "Delivery",
-                                "Type": "Frames",
-                                "DataSource": "ShareOfDisplay",
-                                "Target": "ShareOfTime",
-                                "TargetValues": [
+                                "name": "delivery",
+                                "type": "frames",
+                                "dataSource": "shareofdisplay",
+                                "Target": "shareoftime",
+                                "targetvalues": [
                                     "20"
                                 ]
                             },
                             {
-                                "Name": "Inventory",
-                                "Type": "Audience",
-                                "DataSource": "Metrics",
-                                "Target": "Impacts",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "audience",
+                                "datasource": "metrics",
+                                "target": "impacts",
+                                "targetvalues": [
                                     "10000"
                                 ]
                             },
                             {
-                                "Name": "Investment",
-                                "Type": "Frames",
-                                "DataSource": "GBP",
-                                "Target": "Fixed",
-                                "TargetValues": [
+                                "name": "investment",
+                                "type": "frames",
+                                "datasource": "GBP",
+                                "target": "fixed",
+                                "targetvalues": [
                                     "100"
                                 ]
                             }
                         ],
                         [
                             {
-                                "Name": "Inventory",
-                                "Type": "Frames",
-                                "DataSource": "Space",
-                                "Target": "frame_id",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "frames",
+                                "datasource": "SPACE",
+                                "target": "frame_id",
+                                "targetvalues": [
                                     "1235191547"
                                 ]
                             },
                             {
-                                "Name": "Delivery",
-                                "Type": "Frames",
-                                "DataSource": "ShareOfDisplay",
-                                "Target": "ShareOfTime",
-                                "TargetValues": [
+                                "name": "delivery",
+                                "type": "frames",
+                                "dataSource": "shareofdisplay",
+                                "Target": "shareoftime",
+                                "targetvalues": [
                                     "20"
                                 ]
                             },
                             {
-                                "Name": "Inventory",
-                                "Type": "Audience",
-                                "DataSource": "Metrics",
-                                "Target": "Impacts",
-                                "TargetValues": [
+                                "name": "inventory",
+                                "type": "audience",
+                                "datasource": "metrics",
+                                "target": "impacts",
+                                "targetvalues": [
                                     "30000"
                                 ]
                             },
                             {
-                                "Name": "Investment",
-                                "Type": "Frames",
-                                "DataSource": "GBP",
-                                "Target": "Fixed",
-                                "TargetValues": [
+                                "name": "investment",
+                                "type": "frames",
+                                "datasource": "GBP",
+                                "target": "fixed",
+                                "targetvalues": [
                                     "300"
                                 ]
                             }
@@ -3536,7 +3556,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                     ]
                 }
             ],
-            "Price": 800
+            "price": 800
         }
     ]
 }
