@@ -2643,6 +2643,18 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
       "phone":"2065550100",
       "status":"Approved",
       "url":"http://contoso.com"
+      "organizationtype":"advertiser",
+      "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+       ]
     }
   ]
 }
@@ -2709,6 +2721,18 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
     "phone":"2065550100",
     "status":"Approved",
     "url":"http://contoso.com"
+    "organizationtype":"advertiser",
+    "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+     ]
 }
 ```
 
@@ -2782,6 +2806,18 @@ Content-Type: application/json Content-Length: 1879
     "phone":"2065550100",
     "status":"Approved",
     "url":"http://contoso.com"
+    "organizationtype":"advertiser",
+    "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+     ]
 }
 ```
 
