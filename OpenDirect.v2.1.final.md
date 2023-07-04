@@ -464,7 +464,7 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**allownocreative** |A Boolean value that indicates whether line items assigned to this order may be booked before creative is assigned.<p> A value of TRUE allows lines to be booked without creative assigned.<p> Default value is FALSE and prevents lines from being booked when no creative is assigned.|boolean
 |**currency*** |Identifies the currency for BasePrice and MinSpend.<p>Using ,ISO-4217 currency code|string _(3)_
 |**baseprice*** |The product’s base retail price; this is not the rate card price.<p>The actual price may be more if targeting is specified.|number
-|**deliverytype** |Defines the possible types of delivery.|<<_opendirect_product_deliverytype,deliverytype>>
+|**deliverytype** |Defines the possible types of delivery.<br>• Exclusive – 100% share of voice.<br>• Guaranteed – Guaranteed delivery of all booked display and/or impressions<br>• Non-Guaranteed - Non-Guaranteed delivery of all booked display and/or impressions<br>| enum (exclusive, guaranteed, non-guaranteed)
 |**estdailyavails** |An estimated range of available daily impressions.<p>The ranges should be of the form: Thousands, Tens of Thousands, Hundreds of Thousands, and so on.|string
 |**domain** |Common definition for a domain name.| string _(1024)_
 |**icon** |URL to a thumbnail icon of the product. May be used to display next to the product in the product catalog.<p>Publishers should support icons that are 150x150 or less. The maximum size is 10 KB.|string _(1024)_
@@ -484,6 +484,7 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**source** |This object describes the nature and behavior of the entity that is the source of the bid request upstream from the exchange. The primary purpose of this object is to define post-auction or upstream decisioning when the exchange itself does not control the final decision. A common example of this is header bidding, but it can also apply to upstream server entities such as another RTB exchange, a mediation platform, or an ad server combines direct campaigns with 3rd party demand in decisioning.|[OpenRTB Source](https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/main/2.6.md#3222---object-segment-)
 |**pmp** |This object is the private marketplace container for direct deals between buyers and sellers that may pertain to this Product|[OpenRTB PMP](https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/main/2.6.md#3211---object-pmp-)
 |**producttargeting** | Array of producttargeting objects used to describe the product inventory and sales rules                                                                                  | producttargeting object |
+|**availsgroupby** | Array of producttargeting objects that describe the grouped fields that that the Availability data can be returned in                                                                                  | producttargeting object |
 |**reservedexpirytime** | Defines the day of the week and time of day that represents the cut off point for expiry of a Line for the Product when it is “reserved”. | Date                    |
 |**advertiseridaccess**| List of AdvertiserIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
 |**buyeridaccess**| List of BuyerIDs with access to this Product. NULL = all accounts can access this product.                                                | Array                   |
@@ -2872,7 +2873,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
       "ratetype":"CPM",
       "currency":"USD",
       "baseprice":25.00,
-      "deliveryyype":"Guaranteed",
+      "deliveryyype":"guaranteed",
       "domain":"mydomain.com",
       "estdailyavails":"Hundreds of Thousands",
       "icon":"http://<domain>/<path>/icon.jpg",
@@ -2917,6 +2918,97 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
       },
       "tz":"Eastern Standard Time",
       "url":"http://<domain>/<path>/creativespec.aspx"
+    },
+    {
+        "activedate": "2012-12-10T18:00:00.000Z",
+        "allownocreative": true,
+        "baseprice": 10000,
+        "currency": "GBP",
+        "deliverytype": "guaranteed",
+        "description": "All Digital 6-sheets in Metropolis",
+        "id": "456367",
+        "languages": ["EN"],
+        "leadtime": 1,
+        "name": "Metro",
+        "reservedexpirytime": "P7D",
+        "advertiseridaccess": ["adid1","adid2","adid3"],
+        "buyeridaccess": ["Buyidx"],
+        "intermediaryidaccess": [],
+        "producttargeting": [
+            {
+                "name": "inventory",
+                "type": "frames",
+                "datasource": "SPACE",
+                "target": "frame_id",
+                "targetvalues": [
+                    "1234931339",
+                    "1235190735",
+                    "1234931338",
+                    "1235191547",
+                    "1234931569",
+                    "1235202465"
+                ],
+                "selectable": false
+            },
+            {
+                "name": "delivery",
+                "type": "frames",
+                "datasource": "shareofdisplay",
+                "target": "shareoftime",
+                "selectable": false,
+                "default": 16.6
+            },
+            {
+                "name": "delivery",
+                "type": "frames",
+                "datasource": "shareofdisplay",
+                "target": "spot",
+                "selectable": false,
+                "default": 5
+            },
+            {
+                "Name": "prohibitions",
+                "Type": "frames",
+                "datasource": "SPACE",
+                "target": "Schools",
+                "targetvalues": [
+                    "1234931339",
+                    "1235190735"
+                ]
+            },
+            {
+                "Name": "Prohibitions",
+                "Type": "Frames",
+                "DataSource": "Space",
+                "Target": "HFSS",
+                "TargetValues": [
+                    "1234931569",
+                    "1235202465"
+                ]
+            }
+        ],
+        "availsgroupby": [
+            {
+                "name": "inventory",
+                "type": "frames",
+                "datasource": "SPACE",
+                "target": "frame_id"
+            },
+            {
+                "name": "inventory",
+                "type": "frames",
+                "datasource": "SPACE",
+                "target": "frame_type"
+            },
+            {
+                "name": "inventory",
+                "type": "frames",
+                "datasource": "SPACE",
+                "target": "format"
+            }
+        ],
+        "tz": "GMT",
+        "url": "http://<domain>/<path>/creativespec.aspx"
     }
   ]
 }
