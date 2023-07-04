@@ -3009,6 +3009,30 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
         ],
         "tz": "GMT",
         "url": "http://<domain>/<path>/creativespec.aspx"
+        "adunits":[
+            {
+                "id": "HDPS",
+                "name": "HD Portrait Static",
+                "spec": {
+                    "display": {
+                        "pos": 7,
+                        "w": 1080,
+                        "h": 1920,
+                    }
+                }
+            },
+            {
+                "id": "HDPV",
+                "name": "HD Portrait Video",
+                "spec": {
+                    "video": {
+                        "pos": 7,
+                        "w": 1080,
+                        "h": 1920,
+                    }
+                }
+            }
+        ],
     }
   ]
 }
