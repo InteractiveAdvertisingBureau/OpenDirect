@@ -492,6 +492,39 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
 
+## Object: ProductAvails <a name="object_productavails"></a>
+
+Defines the response to a request for product availability and pricing information at product Level
+
+| Attribute    | Description                                                                                                                                                      | Type                    |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| productid    | ID that identifies the product for which availability and pricing information is provided                                                                        | String(36)              |
+| accountid    | The ID of the account that identifies the buyer, advertiser and any other stakeholders.                                                                          | String(36)              |
+| availability | An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of ProductTargeting objects                                | Object                  |
+| currency     | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | String (3) \[ISO-4217\] |
+| price        | The product’s price based on OOHbject Targeting                                                                                                                  | Decimal                 |
+| startdate          | The requested start date for inventory delivery                                                                                                                    | ISO-8601           |
+| enddate            | The requested end date for inventory delivery                                                                                                                      | ISO-8601           |
+
+
+## Object: ProductAvailsSearch <a name="object_productavailssearch"></a>
+
+Defines search criteria used for requesting product availability and pricing within the given search criteria. This object is returned at OOHbject Level based on the OOHbject targeting criteria submitted.
+
+| Attribute          | Description                                                                                                                                                      | Type               |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| productids         | A list of IDs that identify the products on which to get availability and pricing information                                                                    | Array              |
+| targeting          | The segments to target. For example, behavioral, age, and gender segments.                                 | [AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
+| producttargeting          | The Inventory, Delivery, Investement and Distribution ProductTargeting objects to be targeted for the availability request                                             | producttargeting object array |
+| accountid          | The ID of the account that identifies the buyer, advertiser and any other stakeholders                                                                           | String(36)         |
+| currency           | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | Max 3 Char         |
+| advertiserbrandid  | An ID that uniquely identifies the Brand being advertised                                                                                                        | String (36)        |
+| availabilityfields | Defines the ProductTargeting object metrics that availability is returned as                                                                                                    | producttargeting object array |
+| grouping           | Defines the ProductTargeting object metrics that the availability output is grouped as                                                                                           | producttargeting object array |
+| startdate          | The desired start date for inventory delivery                                                                                                                    | ISO-8601           |
+| enddate            | The desired end date for inventory delivery                                                                                                                      | ISO-8601           |
+
+
 ## Object:  ProductTargeting <a name="object_producttargeting"></a>
     
 OpenDirect (and OpenRTB) trades with real time Audience impressions, whereas physical media such as Out-Of-Home can be sold in the wider dimensions of time, share of time, location and audience.
@@ -3227,7 +3260,289 @@ ProductAvails objects (one for each product specified in the request).
 
 Only organizations that have an Approved or Limited status may search for avails.
 
-#### Example Request
+#### Example Request (Out-Of-Home)
+
+```json
+POST https://<host>/<path>/<version>/products/avails HTTP/1.1 Accept: application/json
+AccessToken: <OAuth token>
+{
+    "AccountId": "23873345",
+    "EndDate": "2014-12-10T18:00:00.000Z",
+    "ProductIds": [ "456367" ],
+    "StartDate": "2014-12-05T06:00:00.000Z",
+
+    "availabilityfields": [
+
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id"
+        },
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days"
+        },
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "time",
+            "target": "hours"
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "dataSource": "shareofdisplay",
+            "target": "shareoftime"
+        },
+        {
+            "name": "inventory",
+            "type": "audience",
+            "datasource": "metrics",
+            "target": "impacts"
+        },
+        {
+            "name": "investment",
+            "type": "frames",
+            "datasource": "GBP",
+            "target": "fixed"
+        }
+
+
+    ],
+
+
+    "grouping": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "datasource": "SPACE",
+            "target": "frame_id"
+        }
+    ],
+
+    "producttargeting": [
+        {
+            "name": "inventory",
+            "type": "frames",
+            "dataSource": "SPACE",
+            "target": "frame_id",
+            "targetvalues": [
+                "1234931339",
+                "1235190735",
+                "1234931338",
+                "1235191547"
+            ]
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "time",
+            "target": "days",
+            "targetvalues": [ "5", "6" ]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "shareoftime",
+            "targetvalues": ["20"]
+
+        },
+        {
+            "name": "delivery",
+            "type": "frames",
+            "datasource": "shareofdisplay",
+            "target": "spot",
+            "targetvalues": ["5"]
+
+        }
+
+    ]
+} 
+```
+
+#### Example Response (Out-Of-Home)
+
+```json
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
+{
+    "avails": [
+        {
+            "Currency": "GBP",
+            "ProductId": "456366",
+            "Availability": [
+                {
+                    "Status": "Available",
+                    "Reason": "",
+                    "Comment": "",
+                    "Context": [],
+                    "Targeting": [
+                        [
+                            {
+                                "Name": "Inventory",
+                                "Type": "Frames",
+                                "DataSource": "Space",
+                                "Target": "frame_id",
+                                "TargetValues": [
+                                    "1234931339"
+                                ]
+                            },
+                            {
+                                "Name": "Delivery",
+                                "Type": "Frames",
+                                "DataSource": "ShareOfDisplay",
+                                "Target": "ShareOfTime",
+                                "TargetValues": [
+                                    "20"
+                                ]
+                            },
+                            {
+                                "Name": "Inventory",
+                                "Type": "Audience",
+                                "DataSource": "Metrics",
+                                "Target": "Impacts",
+                                "TargetValues": [
+                                    "15000"
+                                ]
+                            },
+                            {
+                                "Name": "Investment",
+                                "Type": "Frames",
+                                "DataSource": "GBP",
+                                "Target": "Fixed",
+                                "TargetValues": [
+                                    "150"
+                                ]
+                            }
+                        ],
+                        [
+                            {
+                                "Name": "Inventory",
+                                "Type": "Frames",
+                                "DataSource": "Space",
+                                "Target": "frame_id",
+                                "TargetValues": [
+                                    "1235190735"
+                                ]
+                            },
+                            {
+                                "Name": "Delivery",
+                                "Type": "Frames",
+                                "DataSource": "ShareOfDisplay",
+                                "Target": "ShareOfTime",
+                                "TargetValues": [
+                                    "20"
+                                ]
+                            },
+                            {
+                                "Name": "Inventory",
+                                "Type": "Audience",
+                                "DataSource": "Metrics",
+                                "Target": "Impacts",
+                                "TargetValues": [
+                                    "25000"
+                                ]
+                            },
+                            {
+                                "Name": "Investment",
+                                "Type": "Frames",
+                                "DataSource": "GBP",
+                                "Target": "Fixed",
+                                "TargetValues": [
+                                    "250"
+                                ]
+                            }
+                        ],
+                        [
+                            {
+                                "Name": "Inventory",
+                                "Type": "Frames",
+                                "DataSource": "Space",
+                                "Target": "frame_id",
+                                "TargetValues": [
+                                    "1234931338"
+                                ]
+                            },
+                            {
+                                "Name": "Delivery",
+                                "Type": "Frames",
+                                "DataSource": "ShareOfDisplay",
+                                "Target": "ShareOfTime",
+                                "TargetValues": [
+                                    "20"
+                                ]
+                            },
+                            {
+                                "Name": "Inventory",
+                                "Type": "Audience",
+                                "DataSource": "Metrics",
+                                "Target": "Impacts",
+                                "TargetValues": [
+                                    "10000"
+                                ]
+                            },
+                            {
+                                "Name": "Investment",
+                                "Type": "Frames",
+                                "DataSource": "GBP",
+                                "Target": "Fixed",
+                                "TargetValues": [
+                                    "100"
+                                ]
+                            }
+                        ],
+                        [
+                            {
+                                "Name": "Inventory",
+                                "Type": "Frames",
+                                "DataSource": "Space",
+                                "Target": "frame_id",
+                                "TargetValues": [
+                                    "1235191547"
+                                ]
+                            },
+                            {
+                                "Name": "Delivery",
+                                "Type": "Frames",
+                                "DataSource": "ShareOfDisplay",
+                                "Target": "ShareOfTime",
+                                "TargetValues": [
+                                    "20"
+                                ]
+                            },
+                            {
+                                "Name": "Inventory",
+                                "Type": "Audience",
+                                "DataSource": "Metrics",
+                                "Target": "Impacts",
+                                "TargetValues": [
+                                    "30000"
+                                ]
+                            },
+                            {
+                                "Name": "Investment",
+                                "Type": "Frames",
+                                "DataSource": "GBP",
+                                "Target": "Fixed",
+                                "TargetValues": [
+                                    "300"
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            ],
+            "Price": 800
+        }
+    ]
+}
+```
+
+#### Example Request (Display)
 
 ```json
 POST https://<host>/<path>/<version>/products/avails HTTP/1.1 Accept: application/json
@@ -3255,7 +3570,7 @@ AccessToken: <OAuth token>
 }
 ```
 
-#### Example Response
+#### Example Response (Display)
 
 ```json
 HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
