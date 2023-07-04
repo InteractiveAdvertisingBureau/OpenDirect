@@ -487,7 +487,7 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**reservedexpirytime** | Defines the day of the week and time of day that represents the cut off point for expiry of a Line for the Product when it is “reserved”. | Date                    |
 |**advertiseridaccess**| List of AdvertiserIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
 |**buyeridaccess**| List of BuyerIDs with access to this Product. NULL = all accounts can access this product.                                                | Array                   |
-|**thirdpartyidaccess**| List of ThirdPartyIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
+|**intermediaryidaccess**| List of IntermediaryIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
 
