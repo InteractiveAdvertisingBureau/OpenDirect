@@ -400,7 +400,7 @@ To specify the individual line item details of the order, use the [LINE](#object
 |**brand** |A descriptive name for the brand being advertised. |string _(25)_
 |**currency*** |The publisher may enforce that all lines of the order specify products that use the same currency.<p>Uses ISO-4217 currency codes|string _(3_)
 |**budget** |The order’s estimated budget. The budget is directional; it is not used to limit the amount of money that the order spends. To determine the projected spend based on quantity, aggregate the Cost property for each line of the order.|number
-|**orderstatus*** |Specifies the Status of the Order.|enum (PENDING, APPROVED, REJECTED)
+|**orderstatus*** |Specifies the Status of the Order.|enum (PENDING, OPTIONED, APPROVED, REJECTED)
 |**packageonly** |Identifies whether the order is only available as a package or if specific items can be separated from the inventory.<p> A value of TRUE means the inventory is only available as a package.<p> A value of FALSE allows the buyer to select specific items from inventory.|boolean
 |**preferredbillingmethod** |The preferred billing method for this order.<p>The default is Electronic.<p>If the billing contact is not specified in the order, the billing contact comes from buyer’s list of contacts.|enum (Electronic, Postal)
 |**providerdata**|The ProviderData object is used for buyers to detail structured information that may be used to identify their order in a seller's system using their own IDs or references. |object|
@@ -1687,7 +1687,28 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "orderstatus":"PENDING",
       "preferredbillingmethod":"Electronic",
       "startdate":"2014-11-24T06:00:00.000Z"
-    }
+    },
+    {
+      "id":"1235873",
+      "accountid":"23873345",
+      "publisherid":"7987654",
+      "brand":"Four Candles",
+      "budget":100000,
+      "currency":"USD",
+      "enddate":"2014-12-24T18:00:00.000Z",
+      "name":"Two Ronnies Trading",
+      "orderstatus":"APPROVED",
+      "preferredbillingmethod":"Electronic",
+      "startdate":"2014-11-24T06:00:00.000Z"
+      "providerdata": {
+            "campaignid":"A00123",
+            "campaignname":"Goodnight From Him",
+            "ponumber":"PO80X",
+            "salesorderreference":"SO678",
+            "barterorganisationid":"BO808",
+            "other":{}
+      }
+
   ]
 }
 ```
@@ -1770,7 +1791,7 @@ The response must support pagination. See Paging Query Parameters.
 
 #### Verbs
 
-* **GET**: (optional) Gets a list of orders that match the specified filter criteria. The user may use OData expressions with the following Order properties:
+* **GET**: (optional) Gets a list of orders that match the specified filter criteria. The user may use expressions with the following Order properties:
     * accountid
     * publisherid
     * orderstatus
