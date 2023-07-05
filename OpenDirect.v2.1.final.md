@@ -599,15 +599,19 @@ The Stats resource contains reporting data about a Line.
 |**clicks**|The number of clicks to date. The value must be zero if no clicks have occurred.| integer
 |**ctr**|The click through rate to date. The formula to calculate CTR is (clicks / impressions) x 100 | number
 |**spend**|The amount spent to date. | number
-|**accountid**     | The Account the Stats are for                                                      | string (36)                                                                                                                    |
-|**orderid**         | The Order the Stats are for                                                        | string (36)                                                                                                                    |
-|**lineid**        | The Orderline the Stats are for                                                   | string (36)                                                                                                                    |
-|**reportstarttime** | The date report will start. if left blank, it will revert to the LineID start date | ISO-8601                                                                                                                       |
-|**reportendtime**   | The date report will end. if left blank, it will revert to the LineID end date     | ISO-8601                                                                                                                       |
-|**reportfields**    | Array fields that are to be included in the Stats report                             | array of enum (StartTime, EndTime, SpotLength, ShareOfTime, FrameReference, FrameID, CreativeID, BookedPlays, DeliveredPlays, Delivery) |
-|**timegranularity** | The time granularity of the Stats report                                           | enum (All, Week, Day, Hour, Spot)                                                                                              |
-|**reportformat**| requests the rerport output as a Verbose or Non-Verbose data format                | enum (Verbose, NonVerbose)                                                                                                     |
-|**webhook**| URI of the webhook to respond to                                                   | string (1024)                                                                                                                  |
+|**frame_id**                | The Publisher Frame ID                                                                                                                                                                                                            | String (128)             |
+|**player_ref**               | The MAC Address or other reference uniquely identifying a digital player or frame                                                                                                                                                 | Max length 32 characters |
+|**spot_start_utc**           | The UTC start time of the spot.                                                                                                                                                                                                   | ISO-8601                 |
+|**spot_start_tz**            | Time zone offset for the spot start time (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                  | ±hh:mm<br>Z              |
+|**spot_end_utc**             | The UTC end time of the spot.                                                                                                                                                                                                     | ISO-8601                 |
+|**spot_end_tz**              | Time zone offset for the spot end time. (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                   | ±hh:mm<br>Z              |
+|**spot_length**              | Spot Length in milliseconds.                                                                                                                                                                                                      | number                   |
+|**share_of_time**            | Share of time. This must be provided for scrollers, but its presence is not policed by Playout. Media Owners must determine when this must be supplied.                                                                           | number (decimal)         |
+|**creative_id**              | Media Owner-defined creative identifier.                                                                                                                                                                                          | String (64)              |
+|**creative_name**            | Creative title, to assist with reporting. Usually a filename.                                                                                                                                                                     | String (128)             |
+|**third_party_creative_ref** | Creative reference provided by a third-party such as the creative agency. This might be a URL or a GUID, for example.                                                                                                             | String (128)             |
+|**creative_trigger_event**   | The creative trigger event, indicating what prompted the given creative to be used.                                                                                                                                               | String (64)              |
+|**media_owner_playout_ref**  | Media Owner-defined reference representing this record. For the Media Owner, this should uniquely identify this record across all time. (Note that records supplied by other Media Owners may happen to use the same ID however.) | String (48)              |
 
 ## Object: EID <a name="object_eid"></a>
 
@@ -1674,7 +1678,7 @@ Adds an Order or gets a list of orders that the user has access to. The response
 An advertiser or agency may add orders to accounts that they own. In addition; an agency may add orders to accounts that they manage on behalf of advertisers.
 For advertisers, the list will include only orders that they own. For agencies, the list will include the orders that they own and the orders that belong to accounts that they manage on behalf of advertisers.
 
-#### ￼￼Example POST Request
+#### Example POST Request
 
 ```json
 POST https://<host>/<path>/<version>/accounts/23873345/orders HTTP/1.1 
@@ -4137,23 +4141,100 @@ Get the delivery statistics for a specific Line in an Order
 #### Verbs
 * **GET**: Gets the delivery information
 
-#### Example GET Request
+#### Example GET Request (Display)
 ```json
 GET https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines/345233/stats HTTP/1.1 
 Content-Type: application/json
 AccessToken: <OAuth token>
 ```
-#### Example GET Response
+#### Example GET Response (Display)
 ```json
 HTTP/1.1 200 OK Content-Type: application/json Content-Length: 658
-{
+stats:[
+    {
     "reportdate": "2014-12-25T18:00:00.000Z",
     "impressions": 2853232,
     "clicks": 25434,
     "ctr": 0.8914,
     "spend": 71330.80
-}
+    }
+]
+
 ```
+#### Example GET Request (DOOH)
+```json
+GET https://<host>/<path>/<version>/accounts/23873345/orders/1235873/lines/345234/stats HTTP/1.1 
+Content-Type: application/json
+AccessToken: <OAuth token>
+```
+#### Example GET Response (DOOH)
+```json
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 658
+stats : [
+    {
+    "reportdate": "2023-08-05T00:00:00Z",
+    "frame_id":"1234567890"
+    "player_ref":"001B638445E6"
+    "spot_start_utc":"2023-07-05T11:00:00Z"
+    "spot_start_tz":"+01:00Z"
+    "spot_end_utc":"2023-07-05T11:00:10Z"
+    "spot_end_tz":"+01:00Z"
+    "spot_length":"10"
+    "share_of_time":""
+    "creative_id":"C73839587"
+    "creative_name":"Balloon Door"
+    "third_party_creative_ref":"Balloon Door Final Final Final"
+    "creative_trigger_event":"Windy Weather"
+    "media_owner_playout_ref":"123456789020230705T110000"
+    },
+    {
+    "reportdate": "2023-08-05T00:00:00Z",
+    "frame_id":"1234567890"
+    "player_ref":"001B638445E6"
+    "spot_start_utc":"2023-07-05T11:01:00Z"
+    "spot_start_tz":"+01:00Z"
+    "spot_end_utc":"2023-07-05T11:01:10Z"
+    "spot_end_tz":"+01:00Z"
+    "spot_length":"10"
+    "share_of_time":""
+    "creative_id":"C73839588"
+    "creative_name":"Parma Door"
+    "third_party_creative_ref":"Parma Door Final Final Final Final"
+    "creative_trigger_event":"Hot Weather"
+    "media_owner_playout_ref":"123456789020230705T110100"
+    },
+    {...}
+]
+```
+
+#### Example GET Request (Traditional OOH)
+```json
+GET https://<host>/<path>/<version>/accounts/23873345/orders/1235874/lines/345235/stats HTTP/1.1 
+Content-Type: application/json
+AccessToken: <OAuth token>
+```
+#### Example GET Response (Traditional OOH)
+```json
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 658
+stats : [
+    {
+    "reportdate": "2023-08-05T00:00:00Z",
+    "frame_id":"1234567890"
+    "player_ref":""
+    "spot_start_utc":"2023-07-05T00:00:00Z"
+    "spot_start_tz":"+01:00Z"
+    "spot_end_utc":"2023-07-18T00:00:00Z"
+    "spot_end_tz":"+01:00Z"
+    "spot_length":""
+    "share_of_time":"33.33"
+    "creative_id":"P73839588"
+    "creative_name":"Balloon Door Print"
+    "third_party_creative_ref":"Balloon_Door_Final.pdf"
+    "creative_trigger_event":""
+    "media_owner_playout_ref":"123456789020230705T000000"
+    }
+]
+
 
 ## Path:  Account Messages <a name="path_accounts_messages"></a>
 
