@@ -682,6 +682,7 @@ For GET calls that return a collection of resources, such as /accounts/{id}/orde
 | Call | Property Name | Resource |
 | ---- | ------------- | -------- |
 | /organizations<br />/organizations?$filter | organizations | Organization |
+| /advertiserbrands<br />/advertiserbrands?$filter | advertiserbrands | AdvertiserBrand |
 | /accounts<br />/accounts?$filter | accounts | Account |
 | /accounts/{id}/assignments<br />/accounts/{id}/assignments?$filter | assignments | Assignment |
 | /accounts/{id}/creatives<br />/accounts/{id}/creatives?$filter | creatives | Creative_Assignment |
