@@ -550,7 +550,7 @@ OpenDirect (and OpenRTB) trades with real time Audience impressions, whereas phy
 
 Physical media manifests itself as display of the advert on a 'frame' at a defined location and time which then gives an audience in the vicinity of that event an opportunity to see the advertising.
 
-The producttargeting object is used to discover and target the real-life dimensional aspect of physical media.
+The producttargeting object is used to discover and target the real-life dimensional aspect of physical media. Full details on the use of the ProductTargeting object can be found in the section [Diagrams: ProductTargeting for Physical Media](#producttargetingdetails)
 
 | Attribute    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Type                                                               |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -4773,7 +4773,7 @@ The following diagram shows the relationships between the OpenDirect resources. 
 
 ![Entity Relationship Diagram](images/ODv2EntityRelationshipDiagram.png)
 
-### ProductTargeting for Physical Media 
+### ProductTargeting for Physical Media <a name="producttargetingdetails"></a>
 
 OpenDirect (and OpenRTB) trades with real time Audience impressions, whereas Physical Media such as Out-Of-Home (OOH) media can be sold in the wider dimensions of time, share of time, location and audience.
 
@@ -4784,7 +4784,7 @@ OpenDirect 2.1 introduces the ProductTargeting object to discover and target the
 The ProductTargeting Object has a core structure which acts as a matrix that accomadates the core physical, temporal and monetary dimensions of Physical Media trading
 
 ```json
-producttargeting: [
+"producttargeting": [
     {
         "name": "",
         "type": "",
