@@ -4773,4 +4773,300 @@ The following diagram shows the relationships between the OpenDirect resources. 
 
 ![Entity Relationship Diagram](images/ODv2EntityRelationshipDiagram.png)
 
+### ProductTargeting for Physical Media 
+
+OpenDirect (and OpenRTB) trades with real time Audience impressions, whereas Physical Media such as Out-Of-Home (OOH) media can be sold in the wider dimensions of time, share of time, location and audience.
+
+OOH Media physically manifests itself as display of the advert on a frame at a defined location and time which then gives an audience in the vicinity of that event an opportunity to see the advertising.
+
+OpenDirect 2.1 introduces the ProductTargeting object to discover and target the multidimensional aspect of physical media.
+
+The ProductTargeting Object has a core structure which acts as a matrix that accomadates the core physical, temporal and monetary dimensions of Physical Media trading
+
+```json
+producttargeting: [
+    {
+        "name": "",
+        "type": "",
+        "datasource": "",
+        "target": "",
+        "targetvalues":""
+    }
+]
+```
+
+![ProductTargeting Summary](images/OOHbject_Summary.png)
+
+The use of an array of ProductTargeting objects to describe an OpenDirect Product is at the discretion of the media owner/publisher. The simplest Physical Media OpenDirect Product could be described as display time on a single frame.
+
+- **name,type,dataSource,target**
+
+The primary **name** dimensions for Physical Media trading are:
+
+- inventory: What a media owner / publisher sells in terms of Audience or Frames.
+- delivery: How adverts are displayed from a start and end time, and the share of that display time.
+- distribution: How the adverts are distributed across the times and locations booked by audience and/or investment.
+- investment: How the campaign is quantified for trading purposes (Fixes price, Cost Per Thousand Audience, Cost Per Frame).
+- prohibitions: Information about any brand safety prohibitions that will affect the playout of certain brand types in certain locations e.g. fast food prohibitions on certain locations.
+
+The use of the **datasource** in the ProductTargeting object allows the identification and inclusion of third party data sources into the OpenDirect schema, which both buyside and sell side may use to describe and discover their available Inventory, location and audiences in accordance with the third party schema. The third party schema may also be published and made discoverable as a collection object as detailed in Section 5 of this document.
+
+Examples of third-party **datasource** for Physical Media includes:
+
+- SPACE (UK OOH Industry frame inventory registry)
+- ROUTE (UK OOH Industry audience measurement JIC)
+- Geopath (US OOH Industry audience measurement)
+- Nielson Total Audience Framework
+- Quividi /AdMobilize computer vision analytics segment
+
+
+#### ProductTargeting: Inventory
+
+The Inventory **name** ProductTargeting Object allows a Physical Media owner to describe (and Physical Media buyer to understand) their inventory in terms of *frames* and *audience* then define the audience metrics that are available to targeted.
+
+##### Summary
+
+![Inventory ProductTargeting](images/name_inventory.png)
+
+##### inventory,frames,SPACE,x
+
+As the initial implementation of OpenDirect 2.1 is in the UK, this object would use the UK Outsmart industry bodies&#39; SPACE register for the identification of Frame inventory.
+
+SPACE has created a single source data point to coordinate and categorise the unique identification characteristics of all UK OOH inventory. This register identifies a frame with a common id and also allows media owners to attach frame details to the record in terms of dimension, media type, format and location.
+
+Further information can be found at [https://www.outsmart.org.uk/news/welcome-space](https://www.outsmart.org.uk/news/welcome-space)
+
+These classifications could be taken and used as a common format in countries/markets where no common standards currently exist.
+
+Alternatively, the Inventory.Frames ProductTargeting Object can reference a Media Owner / Publisher's own description of inventory e.g. 
+Inventory.Frames.<MediaOwnerName>.TramWraps
+
+##### inventory,audience,ROUTE,x
+
+As the initial implementation of OpenDirect 2.1 is in the UK, this object would use the Route dataset to describe and segment OOH audiences.
+
+Route produces audience estimates for out-of-home advertising in Britain. The data Route publishes tell subscribers how many and what type of people see an advertising campaign, and how often they do so. The information is used as the currency for planning, trading and valuing advertising investment in the medium at frame level.
+
+The trade associations for the buyers and sellers of the medium underwrite Route jointly. The IPAO represents the interests of the specialist OOH agencies (or planners &amp; buyers) working on behalf of advertisers. Outsmart represents the interests of the media owners (or sellers).
+
+The underwriting agencies are [Kinetic Worldwide](http://www.kineticww.com/), [Mediacom Outdoor](http://www.mediacom.com/en/home), [Posterscope](http://www.posterscope.com/), [Rapport Worldwide](http://www.rapportww.com/uk/) and [Talon Outdoor](http://talonoutdoor.com/). The media owner guarantors are [Clear Channel Outdoor](http://www.clearchannel.co.uk/),  [JCDecaux](http://www.jcdecaux.co.uk/)  and [Global](http://global.com/outdoor/).
+
+Route has over 400 categories of audience classification and reports the audience metrics at both pedestrian and vehicular level as impacts, ratings, reach and cover.
+
+Further information on route can be found at [www.route.org.uk](http://www.route.org.uk/)
+
+##### inventory,frames,metrics,framecount
+
+Allows the Media Owner / Publisher to define the total number of frames to be targeted and allows the buyer to specify this metric when performing an availability check or setting up an order line.
+ 
+##### inventory,audience,metrics,x
+
+Allows the Media Owner / Publisher to define the audience metrics that are available to targeted and allows the buyer to specify these metrics when performing an availability check or setting up an order line.
+
+
+
+#### 4.14.2 ProductTargeting: Delivery
+
+The Delivery ProductTargeting Object allows a Physical Media owner to describe (and media buyer to understand) how their campaign is delivered to selected inventory.
+
+##### Summary
+
+![Delivery ProductTargeting](images/name_delivery.png)
+
+##### delivery,frames,time,days
+
+If this is made available, this dynamic ProductTargeting Object details an array of numbered days that can be targeted within in the product. This dynamic array takes the form of the days available from the booking line start and end date
+
+e.g.
+
+Booking line date 08/11/20 to 17/11/20
+
+delivery.frames.time.days = [0,1,2,3,4,5,6] based on ISO 8601
+
+The ProductTargeting Object field *Selectable* indicates if this array is further targetable e.g. the days array of [0,1,2,3,4,5,6] is returned, and if the days are flagged as *selectable*, the buyer may select days [5,6].
+
+##### delivery,frames,time,hours
+
+If this is made available, this dynamic ProductTargeting Object details an array of numbered hours that can be targeted within in the product. This dynamic array takes the form of the hours available from the specified booking line start and end date
+
+e.g.
+
+Booking line date 08/11/20 00:00 to 17/11/20 00:00
+
+delivery.frames.time.hours = [0,1,2,3,4,……,24,25,26,…..48,……,72,…..,96,……120….144,145,….,167]
+
+The OOHbject field *Selectable* indicates if this array is further targetable e.g. the hours array is returned, and if the hours are flagged as *selectable*, the buyer may select Hours [6,7,8,9,30,31,32,33].
+
+The example below shows how the hours of 10am to 2pm on Day 1 and Day 2 would be targeted as an array selection.
+
+Hours[10,11,12,13,34,35,36,37]
+
+![Time Array](images/time_array.png)
+
+Practically, the booking UI should convert the days/hours selected from a calendar based UI into the hour array in the background.
+
+##### delivery,frames,time,timezone
+
+This ProductTargeting Object can be used in the targeting array to indicate if the days and/or hour delivery of the campaign happens in the local time zone (e.g. the local time of where the advert is displayed) or Coordinated Universal Time (e.g. UTC playout would ensure the advert plays at the same exact moment around the world).
+The TargetValues are "Local" or "UTC". The default is "Local" time
+
+##### delivery,frames,shareofdisplay,shareoftime
+
+This ProductTargeting Object details the *shareoftime* that can be targeted within the product. The *shareoftime* can be described as the percentage of time the advert appears on screen vs the time the advert does not appear on screen over the flight of the campaign.
+
+e.g.
+
+A fixed 1 in 4 loop/scrolling billboard with have a *shareoftime* value of 25
+
+A classic paper/vinyl billboard will have a *shareoftime* value of 100
+
+##### delivery,frames,shareofdisplay,spot
+
+This ProductTargeting Object details the *Spot* length (or array of lengths) in seconds that a digital advert can run for each time it appears on a frame. The *Spot* length will affect the frequency of play out within the campaign flight.
+
+e.g. if the Campaign flight is 10 hours, the *shareoftime* value is 20(%) and the creative is 1 hour long, the *spot* will play 2 times.
+
+if the Campaign flight is 10 hours, the *shareoftime* value is 20(%) and the creative is 10s long, the *spot* will play 720 times.
+
+If the Campaign flight is 10 hours, the *shareoftime* value is 100(%) and the creative is 10s long, the *spot* will play 3600 times.
+
+##### delivery,frames,shareofdisplay,spotbreaklength (Optional)
+
+If the product delivers the campaign within a fixed loop, the *spotbreaklength* ProductTargeting Object details the length of time in seconds between the Spots being played.
+
+e.g. in a 30 second loop where the Spot length is 5 Seconds:
+
+Spot = 5
+
+SpotBreakLength = 25
+
+##### delivery,audience,datasource,shareofimpacts
+
+An average % share of viewed impacts across the targeted ProductTargeting Object according to the Audience DataSource identified.
+
+e.g. the campaign needs to be delivered to 30% of the available 'Affluent Female Shopper Audience' over the flight of the campaign
+
+
+
+#### ProductTargeting: Investment
+
+The Investment ProductTargeting Object allows a Physical Media owner to describe (and a media buyer to discover) their inventory in terms of *Frames* and *Audience* Investment.
+
+##### Summary
+
+![Investment ProductTargeting](images/name_investment.png)
+
+*local_currency* is defined as the currency that the order is going to be transacted in to ISO 4217 currency codes e.g. GBP, USD, EUR
+
+##### investment,frames,local_currency,CPF
+
+If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested *cost per frame* price or a target *cost per frame* price based on the other ProductTargeting Object values given.
+ 
+##### investment,frames,local_currency,fixed
+
+If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested total Product price or given total Product price based on the other ProductTargeting Object values given.
+
+##### investment,audience,local_currency,CPT
+
+If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested *cost per thousand* price or a target *cost per thousand* price based on the other ProductTargeting Object values given.
+ 
+##### investment,audience,local_currency,fixed
+
+If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested total Product price or given total Product price based on the other ProductTargeting Object values given.
+
+
+
+#### ProductTargeting: Distribution
+
+The Distribution ProductTargeting Object allows an Physical Media owner to describe (and a media buyer to understand and specify) if their campaign Delivery is Distributed evenly or flexibly across the Campaign flight in terms of Time, audience and/or investment.
+
+Specific targets for Audience, Location and Display Time would be made using arrays of Inventory and Delivery ProductTargeting Objects, rather than the Distribution ProductTargeting Object itself.
+
+##### Summary
+
+![Distribution ProductTargeting](images/name_distribution.png)
+
+The segment array for every Distribution.z.x.y object gives a choice of an even *fixed* distribution or a *flexible* distribution that achieves the Campaign Inventory and Delivery targets over the campaign flight.
+
+##### Distribution,Frames,x,y
+
+This ProductTargeting Object describes how the delivery of the campaign display is distributed over the campaign to frames, times or (DataSource) locations.
+
+The default setting for this Distribution ProductTargeting Object is *flexible* meaning that the targeted *shareofdisplay* and/or frame volumes will be achieved in total over the campaign flight.
+
+e.g.
+- shareofdisplay,days = Fixed, the ShareOfTime and/or total Spot Frequency will be delivered over each selected Day over the campaign flight
+- shareofdisplay,hours = Fixed, the averaged ShareOfTime and/or total Spot Frequency will be delivered on each selected Hour over the campaign flight
+- time,days = fixed, the same volume of Frames will be delivered on each selected Day over the campaign flight
+- time,hours = fixed, the same volume of Frames will be delivered on each selected Hour over the campaign flight
+- (datasource),frame_id = Fixed, a fixed volume of frames will deliver the campaign targeting objectives.
+- (datasource),region = Fixed, a fixed volume of frames per region will deliver the campaign targeting objectives (there will be fliexibility within the region which frames are actually used to deliver the campaign targets)
+
+##### Distribution,Audience,x,y
+
+This ProductTargeting Object describes how the delivery of the targeted campaign audience is distributed over the campaign flight to audience, time or (DataSource) locations.
+
+The default setting for this Distribution ProductTargeting Object is *flexible*; meaning that the total targeted audience impact volume will be delivered over the campaign flight time, but different days, hours and/or locations may have different audience delivery volumes.
+
+e.g.
+- time,day = fixed, the same volume of audience impacts will be delivered on each day to achieve the total audience target
+- time,hour = fixed, the same volume of audience impacts will be delivered on hour
+- (datasource),frame_id = Fixed, the same volume of audience impacts will be delivered at each Frame location over the campaign flight.
+- (datasource),postal_sector = Fixed, the same volume of audience impacts will be delivered within each Postal Sector over the campaign flight.
+- (datasource),town = Fixed, the same volume of audience impacts will be delivered within each Town over the campaign flight.
+- (datasource),conurbation = Fixed, the same volume of audience impacts will be delivered within each Conurbation over the campaign flight.
+- (datasource),tv_area = Fixed, the same volume of audience impacts will be delivered within each TV Area over the campaign flight.
+- (datasource),region = Fixed, the same volume of audience impacts will be delivered within each TV Area over the campaign flight.
+
+The addition of Inventory,Audience,Metrics,x ProductTargeting Object to the targeting array determines the Audience metrics being used e.g.
+
+- inventory,audience,metrics,cover (percentage of the population that saw the advert)
+- inventory,audience,metrics,reach (Unique Audience Count)
+- inventory,audience,metrics,frequency (eNumber of times the Audience reached sees the Advert)
+
+It is up to the Media Owner if they can support such campaign metrics & scheduling distribution in each product they make available to the Media Buyer.
+
+##### Distribution,Investment,x,y
+
+This ProductTargeting Object describes how the delivery of the targeted campaign investment is distributed over time and locations in the campaign flight.
+
+The default setting for this Distribution OOHbject is *flexible* meaning that the targeted campaign investment will be delivered over the campaign flight time. Individual days, hours or locations may have different investment pacing.
+
+e.g.
+- time,day = fixed, the same investment will be delivered on each day to achieve the total investment target
+- time,hour = fixed, the same investment will be delivered in each hour to achieve the same investment target
+- (datasource),frame_id= Fixed, the same investment will be delivered at each Frame location over the campaign flight to achieve the campaign investment target.
+- (datasource),postal_sector = Fixed, the same investment will be delivered within each Postal Sector over the campaign flight to achieve the campaign investment target.
+- (datasource),town = Fixed, the same investment will be delivered within each Town over the campaign flight to achieve the campaign investment target.
+- (datasource),conurbation = Fixed, the same investment will be delivered within each Conurbation over the campaign flight to achieve the campaign investment target.
+- (datasource),tv_area = Fixed, the same investment will be delivered within each TV Area over the campaign flight to achieve the campaign investment target.
+- (datasource),region = Fixed, the same investment impacts will be delivered within each TV Area over the campaign flight to achieve the campaign investment target.
+
+
+
+#### ProductTargeting: Prohibitions
+
+The Prohibitions ProductTargeting Object allows an OOH media owner to describe (and OOH media buyer to understand) their inventory in terms of frame prohibitions from a named DataSource that will affect if their brand or advert can be displayed at a certain product locations.
+
+##### Summary
+
+![Prohibitions ProductTargeting](images/name_prohibitions.png)
+
+This ProductTargeting Object is used to expose all FrameIDs (via the Segment) which may be affected by any of the prohibitions listed.
+
+e.g. if the product contains the datasource:SPACE frame ids of
+
+1234931339, 1235190735, 1234931338, 1235191547,1234931569 and 1235202465
+
+and the frames
+
+1234931339, 1235190735
+
+are prohibited from displaying alcohol brands,
+
+this could be shown as:
+
+prohibitions.frames.SPACE.Alcohol = [1234931339, 1235190735]
+
+This is for descriptive purpose only and the master frame to prohibitions table may be managed elsewhere by the publisher/media owner.
 
