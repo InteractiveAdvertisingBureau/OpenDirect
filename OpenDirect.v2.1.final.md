@@ -436,7 +436,7 @@ A publisher may also create an organization for itself for the purpose of reques
 |**name*** |The organization’s display name.<p>Cannot be an empty string. Must be unique. |string _(120)_
 |**phone** |The organization’s phone number. |string _(20)_
 |**status*** |A value that indicates the current state of the approval process. <p>The approval process confirms the organization’s identity. |enum (Pending, Approved, Disapproved, Limited)
-|**organizationtype***| The core activity that an organisation undertakes as a business e.g. advertiser, OOH Specialist or Media Agency| enum (Advertiser, Buyer, Agency)      |
+|**organizationtype***| The core activity that an organisation undertakes as a business e.g. Advertiser, Intermediary or Agency| enum (advertiser, intermediary, agency)      |
 | **eids**                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the organization to the buyer                       | Array                                  |
 |**url** |A URL to the organization’s website. |string _(1024)_
 |**ext**|Optional vendor-specific extensions. |ext object|
@@ -1688,6 +1688,24 @@ AccessToken: <OAuth token>
   "accountid":"23873345",
   "publisherid":"7987654",
   "brand":"Four Wakes",
+  "advertiserbrand": [
+        {
+            "Id": "1173",
+            "Name": "Four Wakes",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -1708,6 +1726,24 @@ Content-Length: 108
   "accountid":"23873345",
   "publisherid":"7987654",
   "brand":"Four Wakes",
+  "advertiserbrand": [
+        {
+            "Id": "1173",
+            "Name": "Four Wakes",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -1737,6 +1773,24 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Wakes",
+      "advertiserbrand": [
+        {
+            "Id": "1173",
+            "Name": "Four Wakes",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -1750,6 +1804,24 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Candles",
+      "advertiserbrand": [
+        {
+            "Id": "1174",
+            "Name": "Four Candles",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14790"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
       "budget":100000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -1802,6 +1874,24 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 158
   "id":"1235872",
   "accountid":"23873345",
   "brand":"Four Wakes",
+  "advertiserbrand": [
+        {
+            "Id": "1173",
+            "Name": "Four Wakes",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -1832,6 +1922,24 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 358
   "id":"1235872",
   "accountid":"23873345",
   "brand":"Four Wakes",
+  "advertiserbrand": [
+        {
+            "Id": "1173",
+            "Name": "Four Wakes",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -1884,6 +1992,24 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Wakes",
+      "advertiserbrand": [
+        {
+            "Id": "1173",
+            "Name": "Four Wakes",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -1891,7 +2017,46 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "orderstatus":"PENDING",
       "preferredbillingmethod":"Electronic",
       "startdate":"2014-11-24T06:00:00.000Z"
-    }
+    },
+    {
+      "id":"1235873",
+      "accountid":"23873345",
+      "publisherid":"7987654",
+      "brand":"Four Candles",
+      "advertiserbrand": [
+        {
+            "Id": "1174",
+            "Name": "Four Candles",
+            "OrganizationId": "345",
+            "eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14790"
+                        }
+                    ]
+                }
+            ]
+        },
+      ]
+      "budget":100000,
+      "currency":"USD",
+      "enddate":"2014-12-24T18:00:00.000Z",
+      "name":"Two Ronnies Trading",
+      "orderstatus":"APPROVED",
+      "preferredbillingmethod":"Electronic",
+      "startdate":"2014-11-24T06:00:00.000Z"
+      "providerdata": {
+            "campaignid":"A00123",
+            "campaignname":"Goodnight From Him",
+            "ponumber":"PO80X",
+            "salesorderreference":"SO678",
+            "barterorganisationid":"BO808",
+            "other":{}
+       }
+     }
   ]
 }
 ```
@@ -1915,7 +2080,78 @@ Adds a Line to an order or gets a list of lines that the user has access to. The
 An advertiser or agency may add lines to orders that they own. In addition; an agency may add lines to orders that they manage on behalf of advertisers.
 For advertisers, the list will include only lines that they own. For agencies, the list will include the lines that they own and the lines that belong to accounts that they manage on behalf of advertisers.
 
-#### Example POST Request
+#### Example POST Request (Display)
+
+```json
+POST https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines HTTP/1.1
+Content-Type: application/json
+AccessToken: <OAuth token>
+{
+  "comment":"Free form comment",
+  "enddate":"2014-12-10T18:00:00.000Z",
+  "frequencycount":3,
+  "frequencyinterval":"Day",
+  "name":"My Line 1",
+  "productid":"888899",
+  "ratetype":"CPM",
+  "rate":25.00,
+  "quantity":3000000,
+  "cost": 75000.00,
+  "startdate":"2014-12-05T06:00:00.000Z",
+  "targeting":[
+    {
+      "id":"ABCD1234",
+      "name":"Age",
+      "value":"25-34"
+    },
+    {
+      "id":"ABCD1235",  
+      "name":"Gender",
+      "value":"Male"
+    }
+  ]
+}
+```
+
+#### Example POST Response (Display)
+
+```json
+HTTP/1.1 200 OK
+Location: https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines/345234 
+Content-Type: application/json
+Content-Length: 878
+{
+  "id":"345234",
+  "bookingstatus":"Draft",
+  "comment":"Free form comment",
+  "enddate":"2014-12-10T18:00:00.000Z",
+  "frequencycount":3,
+  "frequencyinterval":"Day",
+  "name":"My Line 1",
+  "productid":"888899",
+  "ratetype":"CPM",
+  "rate":25.00,
+  "quantity":3000000,
+  "cost": 75000.00,
+  "startdate":"2014-12-05T06:00:00.000Z",
+  "targeting":[
+    {
+      "id":"ABCD1234",
+      "name":"Age",
+      "value":"25-34"
+    },
+    {
+      "id":"ABCD1235",  
+      "name":"Gender",
+      "value":"Male"
+    }
+  ]
+}
+```
+
+
+
+#### Example POST Request (OOH)
 
 ```json
 POST https://<host>/<path>/<version>/accounts/23873345/orders/1235872/lines HTTP/1.1
