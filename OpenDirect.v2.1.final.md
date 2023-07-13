@@ -1,7 +1,7 @@
 ![IAB Tech Lab](https://drive.google.com/uc?id=10yoBoG5uRETSXRrnJPUDuONujvADrSG1)
 
 # **OpenDirect Specification v2.1**
-# ** WORK IN PROGRESS **
+# *** WORK IN PROGRESS ***
 
 **August 2023**
 
