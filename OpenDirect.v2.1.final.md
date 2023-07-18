@@ -4782,7 +4782,7 @@ OpenDirect 2.1 introduces the ProductTargeting object to discover and target the
 
 The use of an array of ProductTargeting objects to describe an OpenDirect Product is at the discretion of the media owner/publisher. The simplest Physical Media OpenDirect Product could be described as display time on a single frame.
 
-The ProductTargeting Object has a core structure which acts as a matrix that accomadates the core physical, temporal and monetary dimensions of Physical Media trading
+The ProductTargeting Object has a core structure which acts as a matrix that accommodates the core physical, temporal and monetary dimensions of Physical Media trading
 
 
 ```json
@@ -4830,6 +4830,18 @@ The Inventory **name** ProductTargeting Object allows a Physical Media owner to 
 
 #### inventory,frames,SPACE,x
 
+```json
+"producttargeting": [
+    {
+        "name": "inventory",
+        "type": "frames",
+        "datasource": "SPACE",
+        "target": "",
+        "targetvalues":""
+    }
+]
+```
+
 As the initial implementation of OpenDirect 2.1 is in the UK, this object would use the UK Outsmart industry bodies&#39; SPACE register for the identification of Frame inventory.
 
 SPACE has created a single source data point to coordinate and categorise the unique identification characteristics of all UK OOH inventory. This register identifies a frame with a common id and also allows media owners to attach frame details to the record in terms of dimension, media type, format and location.
@@ -4841,7 +4853,19 @@ These classifications could be taken and used as a common format in countries/ma
 Alternatively, the Inventory.Frames ProductTargeting Object can reference a Media Owner / Publisher's own description of inventory e.g. 
 Inventory.Frames.<MediaOwnerName>.TramWraps
 
-#### inventory,audience,ROUTE,x
+#### inventory,audience,Route,x
+
+```json
+"producttargeting": [
+    {
+        "name": "inventory",
+        "type": "audience",
+        "datasource": "Route",
+        "target": "",
+        "targetvalues":""
+    }
+]
+```
 
 As the initial implementation of OpenDirect 2.1 is in the UK, this object would use the Route dataset to describe and segment OOH audiences.
 
@@ -4857,9 +4881,33 @@ Further information on route can be found at [www.route.org.uk](http://www.route
 
 #### inventory,frames,metrics,framecount
 
+```json
+"producttargeting": [
+    {
+        "name": "inventory",
+        "type": "frames",
+        "datasource": "metrics",
+        "target": "framecount",
+        "targetvalues":""
+    }
+]
+```
+
 Allows the Media Owner / Publisher to define the total number of frames to be targeted and allows the buyer to specify this metric when performing an availability check or setting up an order line.
  
 #### inventory,audience,metrics,x
+
+```json
+"producttargeting": [
+    {
+        "name": "inventory",
+        "type": "audience",
+        "datasource": "metrics",
+        "target": "",
+        "targetvalues":""
+    }
+]
+```
 
 Allows the Media Owner / Publisher to define the audience metrics that are available to targeted and allows the buyer to specify these metrics when performing an availability check or setting up an order line.
 
@@ -4881,9 +4929,19 @@ e.g.
 
 Booking line date 08/11/20 to 17/11/20
 
-delivery.frames.time.days = [0,1,2,3,4,5,6] based on ISO 8601
+```json
+"producttargeting": [
+    {
+        "name": "delivery",
+        "type": "frames",
+        "datasource": "time",
+        "target": "days",
+        "targetvalues":"[0,1,2,3,4,5,6]"
+    }
+]
+```
 
-The ProductTargeting Object field *Selectable* indicates if this array is further targetable e.g. the days array of [0,1,2,3,4,5,6] is returned, and if the days are flagged as *selectable*, the buyer may select days [5,6].
+The ProductTargeting Object field *Selectable* indicates if this array based on ISO 8601 is further targetable e.g. the days array of [0,1,2,3,4,5,6] is returned, and if the days are flagged as *selectable*, the buyer may select days [5,6].
 
 #### delivery,frames,time,hours
 
@@ -4893,7 +4951,17 @@ e.g.
 
 Booking line date 08/11/20 00:00 to 17/11/20 00:00
 
-delivery.frames.time.hours = [0,1,2,3,4,……,24,25,26,…..48,……,72,…..,96,……120….144,145,….,167]
+```json
+"producttargeting": [
+    {
+        "name": "delivery",
+        "type": "frames",
+        "datasource": "time",
+        "target": "days",
+        "targetvalues":"[0,1,2,3,4,……,24,25,26,…..48,……,72,…..,96,……120….144,145,….,167]"
+    }
+]
+```
 
 The OOHbject field *Selectable* indicates if this array is further targetable e.g. the hours array is returned, and if the hours are flagged as *selectable*, the buyer may select Hours [6,7,8,9,30,31,32,33].
 
@@ -4907,20 +4975,56 @@ Practically, the booking UI should convert the days/hours selected from a calend
 
 #### delivery,frames,time,timezone
 
+```json
+"producttargeting": [
+    {
+        "name": "delivery",
+        "type": "frames",
+        "datasource": "time",
+        "target": "timezone",
+        "targetvalues":"Local"
+    }
+]
+```
+
 This ProductTargeting Object can be used in the targeting array to indicate if the days and/or hour delivery of the campaign happens in the local time zone (e.g. the local time of where the advert is displayed) or Coordinated Universal Time (e.g. UTC playout would ensure the advert plays at the same exact moment around the world).
 The TargetValues are "Local" or "UTC". The default is "Local" time
 
 #### delivery,frames,shareofdisplay,shareoftime
 
+```json
+"producttargeting": [
+    {
+        "name": "delivery",
+        "type": "frames",
+        "datasource": "shareofdisplay",
+        "target": "shareoftime",
+        "targetvalues":""
+    }
+]
+```
+
 This ProductTargeting Object details the *shareoftime* that can be targeted within the product. The *shareoftime* can be described as the percentage of time the advert appears on screen vs the time the advert does not appear on screen over the flight of the campaign.
 
 e.g.
 
-A fixed 1 in 4 loop/scrolling billboard with have a *shareoftime* value of 25
+A fixed 1 in 4 loop/scrolling billboard will have a *shareoftime* value of 25
 
 A classic paper/vinyl billboard will have a *shareoftime* value of 100
 
 #### delivery,frames,shareofdisplay,spot
+
+```json
+"producttargeting": [
+    {
+        "name": "delivery",
+        "type": "frames",
+        "datasource": "shareofdisplay",
+        "target": "spot",
+        "targetvalues":""
+    }
+]
+```
 
 This ProductTargeting Object details the *Spot* length (or array of lengths) in seconds that a digital advert can run for each time it appears on a frame. The *Spot* length will affect the frequency of play out within the campaign flight.
 
@@ -4932,6 +5036,18 @@ If the Campaign flight is 10 hours, the *shareoftime* value is 100(%) and the cr
 
 #### delivery,frames,shareofdisplay,spotbreaklength (Optional)
 
+```json
+"producttargeting": [
+    {
+        "name": "delivery",
+        "type": "frames",
+        "datasource": "shareofdisplay",
+        "target": "spotbreaklength",
+        "targetvalues":""
+    }
+]
+```
+
 If the product delivers the campaign within a fixed loop, the *spotbreaklength* ProductTargeting Object details the length of time in seconds between the Spots being played.
 
 e.g. in a 30 second loop where the Spot length is 5 Seconds:
@@ -4941,6 +5057,18 @@ Spot = 5
 SpotBreakLength = 25
 
 #### delivery,audience,datasource,shareofimpacts
+
+```json
+"producttargeting": [
+    {
+        "name": "delivery",
+        "type": "audience",
+        "datasource": "Route",
+        "target": "shareofimpacts",
+        "targetvalues":""
+    }
+]
+```
 
 An average % share of viewed impacts across the targeted ProductTargeting Object according to the Audience DataSource identified.
 
@@ -4960,17 +5088,65 @@ The Investment ProductTargeting Object allows a Physical Media owner to describe
 
 #### investment,frames,local_currency,CPF
 
+```json
+"producttargeting": [
+    {
+        "name": "investment",
+        "type": "frames",
+        "datasource": "local_currency",
+        "target": "CPF",
+        "targetvalues":""
+    }
+]
+```
+
 If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested *cost per frame* price or a target *cost per frame* price based on the other ProductTargeting Object values given.
  
 #### investment,frames,local_currency,fixed
+
+```json
+"producttargeting": [
+    {
+        "name": "investment",
+        "type": "frames",
+        "datasource": "local_currency",
+        "target": "fixed",
+        "targetvalues":""
+    }
+]
+```
 
 If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested total Product price or given total Product price based on the other ProductTargeting Object values given.
 
 #### investment,audience,local_currency,CPT
 
+```json
+"producttargeting": [
+    {
+        "name": "investment",
+        "type": "frames",
+        "datasource": "local_currency",
+        "target": "CPT",
+        "targetvalues":""
+    }
+]
+```
+
 If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested *cost per thousand* price or a target *cost per thousand* price based on the other ProductTargeting Object values given.
  
 #### investment,audience,local_currency,fixed
+
+```json
+"producttargeting": [
+    {
+        "name": "investment",
+        "type": "audience",
+        "datasource": "local_currency",
+        "target": "fixed",
+        "targetvalues":""
+    }
+]
+```
 
 If this is made available, this dynamic ProductTargeting Object details (in terms of the local currency) the requested total Product price or given total Product price based on the other ProductTargeting Object values given.
 
@@ -4990,6 +5166,17 @@ The segment array for every Distribution.z.x.y object gives a choice of an even 
 
 #### Distribution,Frames,x,y
 
+```json
+"producttargeting": [
+    {
+        "name": "distribution",
+        "type": "frames",
+        "datasource": "shareofdisplay",
+        "target": "days"
+    }
+]
+```
+
 This ProductTargeting Object describes how the delivery of the campaign display is distributed over the campaign to frames, times or (DataSource) locations.
 
 The default setting for this Distribution ProductTargeting Object is *flexible* meaning that the targeted *shareofdisplay* and/or frame volumes will be achieved in total over the campaign flight.
@@ -5003,6 +5190,17 @@ e.g.
 - (datasource),region = Fixed, a fixed volume of frames per region will deliver the campaign targeting objectives (there will be fliexibility within the region which frames are actually used to deliver the campaign targets)
 
 #### Distribution,Audience,x,y
+
+```json
+"producttargeting": [
+    {
+        "name": "distribution",
+        "type": "audience",
+        "datasource": "time",
+        "target": "day"
+    }
+]
+```
 
 This ProductTargeting Object describes how the delivery of the targeted campaign audience is distributed over the campaign flight to audience, time or (DataSource) locations.
 
@@ -5027,6 +5225,18 @@ The addition of Inventory,Audience,Metrics,x ProductTargeting Object to the targ
 It is up to the Media Owner if they can support such campaign metrics & scheduling distribution in each product they make available to the Media Buyer.
 
 #### Distribution,Investment,x,y
+
+```json
+"producttargeting": [
+    {
+        "name": "distribution",
+        "type": "investment",
+        "datasource": "time",
+        "target": "day"
+    }
+]
+```
+
 
 This ProductTargeting Object describes how the delivery of the targeted campaign investment is distributed over time and locations in the campaign flight.
 
@@ -5066,7 +5276,17 @@ are prohibited from displaying alcohol brands,
 
 this could be shown as:
 
-prohibitions.frames.SPACE.Alcohol = [1234931339, 1235190735]
+```json
+"producttargeting": [
+    {
+        "name": "prohibitions",
+        "type": "frames",
+        "datasource": "SPACE",
+        "target": "Alcohol"
+        "targetvalues":"[1234931339, 1235190735]"
+    }
+]
+```
 
 This is for descriptive purpose only and the master frame to prohibitions table may be managed elsewhere by the publisher/media owner.
 
