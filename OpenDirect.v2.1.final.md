@@ -4792,7 +4792,7 @@ The ProductTargeting Object has a core structure which acts as a matrix that acc
         "type": "",
         "datasource": "",
         "target": "",
-        "targetvalues":""
+        "targetvalues":[]
     }
 ]
 ```
@@ -4836,9 +4836,8 @@ The Inventory **name** ProductTargeting Object allows a Physical Media owner to 
         "name": "inventory",
         "type": "frames",
         "datasource": "SPACE",
-        "target": "",
-        "targetvalues":""
-    }
+        "target": "FrameID",
+        "targetvalues": ["2000118775", "2000152956", "2000152957"]
 ]
 ```
 
@@ -4861,8 +4860,8 @@ Inventory.Frames.<MediaOwnerName>.TramWraps
         "name": "inventory",
         "type": "audience",
         "datasource": "Route",
-        "target": "",
-        "targetvalues":""
+        "target": "demographic_custom",
+        "targetvalues":["sex=1 AND marital_status=1 AND social_grade<=3"]
     }
 ]
 ```
@@ -4888,7 +4887,7 @@ Further information on route can be found at [www.route.org.uk](http://www.route
         "type": "frames",
         "datasource": "metrics",
         "target": "framecount",
-        "targetvalues":""
+        "targetvalues":[]
     }
 ]
 ```
@@ -4904,7 +4903,7 @@ Allows the Media Owner / Publisher to define the total number of frames to be ta
         "type": "audience",
         "datasource": "metrics",
         "target": "impacts",
-        "targetvalues":""
+        "targetvalues":[]
     }
 ]
 ```
@@ -4940,7 +4939,7 @@ Booking line date 08/11/20 to 17/11/20
         "type": "frames",
         "datasource": "time",
         "target": "days",
-        "targetvalues":"[0,1,2,3,4,5,6]"
+        "targetvalues":[0,1,2,3,4,5,6]
     }
 ]
 ```
@@ -4962,7 +4961,7 @@ Booking line date 08/11/20 00:00 to 17/11/20 00:00
         "type": "frames",
         "datasource": "time",
         "target": "days",
-        "targetvalues":"[0,1,2,3,4,……,24,25,26,…..48,……,72,…..,96,……120….144,145,….,167]"
+        "targetvalues":[0,1,2,3,4,……,24,25,26,…..48,……,72,…..,96,……120….144,145,….,167]
     }
 ]
 ```
@@ -4986,7 +4985,7 @@ Practically, the booking UI should convert the days/hours selected from a calend
         "type": "frames",
         "datasource": "time",
         "target": "timezone",
-        "targetvalues":"Local"
+        "targetvalues":["Local"]
     }
 ]
 ```
@@ -5003,7 +5002,7 @@ The TargetValues are "Local" or "UTC". The default is "Local" time
         "type": "frames",
         "datasource": "shareofdisplay",
         "target": "shareoftime",
-        "targetvalues":""
+        "targetvalues":[25]
     }
 ]
 ```
@@ -5025,7 +5024,7 @@ A classic paper/vinyl billboard will have a *shareoftime* value of 100
         "type": "frames",
         "datasource": "shareofdisplay",
         "target": "spot",
-        "targetvalues":""
+        "targetvalues":[10]
     }
 ]
 ```
@@ -5047,7 +5046,7 @@ If the Campaign flight is 10 hours, the *shareoftime* value is 100(%) and the cr
         "type": "frames",
         "datasource": "shareofdisplay",
         "target": "spotbreaklength",
-        "targetvalues":""
+        "targetvalues":[50]
     }
 ]
 ```
@@ -5069,7 +5068,7 @@ SpotBreakLength = 25
         "type": "audience",
         "datasource": "Route",
         "target": "shareofimpacts",
-        "targetvalues":""
+        "targetvalues":[30]
     }
 ]
 ```
@@ -5099,7 +5098,7 @@ The Investment ProductTargeting Object allows a Physical Media owner to describe
         "type": "frames",
         "datasource": "local_currency",
         "target": "CPF",
-        "targetvalues":""
+        "targetvalues":[100]
     }
 ]
 ```
@@ -5115,7 +5114,7 @@ If this is made available, this dynamic ProductTargeting Object details (in term
         "type": "frames",
         "datasource": "local_currency",
         "target": "fixed",
-        "targetvalues":""
+        "targetvalues":[5000]
     }
 ]
 ```
@@ -5131,7 +5130,7 @@ If this is made available, this dynamic ProductTargeting Object details (in term
         "type": "frames",
         "datasource": "local_currency",
         "target": "CPT",
-        "targetvalues":""
+        "targetvalues":[18]
     }
 ]
 ```
@@ -5147,7 +5146,7 @@ If this is made available, this dynamic ProductTargeting Object details (in term
         "type": "audience",
         "datasource": "local_currency",
         "target": "fixed",
-        "targetvalues":""
+        "targetvalues":[5000]
     }
 ]
 ```
@@ -5176,7 +5175,7 @@ The segment array for every Distribution.z.x.y object gives a choice of an even 
         "name": "distribution",
         "type": "frames",
         "datasource": "shareofdisplay",
-        "target": "days"
+        "target": "day"
     }
 ]
 ```
@@ -5186,8 +5185,8 @@ This ProductTargeting Object describes how the delivery of the campaign display 
 The default setting for this Distribution ProductTargeting Object is *flexible* meaning that the targeted *shareofdisplay* and/or frame volumes will be achieved in total over the campaign flight.
 
 e.g.
-- shareofdisplay,days = Fixed, the ShareOfTime and/or total Spot Frequency will be delivered over each selected Day over the campaign flight
-- shareofdisplay,hours = Fixed, the averaged ShareOfTime and/or total Spot Frequency will be delivered on each selected Hour over the campaign flight
+- shareofdisplay,day = Fixed, the ShareOfTime and/or total Spot Frequency will be delivered over each selected Day over the campaign flight
+- shareofdisplay,hour = Fixed, the averaged ShareOfTime and/or total Spot Frequency will be delivered on each selected Hour over the campaign flight
 - time,days = fixed, the same volume of Frames will be delivered on each selected Day over the campaign flight
 - time,hours = fixed, the same volume of Frames will be delivered on each selected Hour over the campaign flight
 - (datasource),frame_id = Fixed, a fixed volume of frames will deliver the campaign targeting objectives.
@@ -5287,7 +5286,7 @@ this could be shown as:
         "type": "frames",
         "datasource": "SPACE",
         "target": "Alcohol"
-        "targetvalues":"[1234931339, 1235190735]"
+        "targetvalues":["1234931339", "1235190735"]
     }
 ]
 ```
