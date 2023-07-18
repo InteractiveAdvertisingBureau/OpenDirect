@@ -4903,14 +4903,18 @@ Allows the Media Owner / Publisher to define the total number of frames to be ta
         "name": "inventory",
         "type": "audience",
         "datasource": "metrics",
-        "target": "",
+        "target": "impacts",
         "targetvalues":""
     }
 ]
 ```
 
-Allows the Media Owner / Publisher to define the audience metrics that are available to targeted and allows the buyer to specify these metrics when performing an availability check or setting up an order line.
-
+Allows the Media Owner / Publisher to define the audience metrics that are available to targeted and allows the buyer to specify these metrics when performing an availability check or setting up an order line. 
+These metrics may be identified as:
+* impacts
+* cover
+* reach
+* frequency
 
 
 ### ProductTargeting: Delivery
