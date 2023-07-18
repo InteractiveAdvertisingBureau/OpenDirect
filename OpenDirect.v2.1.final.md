@@ -557,7 +557,7 @@ The producttargeting object is used to discover and target the real-life dimensi
 | type         | How the producttargeting is being quantified:<br>• Frames<br>• Audience<br>• Investment                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | enum (Frames, Audience, Investment, Total)                         |
 | datasource   | The identification and inclusion of third party data sources into the schema, which both buyside and sell side may use to describe and discover their available Inventory, location and audiences in accordance with the third party schema                                                                                                                                                                                                                                                                                                                                                                                                                                                                | String (255)                                                       |
 | target       | Description of the producttargeting Metric                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | String (255)                                                       |
-| targetvalues | Array of one or more values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Array                                                              |
+| targetvalues | Array of one or more values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | String (255) Array                                                              |
 | selectable   | Defines whether a Buyer can select from the given list of targetvalues or whether the targetvalues are fixed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Boolean                                                            |
 | count        | Count of targetvalues                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | number                                                             |
 | minimum      | Defines the minimum number of targetvalues that must be selected                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | number                                                             |
@@ -4939,12 +4939,12 @@ Booking line date 08/11/20 to 17/11/20
         "type": "frames",
         "datasource": "time",
         "target": "days",
-        "targetvalues":[0,1,2,3,4,5,6]
+        "targetvalues":["0","1","2","3","4","5","6"]
     }
 ]
 ```
 
-The ProductTargeting Object field *Selectable* indicates if this array based on ISO 8601 is further targetable e.g. the days array of [0,1,2,3,4,5,6] is returned, and if the days are flagged as *selectable*, the buyer may select days [5,6].
+The ProductTargeting Object field *Selectable* indicates if this array based on ISO 8601 is further targetable e.g. the days array of ["0","1","2","3","4","5","6"] is returned, and if the days are flagged as *selectable*, the buyer may select days ["5","6"].
 
 #### delivery,frames,time,hours
 
@@ -4961,16 +4961,16 @@ Booking line date 08/11/20 00:00 to 17/11/20 00:00
         "type": "frames",
         "datasource": "time",
         "target": "days",
-        "targetvalues":[0,1,2,3,4,……,24,25,26,…..48,……,72,…..,96,……120….144,145,….,167]
+        "targetvalues":["0","1","2","3","4",……,"24","25","26",…..,"48",……,"72",…..,"96",……,"120",….,"144","145",….,"167"]
     }
 ]
 ```
 
-The OOHbject field *Selectable* indicates if this array is further targetable e.g. the hours array is returned, and if the hours are flagged as *selectable*, the buyer may select Hours [6,7,8,9,30,31,32,33].
+The OOHbject field *Selectable* indicates if this array is further targetable e.g. the hours array is returned, and if the hours are flagged as *selectable*, the buyer may select Hours ["6","7","8","9","30","31","32","33"].
 
 The example below shows how the hours of 10am to 2pm on Day 1 and Day 2 would be targeted as an array selection.
 
-Hours[10,11,12,13,34,35,36,37]
+Hours["10","11","12","13","34","35","36","37"]
 
 ![Time Array](images/time_array.png)
 
@@ -5002,7 +5002,7 @@ The TargetValues are "Local" or "UTC". The default is "Local" time
         "type": "frames",
         "datasource": "shareofdisplay",
         "target": "shareoftime",
-        "targetvalues":[25]
+        "targetvalues":["25"]
     }
 ]
 ```
@@ -5024,7 +5024,7 @@ A classic paper/vinyl billboard will have a *shareoftime* value of 100
         "type": "frames",
         "datasource": "shareofdisplay",
         "target": "spot",
-        "targetvalues":[10]
+        "targetvalues":["10"]
     }
 ]
 ```
@@ -5046,7 +5046,7 @@ If the Campaign flight is 10 hours, the *shareoftime* value is 100(%) and the cr
         "type": "frames",
         "datasource": "shareofdisplay",
         "target": "spotbreaklength",
-        "targetvalues":[50]
+        "targetvalues":["50"]
     }
 ]
 ```
@@ -5068,7 +5068,7 @@ SpotBreakLength = 25
         "type": "audience",
         "datasource": "Route",
         "target": "shareofimpacts",
-        "targetvalues":[30]
+        "targetvalues":["30"]
     }
 ]
 ```
@@ -5098,7 +5098,7 @@ The Investment ProductTargeting Object allows a Physical Media owner to describe
         "type": "frames",
         "datasource": "local_currency",
         "target": "CPF",
-        "targetvalues":[100]
+        "targetvalues":["100"]
     }
 ]
 ```
@@ -5114,7 +5114,7 @@ If this is made available, this dynamic ProductTargeting Object details (in term
         "type": "frames",
         "datasource": "local_currency",
         "target": "fixed",
-        "targetvalues":[5000]
+        "targetvalues":["5000"]
     }
 ]
 ```
@@ -5130,7 +5130,7 @@ If this is made available, this dynamic ProductTargeting Object details (in term
         "type": "frames",
         "datasource": "local_currency",
         "target": "CPT",
-        "targetvalues":[18]
+        "targetvalues":["18"]
     }
 ]
 ```
@@ -5146,7 +5146,7 @@ If this is made available, this dynamic ProductTargeting Object details (in term
         "type": "audience",
         "datasource": "local_currency",
         "target": "fixed",
-        "targetvalues":[5000]
+        "targetvalues":["6000"]
     }
 ]
 ```
