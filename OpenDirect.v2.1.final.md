@@ -4838,6 +4838,7 @@ The Inventory **name** ProductTargeting Object allows a Physical Media owner to 
         "datasource": "SPACE",
         "target": "FrameID",
         "targetvalues": ["2000118775", "2000152956", "2000152957"]
+    }
 ]
 ```
 
