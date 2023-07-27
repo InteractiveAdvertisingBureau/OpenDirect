@@ -4888,7 +4888,7 @@ Further information on route can be found at [www.route.org.uk](http://www.route
         "type": "frames",
         "datasource": "metrics",
         "target": "framecount",
-        "targetvalues":[]
+        "targetvalues":["1000"]
     }
 ]
 ```
@@ -4904,7 +4904,7 @@ Allows the Media Owner / Publisher to define the total number of frames to be ta
         "type": "audience",
         "datasource": "metrics",
         "target": "impacts",
-        "targetvalues":[]
+        "targetvalues":["5000000"]
     }
 ]
 ```
