@@ -408,7 +408,7 @@ To specify the individual line item details of the order, use the [LINE](#object
 |**packageonly** |Identifies whether the order is only available as a package or if specific items can be separated from the inventory.<p> A value of TRUE means the inventory is only available as a package.<p> A value of FALSE allows the buyer to select specific items from inventory.|boolean
 |**preferredbillingmethod** |The preferred billing method for this order.<p>The default is Electronic.<p>If the billing contact is not specified in the order, the billing contact comes from buyer’s list of contacts.|enum (Electronic, Postal)
 |**providerdata**|The ProviderData object is used for buyers to detail structured information that may be used to identify their order in a seller's system using their own IDs or references. |object|
-|**advertiserbrand***|identification of the brand being advertised by the advertiser organisation |object|
+|**advertiserbrandid***|id of the brand being advertised by the advertiser organisation |object|
 |**startdate** |The date and time that the order will start. The start date is directional and may be updated by the publisher to match the earliest start date found in the order’s list of lines.<p>If the time is missing, 12:00 AM is assumed.<p>When creating the order, the date and time must be greater than or equal to now.<p>Start dates that have past may not be updated.|string (date-time)
 |**enddate** |The date and time that the order will end. The end date is directional and may be updated by the publisher to match the latest end date found in the order’s lines.<p>If the time is missing, 11:59:59 PM is assumed.<p>The end date must be later than the start date.<p>End dates that have past cannot be updated.|string (date-time)
 |**orderexpirydate**|The date and time for when the order expires. Publisher will only hold inventory up until the date and time indicated.|string (date-time)
@@ -435,7 +435,7 @@ A publisher may also create an organization for itself for the purpose of reques
 |**name*** |The organization’s display name.<p>Cannot be an empty string. Must be unique. |string _(120)_
 |**phone** |The organization’s phone number. |string _(20)_
 |**status*** |A value that indicates the current state of the approval process. <p>The approval process confirms the organization’s identity. |enum (Pending, Approved, Disapproved, Limited)
-|**organizationtype***| The core activity that an organisation undertakes as a business e.g. Advertiser, Intermediary or Agency| enum (advertiser, intermediary, agency)      |
+|**organizationtype***| The core activity that an organisation undertakes as a business e.g. Advertiser, Intermediary or Agency| enum (advertiser, intermediary, agency, publisher)      |
 | **eids**                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the organization to the buyer                       | Array                                  |
 |**url** |A URL to the organization’s website. |string _(1024)_
 |**ext**|Optional vendor-specific extensions. |ext object|
