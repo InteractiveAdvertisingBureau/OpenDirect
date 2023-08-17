@@ -683,12 +683,12 @@ For GET calls that return a collection of resources, such as /accounts/{id}/orde
 | /advertiserbrands<br />/advertiserbrands?$filter | advertiserbrands | AdvertiserBrand |
 | /accounts<br />/accounts?$filter | accounts | Account |
 | /accounts/{id}/assignments<br />/accounts/{id}/assignments?$filter | assignments | Assignment |
-| /accounts/{id}/creatives<br />/accounts/{id}/creatives?$filter | creatives | Creative_Assignment |
-| /accounts/{id}/orders<br />/accounts/{id}/orders?$filter | orders | Order_Campaign_Assignment |
-| /accounts/{id}/orders/{id}/lines<br />/accounts/{id}/orders/lines?$filter | lines | Lines_Assignment |
-| /accounts/{id}/orders/{id}/lines/{id}/placements<br />/accounts/{id}/orders/lines{id}/placements?$filter | placements | Placement_Assignment |
-| /products<br />/products/search (POST) | products | Product_Assignment |
-| /products/avails (POST) | avails | ProductAvails_Assignment
+| /accounts/{id}/creatives<br />/accounts/{id}/creatives?$filter | creatives | Creative Assignment |
+| /accounts/{id}/orders<br />/accounts/{id}/orders?$filter | orders | Order Campaign Assignment |
+| /accounts/{id}/orders/{id}/lines<br />/accounts/{id}/orders/lines?$filter | lines | Lines Assignment |
+| /accounts/{id}/orders/{id}/lines/{id}/placements<br />/accounts/{id}/orders/lines{id}/placements?$filter | placements | Placement Assignment |
+| /products<br />/products/search (POST) | products | Product Assignment |
+| /products/avails (POST) | avails | ProductAvails Assignment
 
 The following shows an example response for _**/accounts**_.
 ```json
