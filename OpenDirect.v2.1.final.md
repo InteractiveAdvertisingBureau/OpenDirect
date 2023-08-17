@@ -480,7 +480,7 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**ratetype***|Defines a unit of measure that a cost (i.e. BasePrice) is expressed in. The API may support all or a subset of the specified values.|enum (CPM, CPMV, CPC, CPD, FlatRate)
 |**adunit** | Details of the Ad Units comprising this Product | [AdUnit](#object_adunit) array
 |**alladunits** |Describes whether all child Ad Units are severed together as a group or just one of the Ad Units is served|integer
-|**retirementaate** |The date and time, in UTC, that the product may be removed from the bookable inventory.|string (date-time)
+|**retirementdate** |The date and time, in UTC, that the product may be removed from the bookable inventory.|string (date-time)
 |**tz** |The time zone that the product runs in.|string
 |**url** |A URL to the specification that describes the creative requirements.|string
 |**context** |Indicates the type of content being used or consumed by the user in which ads may appear. This table has values derived from the TAG Inventory Quality Guidelines (IQG). | [AdCOM **Context** Object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#list--content-contexts-)|
