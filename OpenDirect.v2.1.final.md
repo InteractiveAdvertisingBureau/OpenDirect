@@ -1046,7 +1046,7 @@ User should be able to filter the advertiserbrands by any of the fields or field
 
 #### Example Request ####
 ```json
-GET https://<host>/<path>/<version>/accounts?name=wa  HTTP/1.1
+GET https://<host>/<path>/<version>/accounts?name=*wa*  HTTP/1.1
 Accept: application/json
 AccessToken: <OAuth token>
 ```
