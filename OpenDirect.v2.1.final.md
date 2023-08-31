@@ -60,6 +60,7 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Custom Headers](#custom_headers)
 - [INTERFACES](#interfaces)
     - [URI Summary Table](#uri_summary_table)
+    - [URI Filter Guidance](#uri_filter_guidance)
     - [Path:  Accounts](#path_accounts)
     - [Path:  Accounts Assignments](#path_accounts_assignments)
     - [Path:  Accounts Creatives](#path_accounts_creatives)
@@ -840,6 +841,22 @@ Header Name: _**X-Total-Count**_
 | ChangeRequestLine | /accounts/{id}/changesrequests/{id}/lines | GET, POST | Yes |
 | ChangeRequestLine | /accounts/{id}/changesrequests//lines/{id} | GET, PUT or<br />PATCH | Yes |
 | ChangeRequestLine | /accounts/{id}/changesrequests//lines?$filter= | GET | Yes |
+
+## URI Filter Guidance <a name="uri_filter_guidance"></a>
+The following examples show the reccomended implememtiation support for the url filter function
+
+#### Wildcards
+/brands?name=\*gucci\* <br/>
+/organizations?name=\*procter\*
+ 
+#### Boolean (AND) Logic
+/brands/?eids_name=SPACE&eids_tpids_id=1234 <br/> 
+/organizations?eids_name=SPACE&eids_tpids_id=4567 <br/>
+/organizations?eids_source=https://oohspace.co.uk&eids_tpids_id=8879 
+ 
+#### Ability to retrieve all data if pagination is implemented 
+/brands?offset=0&count=50000 <br/>
+/organizations?offset=0&count=50000
 
 
 ## Path:  Accounts <a name="path_accounts"></a>
