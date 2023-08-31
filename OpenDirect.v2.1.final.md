@@ -820,6 +820,9 @@ Header Name: _**X-Total-Count**_
 | Account | /accounts | GET, POST | Yes |
 | Account | /accounts/{id} | GET | Yes |
 | Account | /accounts?$filter= | GET | Yes |
+| AdvertiserBrands     | /advertiserbrands                             | GET                | No       |
+| AdvertiserBrands     | /advertiserbrands/{id}                        | GET                | No       |
+| AdvertiserBrands     | /advertiserbrands?$filter=                    | GET                | No       |
 | Assignment | /accounts/{id}/assignments | GET, POST | Yes |
 | Assignment | /accounts/{id}/assignments/{id} | GET, PUT or<br />PATCH, DELETE | Yes |
 | Assignment | /accounts/{id}/assignments/{id}?disable | PUT or PATCH | Yes |
