@@ -792,13 +792,23 @@ For example, you have 100 records and wish to return 25 per page, you would spec
 
 Recommended Count Limit: _**250**_
 
-## Custom Headers <a name="custom_headers"></a>
 
-When using paging, the consumer may need to know how many total records there are so this should be part of the response. There are two options here. One would be to return the total count in an outer json object to the request. The other is to use a custom header. The custom header is preferable because it does not become part of the model represented by the json. The con is, many frown upon custom headers.
+## Paging Object vs Custom Headers <a name="custom_headers"></a>
+
+When using paging, the consumer may need to know how many total records there are so this should be part of the response. There are two options here. One would be to return the total count in an outer json object to the request e.g.
+
+```json
+"paging": {
+     "page": 1,
+     "page_size": 10,
+     "total_pages": 65,
+     "total_records": 650
+}
+```
+
+The other is to use a custom header. The custom header is suggested because it does not become part of the model represented by the json. The con is, many frown upon custom headers.
 
 Header Name: _**X-Total-Count**_
-
-
 
 
 # INTERFACES <a name="INTERFACES"></a>
