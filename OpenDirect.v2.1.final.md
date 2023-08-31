@@ -1035,6 +1035,212 @@ Content-Length: 187
 }
 ```
 
+++++++
+## Path:  AdvertiserBrands <a name="path_advertiserbrands"></a>
+The AdvertiserBrand associates brands to an advertiser. AdvertiserBrand URIs enables the buyer to identify the brands linked to the advertiser they are buying for. Its important for Publishers that they know what brand is being user in the transaction so that the publisher can give availbility based on prohibition and duplication considerations.
+
+### /advertiserbrands ###
+Gets a list of AdvertiserBrands that the user has access to. The response must support pagination. See Paging Query Parameters.
+
+#### Verbs ####
+
+* **GET**: Gets a list of all AdvertiserBrands
+
+#### Rules ####
+For an advertiser, the list of advertiserbrands will include only brands that they own. However, for an agency, the list of advertiserbrands will include the advertiserbrands that they manage on behalf of advertisers.
+
+#### Example GET Request ####
+```json
+GET https://<host>/<path>/<version>/advertiserbrands HTTP/1.1
+Accept: application/json
+AccessToken: <OAuth token>
+```
+
+#### Example GET Response ####
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 2079
+{
+    "AdvertiserBrands": [
+        {
+            "Id": "1173",
+            "Name": "Marmite",
+            "OrganizationId": "345",
+            "Eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "14789"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Id": "1174",
+            "Name": "PGTips",
+            "OrganizationId": "345",
+            "Eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "567"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Id": "1175",
+            "Name": "Lynx",
+            "OrganizationId": "345",
+            "Eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "8890"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Id": "1176",
+            "Name": "Walls",
+            "OrganizationId": "345",
+            "Eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+                            "id": "3562"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Id": "1234",
+            "Name": "Walkers",
+            "OrganizationId": "889",
+            "Eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+
+                            "id": "84585608"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+### /advertiserbrands/{id} ###
+Gets the specified Account.
+
+#### Verb ####
+* **GET**: Gets the specified advertiserbrand.
+
+#### Rules ####
+The user must have permissions to perform the requested action. For example, advertisers and agencies may get the advetiserbrands that they own. In addition, an agency may get the advertiserbrands that they manage on behalf of advertisers.
+
+#### Example GET Request ####
+```json
+GET https://<host>/<path>/<version>/advertiserbrands/1234 HTTP/1.1
+Accept: application/json
+AccessToken: <OAuth token>
+```
+
+#### Example GET Response ####
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 187
+{
+    "AdvertiserBrands": [
+        {
+            "Id": "1234",
+            "Name": "Walkers",
+            "OrganizationId": "889",
+            "Eids": [
+                {
+                    "source": "https://oohspace.co.uk",
+                    "name": "SPACE",
+                    "tpids": [
+                        {
+
+                            "id": "84585608"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+### /advertiserbrands?$filter= ###
+The response must support pagination. See Paging Query Parameters.
+
+#### Verb ####
+* **GET**: Gets a list of advertiserbrands that match the specified filter criteria. The user may use filter expressions with any of the Account properties:
+    * name
+    * organizationid
+    * id
+
+May also support getting a list of IDs.
+
+#### Rules ####
+Only an advertiser or a buyer who own the accounts can issue the request. User should be able to filter the accounts by any of the fields or field values of the owned account. Logical AND/OR condition of the fields may be allowed.
+
+#### Example Request ####
+```json
+GET https://<host>/<path>/<version>/accounts?name=*Brand*  HTTP/1.1
+Accept: application/json
+AccessToken: <OAuth token>
+```
+
+#### Example Response ####
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 187
+{
+    "Accounts":[
+        {
+            "advertiserid":"1234987",
+            "buyerid":"1234987",
+            "name":"Brand B",
+            "status":"pending",
+            "id":"9876542"
+        },
+        {
+            "advertiserid":"1234987",
+            "buyerid":"34587",
+            "intermediaryid":"9876543",
+            "name":"Brand A",
+            "status":"approved",
+            "id":"23873345"
+        }
+    ]
+}
+```
+
+------
+
 ## Path:  Accounts Assignments <a name="path_accounts_assignments"></a>
 
 Account assignments associate a creative with a line.
