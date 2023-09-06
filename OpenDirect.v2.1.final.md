@@ -882,9 +882,57 @@ Gets a list of advertiserbrands that the user has access to. The response must s
 #### Verbs ####
 
 * **GET**: Gets a list of all advertiserbrands
+* **POST**: Adds an advertiserbrand
 
 #### Rules ####
 For an advertiser, the list of advertiserbrands will include only brands that they own. However, for an agency, the list of advertiserbrands will include the advertiserbrands that they manage on behalf of advertisers.
+
+#### Example POST Request #####
+```json
+POST https://<host>/<path>/<version>/advertiserbrands HTTP/1.1
+Content-Type: application/json
+AccessToken: <OAuth token>
+{
+    "name": "Walkers",
+    "organizationid": "889",
+    "eids": [
+        {
+            "source": "https://oohspace.co.uk",
+            "name": "SPACE",
+            "tpids": [
+                {
+                    "id": "84585608"
+                }
+            ]
+        }
+    ]
+}
+```
+
+#### Example POST Response ####
+```json
+HTTP/1.1 200 OK
+Location: https://<host>/<path>/<version>/accounts/23873345
+Content-Type: application/json
+Content-Length: 379
+{
+    "id": "1234",
+    "name": "Walkers",
+    "organizationid": "889",
+    "eids": [
+        {
+            "source": "https://oohspace.co.uk",
+            "name": "SPACE",
+            "tpids": [
+                {
+                    "id": "84585608"
+                }
+            ]
+        }
+    ]
+}
+```
+
 
 #### Example GET Request ####
 ```json
