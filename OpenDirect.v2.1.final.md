@@ -1007,25 +1007,22 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Length: 187
 {
-    "AdvertiserBrands": [
+    "Id": "1234",
+    "Name": "Walkers",
+    "OrganizationId": "889",
+    "Eids": [
         {
-            "Id": "1234",
-            "Name": "Walkers",
-            "OrganizationId": "889",
-            "Eids": [
+            "source": "https://oohspace.co.uk",
+            "name": "SPACE",
+            "tpids": [
                 {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "84585608"
-                        }
-                    ]
+                    "id": "84585608"
                 }
             ]
         }
     ]
 }
+ 
 ```
 
 ### /advertiserbrands?$filter= ###
