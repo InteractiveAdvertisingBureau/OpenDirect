@@ -796,14 +796,14 @@ Recommended Count Limit: _**250**_
 
 ## Paging Object vs Custom Headers <a name="custom_headers"></a>
 
-When using paging, the consumer may need to know how many total records there are so this should be part of the response. There are two options here. One would be to return the total count in an outer json object to the request e.g.
+When using paging, the consumer may need to know how many total records there are so this should be part of the response. There are two options here. One would be to return the countdetails in an outer json object to the request e.g.
 
 ```json
 "paging": {
-     "page": 1,
-     "page_size": 10,
-     "total_pages": 65,
-     "total_records": 650
+     "offset": 0,
+     "count": 25,
+     "totalrecords": 100,
+     "countlimit": 100
 }
 ```
 
