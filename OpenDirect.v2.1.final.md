@@ -445,6 +445,7 @@ A publisher may also create an organization for itself for the purpose of reques
 |**phone** |The organization’s phone number. |string _(20)_
 |**status*** |A value that indicates the current state of the approval process. <p>The approval process confirms the organization’s identity. |enum (Pending, Approved, Disapproved, Limited)
 |**organizationtype***| The core activity that an organisation undertakes as a business e.g. Advertiser, Intermediary or Agency| enum (advertiser, intermediary, agency, publisher)      |
+|**advertiserbrands**| Array of one or more advertiserbrand objects associated with an advertiser organisationtype| Array      |
 | **eids**                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the organization to the buyer                       | Array                                  |
 |**url** |A URL to the organization’s website. |string _(1024)_
 |**ext**|Optional vendor-specific extensions. |ext object|
