@@ -231,7 +231,6 @@ Ad Unit contains exactly one AdCOM Ad Specification
 |**name** |A name to identify this Ad Unit |string _(255)_ |
 |**spec*** |The technical specifications of this Ad Unit|[AdCOM **Placement** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_placement)
 
-
 _* required_
 
 
@@ -263,6 +262,7 @@ Defines the details of a Brand associated with an organization
 | **organizationid***       | The ID of the organization that owns the brand                  | String (36)  |
 | **eids**                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the AdvertiderBrand to the buyer                       | Array                                  |
 
+_* required_
 
 ## Object:  Assignment <a name="object_assignment"></a>
 Defines an Assignment resource. An Assignment associates a creative with a line of the order. A creative may be assigned to one or more lines and a line may be assigned one or more creative.
@@ -273,13 +273,14 @@ Notes: The assignment must fail if the following are true.
 
 |Attribute|Description|Type|
 |---|---|---
-|**id** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_ |
+|**id*** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_ |
 |**creativeid***|The ID of the creative to display when the line runs.|string _(36)_ |
 |**placementid***|The ID of the placement that will display the creative.|string _(36)_ |
 |**status**|A value that determines whether the creative serves.<p>The status may not transition from Inactive to Active.|enum (Active, Inactive)
 |**weight** |Determines how much the creative is displayed relative to the other creative assigned to the same line.<p>To provide even rotation, do not specify a weight.<p>If weight is specified, all assignments that specify the same line must specify a weight and the weight of all the assignments must add up to 100. If the weight of all assignments does not add up to 100, even rotation is applied.<p>Assignments with heavier weight get proportionally more rotation compared to those with lesser weight.<p>For example, if the line has 2 creative, A and B, assigned with the same dates, and A has weight 25 and B has weight 75, B will serve three times as often as A.| integer (1-100)
 |**producttargeting**|Object that assigns creative to play at the right place at the right time |producttargeting array|
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 
@@ -290,7 +291,7 @@ The OrderSearch object can be used to search for orders that have an order statu
 
 |Attribute|Description|Type|
 |---|---|---|
-|**id**|A system-generated opaque ID that uniquely identifies this resource.|string _(36)_ |
+|**id***|A system-generated opaque ID that uniquely identifies this resource.|string _(36)_ |
 |**accountid***|The ID of the account that identifies the advertiser and buyer that own the Change. This must be the same as the AccountId for the Order.|string _(36)_ |
 |**comments**|Optional comments as to why the Change is being requested/proposed. |string _(1000)_ |
 |**contacts**|The list of contacts to use for this change. This list of contacts is in addition to the buyer’s and advertiser’s list of contacts.<p>The list must contain unique contact types (for example, only one billing contact).|[CONTACT](#object_contact) array
@@ -301,6 +302,7 @@ The OrderSearch object can be used to search for orders that have an order statu
 |**status**|Specifies the Status of the Change Request. |enum (PENDING, APPROVED, REJECTED)
 |**webhook**|URI which is called when the change is approved, rejected or modified by the Seller.<p>URI is called with a PUT request containing the Change Request ID. | string _(36)_ |
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 
@@ -318,6 +320,7 @@ Defines an agency or advertiser contact.
 |**phone** |The contact’s phone number |string _(20)_|
 |**title** |The contact’s job title. |string _(30)_|
 |**type** |Defines the possible types of Contacts.|enum (Billing, Buyer, Creative, Sales)|
+
 _* required_
 
 ## Object:  Creative <a name="object_creative"></a>
@@ -332,6 +335,7 @@ See Assignment for instructions on updating a creative.
 | **ad** | The metadata and content of this creative Ad|[AdCOM **Ad** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_ad)|
 | **creativeapprovals** | Any array of pairs describing the approval status for each publisher in the form PublisherId : Status where the approval status is either:<p>- PENDING<p>- APPROVED<p>- REJECTED | Key/Value array |
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 
@@ -345,7 +349,7 @@ _Notes: The user may update a line only if it’s in the Draft state. If the lin
 
 |Attribute|Description|Type|
 |---|---|---|
-|**id** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_ |
+|**id*** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_ |
 |**name***|The line’s display name. <p>Should be unique.|string _(200)_ |
 |**orderid***|The ID of the order that this line belongs to.|string _(36)_ |
 |**productid***|The ID of the product where the creatives run.|string _(36)_ |
@@ -367,6 +371,7 @@ _Notes: The user may update a line only if it’s in the Draft state. If the lin
 |**specialinstructions**|Free text box to capture any special intructions relating to the orderline. If this field is used, the orderline should be set to requested/pending status for manual intervention e.g. this could be used for special posting/display instructions such as 'blank after orderline end time'|string (255)
 |**pmp** | | |
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 ## Object:  Message <a name="object_message"></a>
@@ -376,7 +381,7 @@ Mesages are used for communication between a buyer are a seller around an Order 
 
 |Attribute|Description|Type|
 |---|---|---|
-|**id** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_
+|**id*** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_
 |**sender** |The sender of the message| [Contact](#object_contact) object |
 |**recipient**|The intended recipient of the message|[Contact](#object_contact) object |
 |**messagedate** |Time and date the mesage was sent|string (date-time)
@@ -388,6 +393,7 @@ Mesages are used for communication between a buyer are a seller around an Order 
 |**replytomessageid** |Id of the message that this message is in reply to| string _(36)_
 |**replywebhook** |URI which is called when there is a reply to this message.<p>URI is called with a PUT request containing the new MessageId in a JSON object. |string _(1024)_
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
     
 
@@ -399,7 +405,7 @@ To specify the individual line item details of the order, use the [LINE](#object
 
 |Attribute|Description|Type|
 |---|---|---|
-|**id** |A system-generated opaque ID that uniquely identifies this resource.| string _(36)_
+|**id*** |A system-generated opaque ID that uniquely identifies this resource.| string _(36)_
 |**name*** |The order’s display name.<p>Must be unique within the account’s list of orders.|string _(100)_
 |**accountid*** |The ID of the account that identifies the advertiser and buyer that own the order.|string _(36)_
 |**publisherid*** |The Id of the Publisher providing this Order| string _(36)_
@@ -429,7 +435,7 @@ A publisher may also create an organization for itself for the purpose of reques
 
 |Attribute|Description|Type|
 |---|---|---|
-|**id**|A system-generated opaque ID that uniquely identifies this resource.| string _(36)_
+|**id***|A system-generated opaque ID that uniquely identifies this resource.| string _(36)_
 |**address** | The primary address of the organization|[Address](#object_address) object
 |**contacts** |A list of one or more contacts within the organization. The list must contain unique contact types (for example, only one billing contact). At least one billing contact is required.|[Contact](#object_contact) array
 |**disapprovalreason**|The reason why the organization was not registered. Must be specified if Status is Disapproved. |string _(255)_
@@ -442,6 +448,7 @@ A publisher may also create an organization for itself for the purpose of reques
 | **eids**                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the organization to the buyer                       | Array                                  |
 |**url** |A URL to the organization’s website. |string _(1024)_
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 ## Object:  Placement <a name="object_placement"></a>
@@ -450,11 +457,12 @@ The Placement resource is usd to store the specifications for an individual AdUn
 
 |Attribute|Description|Type
 |---|---|---|
-|**id** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_
+|**id*** |A system-generated opaque ID that uniquely identifies this resource.|string _(36)_
 |**lineid*** |The Id of the line the placement belongs to|string _(36)_
 |**adunitid*** |The Id of the Ad unit this placement is for|string _(36)_
 |**spec** |The technical specifications for this line.<p>If empty, the technical specifications for the Ad Unit are used|[AdCOM **Placement** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_placement)|
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 
@@ -497,6 +505,7 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**buyeridaccess**| List of BuyerIDs with access to this Product. NULL = all accounts can access this product.                                                | Array                   |
 |**intermediaryidaccess**| List of IntermediaryIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
 |**ext**|Optional vendor-specific extensions. |ext object|
+
 _* required_
 
 
@@ -506,17 +515,18 @@ Defines search criteria used for requesting product availability and pricing wit
 
 | Attribute          | Description                                                                                                                                                      | Type               |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| **productids**         | A list of IDs that identify the products on which to get availability and pricing information                                                                    | Array              |
+| **productids***         | A list of IDs that identify the products on which to get availability and pricing information                                                                    | Array              |
 | **targeting**          | The segments to target. For example, behavioral, age, and gender segments.                                 | [AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
 | **producttargeting**          | The Inventory, Delivery, Investement and Distribution ProductTargeting objects to be targeted for the availability request                                             | producttargeting object array |
-| **accountid**          | The ID of the account that identifies the buyer, advertiser and any other stakeholders                                                                           | String(36)         |
+| **accountid***          | The ID of the account that identifies the buyer, advertiser and any other stakeholders                                                                           | String(36)         |
 | **currency**           | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | Max 3 Char         |
-| **advertiserbrandid**  | An ID that uniquely identifies the Brand being advertised                                                                                                        | String (36)        |
+| **advertiserbrandid***  | An ID that uniquely identifies the Brand being advertised                                                                                                        | String (36)        |
 | **availabilityfields** | Defines the ProductTargeting object metrics that availability is returned as                                                                                                    | producttargeting object array |
 | **grouping**           | Defines the ProductTargeting object metrics that the availability output is grouped as                                                                                           | producttargeting object array |
-| **startdate**          | The desired start date for inventory delivery                                                                                                                    | ISO-8601           |
-| **enddate**            | The desired end date for inventory delivery                                                                                                                      | ISO-8601           |
+| **startdate***          | The desired start date for inventory delivery                                                                                                                    | ISO-8601           |
+| **enddate***            | The desired end date for inventory delivery                                                                                                                      | ISO-8601           |
 
+_* required_
 
 ## Object: Avails <a name="object_avails"></a>
 
@@ -524,15 +534,16 @@ Defines the response to a request for product availability and pricing informati
 
 | Attribute    | Description                                                                                                                                                      | Type                    |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| **productid**    | ID that identifies the product for which availability and pricing information is provided                                                                        | String(36)              |
-| **accountid**    | The ID of the account that identifies the buyer, advertiser and any other stakeholders.                                                                          | String(36)              |
+| **productid***    | ID that identifies the product for which availability and pricing information is provided                                                                        | String(36)              |
+| **accountid***    | The ID of the account that identifies the buyer, advertiser and any other stakeholders.                                                                          | String(36)              |
 | **availability** | The quantity available for booking for the specified date range. Availability for a given date range may vary. In order for products to be returned in a PRODUCT AVAILS SEARCH, product availability must be equal to or less than the value provided in the Quantity property of the PRODUCT AVAILS SEARCH object. For example, if Quantity is set to 500,000 in PRODUCT AVAILS SEARCH, impression availability for the product must be at least 500,000. However, if only 250,000 impressions are available, the product is not returned. Publishers may set an artificial limit on the maximum number of available impressions. If the quantity field in PRODUCT AVAILS SEARCH is not provided, all products matching other criteria are returned showing maximum availability.                                | Integer                 |
 | **productavailability** | An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of ProductTargeting objects                                | productavailability Object                  |
 | **currency**     | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | String (3) \[ISO-4217\] |
-| **pric**e        | The product’s price                                                                                                                  | Decimal                 |
-| **startdate**          | The requested start date for inventory delivery                                                                                                                    | ISO-8601           |
-| **enddate**            | The requested end date for inventory delivery                                                                                                                      | ISO-8601           |
+| **price***        | The product’s price                                                                                                                  | Decimal                 |
+| **startdate***          | The requested start date for inventory delivery                                                                                                                    | ISO-8601           |
+| **enddate***            | The requested end date for inventory delivery                                                                                                                      | ISO-8601           |
 
+_* required_
 
 ## Object: ProductAvailability <a name="object_productavailability"></a>
 
@@ -540,11 +551,13 @@ An object that groups the inventory availbility into Available, Partially Availa
 
 | Attribute | Description                                                                                                                                               | Type   |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **status**    | Summary definition of the inventory described in the Targeting Array as <ul><li>Available</li><li>Partially Available</li><li>Unavailable</li></ul> | String |
+| **status***    | Summary definition of the inventory described in the Targeting Array as <ul><li>Available</li><li>Partially Available</li><li>Unavailable</li></ul> | String |
 | **reason**    | State the reason if Partially Available or Unavailable from the list <ul><li>Booked</li><li>Optioned</li><li>Excluded</li><li>OutOfCharge</li><li>Prohibited</li><li>Manual Trade Only</li><li>InvalidPeriodLength</li><li>InvalidFrameID</li><li>InvalidBudget</li><li>InvalidPrice</li><li>ClientDuplication</li><li>LocationDuplication</li><li>LocationJuxta</li></ul>| String |
 | **comment**   | Free text for an availability comment                                                                                                                     | String |
 | **context**   | Array of ProductTargeting objects describing the context of any Partially Available or Unavailable status e.g. this could be a frame that is causing a duplication error | Object |
-| **producttargeting** | Array of ProductTargeting objects describing the inventory that is at Available,  Partially Available or Unavailable status                                               | Object |
+| **producttargeting*** | Array of ProductTargeting objects describing the inventory that is at Available,  Partially Available or Unavailable status                                               | Object |
+
+_* required_
 
 ## Object:  ProductTargeting <a name="object_producttargeting"></a>
     
@@ -556,19 +569,19 @@ The producttargeting object is used to discover and target the real-life dimensi
 
 | Attribute    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Type                                                               |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| name         | The key objects for describing physical media campaigns and products are:<br>• Inventory: What a media owner / publisher sells in terms of Audience or Frames.<br>• Delivery: How adverts are displayed from a start and end time, and the share of that display time.<br>• Distribution: How the adverts are distributed across the times and locations booked by audience and/or investment.<br>• Investment: How the campaign is quantified for trading purposes (Fixes price, Cost Per Thousand Audience, Cost Per Frame).<br>• Prohibitions: Information about any brand safety prohibitions that will affect the playout of certain brand types in certain locations e.g. fast food prohibitions on certain locations. | enum (Inventory, Delivery, Distribution, Investment, Prohibitions) |
+| **name***         | The key objects for describing physical media campaigns and products are:<br>• Inventory: What a media owner / publisher sells in terms of Audience or Frames.<br>• Delivery: How adverts are displayed from a start and end time, and the share of that display time.<br>• Distribution: How the adverts are distributed across the times and locations booked by audience and/or investment.<br>• Investment: How the campaign is quantified for trading purposes (Fixes price, Cost Per Thousand Audience, Cost Per Frame).<br>• Prohibitions: Information about any brand safety prohibitions that will affect the playout of certain brand types in certain locations e.g. fast food prohibitions on certain locations. | enum (Inventory, Delivery, Distribution, Investment, Prohibitions) |
 | type         | How the producttargeting is being quantified:<br>• Frames<br>• Audience<br>• Investment                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | enum (Frames, Audience, Investment, Total)                         |
-| datasource   | The identification and inclusion of third party data sources into the schema, which both buyside and sell side may use to describe and discover their available Inventory, location and audiences in accordance with the third party schema                                                                                                                                                                                                                                                                                                                                                                                                                                                                | String (255)                                                       |
-| target       | Description of the producttargeting Metric                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | String (255)                                                       |
-| targetvalues | Array of one or more values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | String (255) Array                                                              |
-| selectable   | Defines whether a Buyer can select from the given list of targetvalues or whether the targetvalues are fixed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Boolean                                                            |
-| count        | Count of targetvalues                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | number                                                             |
-| minimum      | Defines the minimum number of targetvalues that must be selected                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | number                                                             |
-| maximum      | Defines the maximum number of targetvalues that must be selected                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | number                                                             |
-| increment    | Defines the increments that are permitted for the targeting values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | number                                                             |
-| default      | Defines the default targetvalues(s) that are selected if the Buyer does not specify any TargetValue(s) or the target is not selectable                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | String (255) or Number                                             |
+| **datasource***   | The identification and inclusion of third party data sources into the schema, which both buyside and sell side may use to describe and discover their available Inventory, location and audiences in accordance with the third party schema                                                                                                                                                                                                                                                                                                                                                                                                                                                                | String (255)                                                       |
+| **target***       | Description of the producttargeting Metric                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | String (255)                                                       |
+| **targetvalues*** | Array of one or more values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | String (255) Array                                                              |
+| **selectable***   | Defines whether a Buyer can select from the given list of targetvalues or whether the targetvalues are fixed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Boolean                                                            |
+| **count**        | Count of targetvalues                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | number                                                             |
+| **minimum**      | Defines the minimum number of targetvalues that must be selected                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | number                                                             |
+| **maximum**      | Defines the maximum number of targetvalues that must be selected                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | number                                                             |
+| **increment**    | Defines the increments that are permitted for the targeting values                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | number                                                             |
+| **default**      | Defines the default targetvalues(s) that are selected if the Buyer does not specify any TargetValue(s) or the target is not selectable                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | String (255) or Number                                             |
 
-
+_* required_
 
 ## Object:  ProviderData <a name="object_providerdata"></a>
 
@@ -582,13 +595,14 @@ It is proposed that a Seller should publish such commercial rules in a text file
 
 | Attribute            | Description                                                                                                                                                                                                                                                                                                                                          | Type         |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| campaignid           | Provided by the Buyer to uniquely identify the Advertising Campaign for which the Order is being placed                                                                                                                                                                                                                                              | String (255) |
-| campaignname         | A descriptive name provided by the Buyer which is associated with the Advertising Campaign for which the Order is being placed                                                                                                                                                                                                                       | String (255) |
-| ponumber             | Provided by Buyer as a reference to be used by Buyers for any offline contact related to the Order                                                                                                                                                                                                                                                   | String (255) |
-| salesorderreference  | Provided by the Media Owner as a reference to be used by Buyers for any offline contact related to the Order                                                                                                                                                                                                                                         | String (255) |
-| barterorganizationid | The OrganizationID of a Barter Company can be added here to flag a Barter transaction                                                                                                                                                                                                                                                                | String (255) |
-| other                | An opaque CLOB of provider-defined data. Providers may use this field as needed (for example, to store an ID that correlates this object with resources within their system). Note that any provider that edits this object may override the data in this field. The data should include a marker that you can identify to ensure the data is yours. | CLOB (10000) |    
+| **campaignid***           | Provided by the Buyer to uniquely identify the Advertising Campaign for which the Order is being placed                                                                                                                                                                                                                                              | String (255) |
+| **campaignname***         | A descriptive name provided by the Buyer which is associated with the Advertising Campaign for which the Order is being placed                                                                                                                                                                                                                       | String (255) |
+| **ponumber**             | Provided by Buyer as a reference to be used by Buyers for any offline contact related to the Order                                                                                                                                                                                                                                                   | String (255) |
+| **salesorderreference**  | Provided by the Media Owner as a reference to be used by Buyers for any offline contact related to the Order                                                                                                                                                                                                                                         | String (255) |
+| **barterorganizationid** | The OrganizationID of a Barter Company can be added here to flag a Barter transaction                                                                                                                                                                                                                                                                | String (255) |
+| **other**                | An opaque CLOB of provider-defined data. Providers may use this field as needed (for example, to store an ID that correlates this object with resources within their system). Note that any provider that edits this object may override the data in this field. The data should include a marker that you can identify to ensure the data is yours. | CLOB (10000) |    
 
+_* required_
 
 ## Object:  Stats <a name="object_stats"></a>
 The Stats resource contains reporting data about a Line.
@@ -596,17 +610,17 @@ The Stats resource contains reporting data about a Line.
 
 |Attribute|Description|Type|
 |---|---|---|
-|**reportdate**|A system-generated opaque ID that uniquely identifies this resource.|string _datetime_ |
+|**reportdate***|A system-generated opaque ID that uniquely identifies this resource.|string _datetime_ |
 |**impressions**| The number of impressions served to date.<p />The value must be zero if no impressions have been served | integer
 |**clicks**|The number of clicks to date. The value must be zero if no clicks have occurred.| integer
 |**ctr**|The click through rate to date. The formula to calculate CTR is (clicks / impressions) x 100 | number
 |**spend**|The amount spent to date. | number
-|**frameid**                | The Publisher Frame ID                                                                                                                                                                                                            | String (128)             |
+|**frameid***                | The Publisher Frame ID                                                                                                                                                                                                            | String (128)             |
 |**playerref**               | The MAC Address or other reference uniquely identifying a digital player or frame                                                                                                                                                 | Max length 32 characters |
-|**spotstartutc**           | The UTC start time of the spot.                                                                                                                                                                                                   | ISO-8601                 |
-|**spotstarttz**            | Time zone offset for the spot start time (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                  | ±hh:mm<br>Z              |
-|**spotendutc**             | The UTC end time of the spot.                                                                                                                                                                                                     | ISO-8601                 |
-|**spotendtz**              | Time zone offset for the spot end time. (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                   | ±hh:mm<br>Z              |
+|**spotstartutc***           | The UTC start time of the spot.                                                                                                                                                                                                   | ISO-8601                 |
+|**spotstarttz***            | Time zone offset for the spot start time (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                  | ±hh:mm<br>Z              |
+|**spotendutc***             | The UTC end time of the spot.                                                                                                                                                                                                     | ISO-8601                 |
+|**spotendtz***              | Time zone offset for the spot end time. (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                   | ±hh:mm<br>Z              |
 |**spotlength**              | Spot Length in milliseconds.                                                                                                                                                                                                      | number                   |
 |**shareoftime**            | Share of time. This must be provided for scrollers, but its presence is not policed by Playout. Media Owners must determine when this must be supplied.                                                                           | number (decimal)         |
 |**creativeid**              | Media Owner-defined creative identifier.                                                                                                                                                                                          | String (64)              |
@@ -614,6 +628,8 @@ The Stats resource contains reporting data about a Line.
 |**thirdpartycreativeref** | Creative reference provided by a third-party such as the creative agency. This might be a URL or a GUID, for example.                                                                                                             | String (128)             |
 |**creativetriggerevent**   | The creative trigger event, indicating what prompted the given creative to be used.                                                                                                                                               | String (64)              |
 |**mediaownerplayoutref**  | Media Owner-defined reference representing this record. For the Media Owner, this should uniquely identify this record across all time. (Note that records supplied by other Media Owners may happen to use the same ID however.) | String (48)              |
+
+_* required_
 
 ## Object: EID <a name="object_eid"></a>
 
@@ -627,17 +643,17 @@ Extended identifiers support in the OpenDirect specification allows buyers to us
     <td><strong>Description</strong></td>
   </tr>
   <tr>
-    <td><code>source</code></td>
+    <td><code>source*</code></td>
     <td>string</td>
     <td>Source or technology provider responsible for the set of included IDs. Expressed as a top-level domain.</td>
   </tr>
   <tr>
-    <td><code>name</code></td>
+    <td><code>name*</code></td>
     <td>string</td>
-    <td>Name of Source or technology provider responsible for the set of included IDs.</td>
+    <td>Name of third party ID.</td>
   </tr>
   <tr>
-    <td><code>tpids</code></td>
+    <td><code>tpids*</code></td>
     <td>object array</td>
     <td>Array of third party IDs <code>TPID</code> objects from the given source. Refer to 3.11 Extended Identifier UIDs</td>
  </tr>
@@ -650,6 +666,7 @@ Extended identifiers support in the OpenDirect specification allows buyers to us
   </tr>
 </table>
 
+_* required_
 
 ## Object: TPID <a name="object_tpid"></a>
 
@@ -663,7 +680,7 @@ This object contains a single third party identifier provided as part of extende
     <td><strong>Description</strong></td>
   </tr>
   <tr>
-    <td><code>id</code></td>
+    <td><code>id*</code></td>
     <td>string</td>
     <td>The identifier for the Third Party.</td>
   </tr>
@@ -676,6 +693,7 @@ This object contains a single third party identifier provided as part of extende
   </tr>
 </table>
 
+_* required_
 
 # Collection Objects <a name="collection_objects"></a>
 
