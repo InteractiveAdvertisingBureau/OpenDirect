@@ -364,6 +364,7 @@ _Notes: The user may update a line only if it’s in the Draft state. If the lin
 |**targeting**|The creative assigned to the LINE resource is display when the line includes user segments and the delivery engine can determine whether the user matches the specified segments.|[AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
 |**producttargeting**|Array of objects used to determine product availability.|producttarget array |
 |**providerdata**|The ProviderData object is used for buyers to detail structured information that may be used to identify their order in a seller's system using their own IDs or references. |object|
+|**specialinstructions**|Free text box to capture any special intructions relating to the orderline. If this field is used, the orderline should be set to requested/pending status for manual intervention e.g. this could be used for special posting/display instructions such as 'blank after orderline end time'|string (255)
 |**pmp** | | |
 |**ext**|Optional vendor-specific extensions. |ext object|
 _* required_
@@ -414,6 +415,7 @@ To specify the individual line item details of the order, use the [LINE](#object
 |**enddate** |The date and time that the order will end. The end date is directional and may be updated by the publisher to match the latest end date found in the order’s lines.<p>If the time is missing, 11:59:59 PM is assumed.<p>The end date must be later than the start date.<p>End dates that have past cannot be updated.|string (date-time)
 |**orderexpirydate**|The date and time for when the order expires. Publisher will only hold inventory up until the date and time indicated.|string (date-time)
 |**contacts** |The list of contacts to use for this order. This list of contacts is in addition to the buyer’s and advertiser’s list of contacts.<p>The list must contain unique contact types (for example, only one billing contact).| [Contact](#object_contact) array
+|**specialinstructions**|Free text box to capture any special intructions relating to the order. If this field is used, the order should be set to requested/pending status for manual intervention|string (255)
 |**ext**|Optional vendor-specific extensions. |ext object|
 
 _* required_
