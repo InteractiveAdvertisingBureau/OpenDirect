@@ -278,7 +278,7 @@ Notes: The assignment must fail if the following are true.
 |**placementid***|The ID of the placement that will display the creative.|string _(36)_ |
 |**status**|A value that determines whether the creative serves.<p>The status may not transition from Inactive to Active.|enum (Active, Inactive)
 |**sov** |Determines how much the creative is displayed relative to the other creative assigned to the same line.<p>To provide even rotation, do not specify a share of voice.<p>If share of voice is specified, all assignments that specify the same line must specify a share of voice and the share of voice of all the assignments must add up to 100. If the share of voice of all assignments does not add up to 100, even rotation is applied.<p>Assignments with heavier share of voice get proportionally more rotation compared to those with lesser share of voice.<p>For example, if the line has 2 creative, A and B, assigned with the same dates, and A has share of voice 25 and B has share of voice 75, B will serve three times as often as A.| integer (1-100)
-|**producttargeting**|Object that assigns creative to play at the right place at the right time |producttargeting array|
+|**producttargeting**|The producttargeting object is used to discover and target the real-life dimensional and temporal aspect of physical media. Full details on the use of the ProductTargeting object can be found in the section [ProductTargeting for Physical Media](#producttargetingdetails) |producttargeting array|
 |**ext**|Optional vendor-specific extensions. |ext object|
 
 _* required_
