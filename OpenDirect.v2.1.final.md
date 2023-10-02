@@ -277,7 +277,7 @@ Notes: The assignment must fail if the following are true.
 |**creativeid***|The ID of the creative to display when the line runs.|string _(36)_ |
 |**placementid***|The ID of the placement that will display the creative.|string _(36)_ |
 |**status**|A value that determines whether the creative serves.<p>The status may not transition from Inactive to Active.|enum (Active, Inactive)
-|**weight** |Determines how much the creative is displayed relative to the other creative assigned to the same line.<p>To provide even rotation, do not specify a weight.<p>If weight is specified, all assignments that specify the same line must specify a weight and the weight of all the assignments must add up to 100. If the weight of all assignments does not add up to 100, even rotation is applied.<p>Assignments with heavier weight get proportionally more rotation compared to those with lesser weight.<p>For example, if the line has 2 creative, A and B, assigned with the same dates, and A has weight 25 and B has weight 75, B will serve three times as often as A.| integer (1-100)
+|**sov** |Determines how much the creative is displayed relative to the other creative assigned to the same line.<p>To provide even rotation, do not specify a share of voice.<p>If share of voice is specified, all assignments that specify the same line must specify a share of voice and the share of voice of all the assignments must add up to 100. If the share of voice of all assignments does not add up to 100, even rotation is applied.<p>Assignments with heavier share of voice get proportionally more rotation compared to those with lesser share of voice.<p>For example, if the line has 2 creative, A and B, assigned with the same dates, and A has share of voice 25 and B has share of voice 75, B will serve three times as often as A.| integer (1-100)
 |**producttargeting**|Object that assigns creative to play at the right place at the right time |producttargeting array|
 |**ext**|Optional vendor-specific extensions. |ext object|
 
@@ -1351,7 +1351,7 @@ AccessToken: <OAuth token>
 {
     "creativeid":"394857",
     "placementid":"394578",
-    "weight":75,
+    "sov":75,
     "producttargeting": [
         {
             "name": "inventory",
@@ -1389,7 +1389,7 @@ Content-Length: 689
 {
     "creativeid":"394857",
     "placementid":"394578",
-    "weight":75,
+    "sov":75,
     "producttargeting": [
         {
             "name": "inventory",
@@ -1437,7 +1437,7 @@ Content-Length: 1171
         {
             "creativeid":"394857",
             "placementid":"394578",
-            "weight":75,
+            "sov":75,
             "producttargeting": [
                 {
                     "name": "inventory",
@@ -1514,7 +1514,7 @@ PATCH https://<host>/<path>/<version>/accounts/23873345/assignments/34534 HTTP/1
 Content-Type: application/json
 AccessToken: <OAuth token>
 {
-    "weight":80
+    "sov":80
 }
 ```
 
@@ -1526,7 +1526,7 @@ Content-Length: 689
 {
     "creativeid":"394857",
     "placementid":"394578",
-    "weight":80,
+    "sov":80,
     "producttargeting": [
         {
             "name": "inventory",
@@ -1595,7 +1595,7 @@ Gets a list of Assignments that match the specified filter criteria.
     * creativeid
     * placementid
     * status
-    * weight
+    * sov
     * producttargeting
 
 
@@ -1618,7 +1618,7 @@ Content-Length: 1171
         {
             "creativeid":"394857",
             "placementid":"394578",
-            "weight":75,
+            "sov":75,
             "producttargeting": [
                 {
                     "name": "inventory",
@@ -5048,7 +5048,7 @@ To upload a creative, send a POST request to /accounts/{id}/creatives. The body 
 
 In most cases, the creative must pass editorial review before it may be assigned to a line. The requirement to add creative before assignment is specified for the product. To determine whether the creative passed editorial review, send a GET request to /accounts/{id}/creative/{id}. The response contains a Creative object. The creative passed editorial review if AdStatus is set to Approved.
 
-To assign the creative to a line after it passes editorial review, send a POST request to /accounts/{id}/assignments. The body of the request is an Assignment object. The Assignment object specifies the creative ID and placement ID. If you assign more than one creative to a line, the creatives are rotated evenly. To control the rotation, set the optional weight property.
+To assign the creative to a line after it passes editorial review, send a POST request to /accounts/{id}/assignments. The body of the request is an Assignment object. The Assignment object specifies the creative ID and placement ID. If you assign more than one creative to a line, the creatives are rotated evenly. To control the rotation, set the optional share of voice property.
 
 Note that a line must have a creative assigned to it before it may be booked. The creative may be the actual creative that the advertiser plans to run or a placeholder creative that is later replaced with the actual creative when it becomes available. However, the line will run with whichever creative is assigned to it (the actual creative or placeholder creative).
 
