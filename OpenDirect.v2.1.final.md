@@ -359,7 +359,7 @@ _Notes: The user may update a line only if it’s in the Draft state. If the lin
 |**enddate***|The date and time that the line will stop.<p>If the time is missing, 11:59:59 PM is assumed.<p>The line end date must be later than the line start date and should be less than or equal to the order’s end date.<p>If the line end date is later than the order’s end date, the order’s end date should be extended to match the line’s end date.|string (date-time)
 |**ratetype***|Defines a unit of measure that a cost (i.e. BasePrice) is expressed in. The API may support all or a subset of the specified values.|enum (CPM, CPMV, CPC, CPD, FlatRate)
 |**rate***|The price per unit of impressions. For example, $10 per 1,000 impressions (CPM).<p>The rate is determined each time the line is saved (added, updated, booked, or reserved).<p>Value in currency for the order.|number
-|**quantity***|The quantity requested for the specified date range. This value will differ based on various cost types. For CPM, for examples, the value would be impressions.<p>The line must contain a quantity before the user may reserve or book it. If the requested quantity is not available, reserving or booking the line must fail and bookingStatus must be set to Declined.|integer
+|**qty***|The quantity requested for the specified date range. This value will differ based on various cost types. For CPM, for examples, the value would be impressions.<p>The line must contain a quantity before the user may reserve or book it. If the requested quantity is not available, reserving or booking the line must fail and bookingStatus must be set to Declined.|integer
 |**cost***|The projected cost of the line is based on the specified quantity, rate and targeting. The actual cost (the amount billed) is based on the actual number of impressions.<p>The cost is specified in the currency for the order. If the order uses a different currency than what the product uses, the cost for the line must be converted to the order’s currency.<p>The cost is determined at the time the line is saved with the following statuses: Drafted, Reserved, or Booked.|number
 |**comment** |User notes related to this line. |string _(255)_ |
 |**frequencycount** |The maximum number of times that a unique user must see ads from this line during the specified interval (see FrequencyInterval).|integer
@@ -537,7 +537,7 @@ Defines the response to a request for product availability and pricing informati
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 | **productid***    | ID that identifies the product for which availability and pricing information is provided                                                                        | String(36)              |
 | **accountid***    | The ID of the account that identifies the buyer, advertiser and any other stakeholders.                                                                          | String(36)              |
-| **availability** | The quantity available for booking for the specified date range. Availability for a given date range may vary. In order for products to be returned in a PRODUCT AVAILS SEARCH, product availability must be equal to or less than the value provided in the Quantity property of the PRODUCT AVAILS SEARCH object. For example, if Quantity is set to 500,000 in PRODUCT AVAILS SEARCH, impression availability for the product must be at least 500,000. However, if only 250,000 impressions are available, the product is not returned. Publishers may set an artificial limit on the maximum number of available impressions. If the quantity field in PRODUCT AVAILS SEARCH is not provided, all products matching other criteria are returned showing maximum availability.                                | Integer                 |
+| **availability** | The quantity available for booking for the specified date range. Availability for a given date range may vary. In order for products to be returned in a PRODUCT AVAILS SEARCH, product availability must be equal to or less than the value provided in the quantity property of the PRODUCT AVAILS SEARCH object. For example, if quantity is set to 500,000 in PRODUCT AVAILS SEARCH, impression availability for the product must be at least 500,000. However, if only 250,000 impressions are available, the product is not returned. Publishers may set an artificial limit on the maximum number of available impressions. If the quantity field in PRODUCT AVAILS SEARCH is not provided, all products matching other criteria are returned showing maximum availability.                                | Integer                 |
 | **productavailability** | An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of ProductTargeting objects                                | productavailability Object                  |
 | **currency**     | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | String (3) \[ISO-4217\] |
 | **price***        | The product’s price                                                                                                                  | Decimal                 |
@@ -2414,7 +2414,7 @@ AccessToken: <OAuth token>
   "productid":"888899",
   "ratetype":"CPM",
   "rate":25.00,
-  "quantity":3000000,
+  "qty":3000000,
   "cost": 75000.00,
   "startdate":"2014-12-05T06:00:00.000Z",
   "targeting":[
@@ -2450,7 +2450,7 @@ Content-Length: 878
   "productid":"888899",
   "ratetype":"CPM",
   "rate":25.00,
-  "quantity":3000000,
+  "qty":3000000,
   "cost": 75000.00,
   "startdate":"2014-12-05T06:00:00.000Z",
   "targeting":[
@@ -2656,7 +2656,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1240
         "productid":"888899",
         "ratetype":"CPM",
         "rate":25.00,
-        "quantity":3000000,
+        "qty":3000000,
         "cost": 75000.00,
         "startdate":"2014-12-05T06:00:00.000Z",
         "targeting":[
@@ -4131,7 +4131,7 @@ AccessToken: <OAuth token>
   "enddate":"2014-12-10T18:00:00.000Z",
   "frequencycount":3,
   "frequencyinterval":"Day",
-  "Quantity":3000000,
+  "qty":3000000,
   "productids":["456366"],
   "targeting":[
     {
@@ -4483,7 +4483,7 @@ AccessToken: <OAuth token>
   "productid":"456366",
   "ratetype":"CPM",
   "rate":25.00,
-  "quantity":3000000,
+  "qty":3000000,
   "cost": 75000.00,
   "startdate":"2014-12-09T06:00:00.000Z",
   "targeting":[
@@ -4515,7 +4515,7 @@ AccessToken: <OAuth token>
   "productid":"456366",
   "ratetype":"CPM",
   "rate":25.00,
-  "quantity":3000000,
+  "qty":3000000,
   "cost": 75000.00,
   "startdate":"2014-12-09T06:00:00.000Z",
   "targeting":[
@@ -4557,7 +4557,7 @@ AccessToken: <OAuth token>
             "productid":"456366",
             "ratetype":"CPM",
             "rate":25.00,
-            "quantity":3000000,
+            "qty":3000000,
             "cost": 75000.00,
             "startdate":"2014-12-09T06:00:00.000Z",
             "targeting":[
@@ -4613,7 +4613,7 @@ AccessToken: <OAuth token>
   "productid":"456366",
   "ratetype":"CPM",
   "rate":25.00,
-  "quantity":3000000,
+  "qty":3000000,
   "cost": 75000.00,
   "startdate":"2014-12-09T06:00:00.000Z",
   "targeting":[
@@ -4656,7 +4656,7 @@ AccessToken: <OAuth token>
   "productid":"456366",
   "ratetype":"CPM",
   "rate":25.00,
-  "quantity":3000000,
+  "qty":3000000,
   "cost": 75000.00,
   "startdate":"2014-12-03T06:00:00.000Z",
   "targeting":[
