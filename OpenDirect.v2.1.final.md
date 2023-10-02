@@ -227,7 +227,7 @@ Ad Unit contains exactly one AdCOM Ad Specification
 
 |Attribute|Description|Type|
 |---|---|---|
-|**id***|An Id to uniquely identify this Ad Unit within the product|string _(36)_|
+|**gpid***|Distinct, persistent id for each ad unit within the product|[**Global Placement** string](https://github.com/InteractiveAdvertisingBureau/openrtb/blob/master/extensions/community_extensions/gpid.md#global-placement-idgpid)|
 |**name** |A name to identify this Ad Unit |string _(255)_ |
 |**spec*** |The technical specifications of this Ad Unit|[AdCOM **Placement** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_placement)
 
