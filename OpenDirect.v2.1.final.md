@@ -36,7 +36,6 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  Creative](#object_creative)
     - [Object:  Line](#object_line)
     - [Object:  Message](#object_message)
-    - [Object:  ProductTargeting](#object_producttargeting)
     - [Object:  Order](#object_order)
     - [Object:  Organization](#object_organization)
     - [Object:  Placement](#object_placement)
