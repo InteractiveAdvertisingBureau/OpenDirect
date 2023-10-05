@@ -1,4 +1,4 @@
-![IAB Tech Lab](https://drive.google.com/uc?id=10yoBoG5uRETSXRrnJPUDuONujvADrSG1)
+ ![IAB Tech Lab](https://drive.google.com/uc?id=10yoBoG5uRETSXRrnJPUDuONujvADrSG1)
 
 # **OpenDirect Specification v2.1**
 
@@ -11,7 +11,7 @@ Learn more about IAB Tech Lab here: [www.iabtechlab.com](https://www.iabtechlab.
 
 **License**
 
-OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons Attribution 3.0 License. To view a copy of this license, visit [creativecommons.org/licenses/by/3.0/](http://creativecommons.org/licenses/by/3.0/) or write to Creative Commons, 171 Second Street, Suite 300, San Francisco, CA 94105, USA.
+OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons Attribution 3.0 License. To view a copy of this license, visit [creativecommons.org/licenses/by/3.0/](http://creativecommons.org/licenses/by/3.0/) or write to Creative Commons, 171 Second Street, Suite 300, San Francisco, CA 94105, USA.       
 
 ![](https://drive.google.com/uc?id=1GsSz9KPUksmllzcn4v4v0rFxizNNXt-S)
 
@@ -256,7 +256,7 @@ Defines the details of a Brand associated with an organization
 
 | Attribute            | Description                                                     | Type         |
 | -------------------- | --------------------------------------------------------------- | ------------ |
-| **id***                   | A system-generated opaque ID that uniquely identifies the brand | String (255) |
+| **id***                   | A system-generated opaque ID that uniquely identifies the brand | String (36) |
 | **name***                 | The brand's display name                                        | String (255) |
 | **organizationid***       | The ID of the organization that owns the brand                  | String (36)  |
 | **eids**                | array of extended ids (EID) that detail third party datasources and ids that may be referenced to identify the AdvertiderBrand to the buyer                       | Array                                  |
@@ -415,7 +415,7 @@ To specify the individual line item details of the order, use the [LINE](#object
 |**packageonly** |Identifies whether the order is only available as a package or if specific items can be separated from the inventory.<p> A value of TRUE means the inventory is only available as a package.<p> A value of FALSE allows the buyer to select specific items from inventory.|boolean
 |**preferredbillingmethod** |The preferred billing method for this order.<p>The default is Electronic.<p>If the billing contact is not specified in the order, the billing contact comes from buyer’s list of contacts.|enum (Electronic, Postal)
 |**providerdata**|The ProviderData object is used for buyers to detail structured information that may be used to identify their order in a seller's system using their own IDs or references. |object|
-|**advertiserbrandid***|id of the brand being advertised by the advertiser organisation |object|
+|**advertiserbrandid***|id of the brand being advertised by the advertiser organisation |string _(36)_|
 |**startdate** |The date and time that the order will start. The start date is directional and may be updated by the publisher to match the earliest start date found in the order’s list of lines.<p>If the time is missing, 12:00 AM is assumed.<p>When creating the order, the date and time must be greater than or equal to now.<p>Start dates that have past may not be updated.|string (date-time)
 |**enddate** |The date and time that the order will end. The end date is directional and may be updated by the publisher to match the latest end date found in the order’s lines.<p>If the time is missing, 11:59:59 PM is assumed.<p>The end date must be later than the start date.<p>End dates that have past cannot be updated.|string (date-time)
 |**orderexpirydate**|The date and time for when the order expires. Publisher will only hold inventory up until the date and time indicated.|string (date-time)
