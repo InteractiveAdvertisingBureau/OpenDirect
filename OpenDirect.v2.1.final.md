@@ -617,12 +617,12 @@ The Stats resource contains reporting data about a Line.
 |**spend**|The amount spent to date. | number
 |**frameid***                | The Publisher Frame ID                                                                                                                                                                                                            | String (128)             |
 |**playerref**               | The MAC Address or other reference uniquely identifying a digital player or frame                                                                                                                                                 | Max length 32 characters |
-|**spotstartutc***           | The UTC start time of the spot.                                                                                                                                                                                                   | ISO-8601                 |
-|**spotstarttz***            | Time zone offset for the spot start time (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                  | ±hh:mm<br>Z              |
-|**spotendutc***             | The UTC end time of the spot.                                                                                                                                                                                                     | ISO-8601                 |
-|**spotendtz***              | Time zone offset for the spot end time. (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                   | ±hh:mm<br>Z              |
+|**startdate***           | The UTC start time of the spot.                                                                                                                                                                                                   | ISO-8601                 |
+|**startutcoffset***            | Time zone offset for the spot start time (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                  | ±hh:mm<br>Z              |
+|**enddate***             | The UTC end time of the spot.                                                                                                                                                                                                     | ISO-8601                 |
+|**endutcoffset***              | Time zone offset for the spot end time. (e.g. +01:00 for BST; Z or :00:00 can be used for GMT.)                                                                                                                                   | ±hh:mm<br>Z              |
 |**spotlength**              | Spot Length in milliseconds.                                                                                                                                                                                                      | number                   |
-|**shareoftime**            | Share of time. This must be provided for scrollers, but its presence is not policed by Playout. Media Owners must determine when this must be supplied.                                                                           | number (decimal)         |
+|**shareoftime**            | Share of time as a % out of 100. This must be provided for scrollers, but its presence is not policed by Playout. Media Owners must determine when this must be supplied.                                                                           | number (decimal)         |
 |**creativeid**              | Media Owner-defined creative identifier.                                                                                                                                                                                          | String (64)              |
 |**creativename**            | Creative title, to assist with reporting. Usually a filename.                                                                                                                                                                     | String (128)             |
 |**thirdpartycreativeref** | Creative reference provided by a third-party such as the creative agency. This might be a URL or a GUID, for example.                                                                                                             | String (128)             |
@@ -633,7 +633,7 @@ _* required_
 
 ## Object: EID <a name="object_eid"></a>
 
-Extended identifiers support in the OpenDirect specification allows buyers to use third party identifiers in ther trading process. This object can contain one or more TPIDs from a single source or a technology provider. The publisher should ensure that business agreements allow for the sending of this data.
+Extended identifiers support in the OpenDirect specification allows buyers to use third party identifiers in ther trading process. This object can contain one or more UIDs from a single source or a technology provider. The publisher should ensure that business agreements allow for the sending of this data.
 
 
 <table>
@@ -653,9 +653,9 @@ Extended identifiers support in the OpenDirect specification allows buyers to us
     <td>Name of third party ID.</td>
   </tr>
   <tr>
-    <td><code>tpids*</code></td>
+    <td><code>uids*</code></td>
     <td>object array</td>
-    <td>Array of third party IDs <code>TPID</code> objects from the given source. Refer to 3.11 Extended Identifier UIDs</td>
+    <td>Array of third party IDs <code>UID</code> objects from the given source. Refer to Object: UID</td>
  </tr>
   <tr>
     <td><code>ext</code></td>
@@ -668,7 +668,7 @@ Extended identifiers support in the OpenDirect specification allows buyers to us
 
 _* required_
 
-## Object: TPID <a name="object_tpid"></a>
+## Object: UID <a name="object_tpid"></a>
 
 This object contains a single third party identifier provided as part of extended identifiers. The publisher should ensure that business agreements allow for the sending of this data.
 
