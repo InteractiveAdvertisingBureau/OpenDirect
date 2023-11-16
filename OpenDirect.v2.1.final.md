@@ -500,7 +500,7 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**pmp** |This object is the private marketplace container for direct deals between buyers and sellers that may pertain to this Product|[OpenRTB PMP](https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/main/2.6.md#3211---object-pmp-)
 |**producttargeting** | Array of producttargeting objects used to describe the product inventory and sales rules                                                                                  | producttargeting object |
 |**availsgroupby** | Array of producttargeting objects that describe the grouped fields that that the Availability data can be returned in                                                                                  | producttargeting object |
-|**reservedexpirytime** | Defines duration time that represents the cut off point for expiry of an OrderLine from when it is “reserved”. | ISO-8601                     |
+|**reservedexpirytime** | Defines a duration that represents the cut off point for expiry of an OrderLine from when it is “reserved”. | ISO-8601                     |
 |**advertiseridaccess**| List of AdvertiserIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
 |**buyeridaccess**| List of BuyerIDs with access to this Product. NULL = all accounts can access this product.                                                | Array                   |
 |**intermediaryidaccess**| List of IntermediaryIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
