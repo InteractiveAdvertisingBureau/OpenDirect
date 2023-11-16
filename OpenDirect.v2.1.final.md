@@ -2107,8 +2107,8 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                     ]
                 }
             ]
-        },
-      ]
+        }
+      ],
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -2138,15 +2138,15 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                     ]
                 }
             ]
-        },
-      ]
+        }
+      ],
       "budget":100000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
       "name":"Two Ronnies Trading",
       "orderstatus":"APPROVED",
       "preferredbillingmethod":"Electronic",
-      "startdate":"2014-11-24T06:00:00.000Z"
+      "startdate":"2014-11-24T06:00:00.000Z",
       "providerdata": {
             "campaignid":"A00123",
             "campaignname":"Goodnight From Him",
@@ -2208,8 +2208,8 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 158
                     ]
                 }
             ]
-        },
-      ]
+        }
+      ],
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2256,8 +2256,8 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 358
                     ]
                 }
             ]
-        },
-      ]
+        }
+      ],
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2326,8 +2326,8 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                     ]
                 }
             ]
-        },
-      ]
+        }
+      ],
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -2357,15 +2357,15 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                     ]
                 }
             ]
-        },
-      ]
+        }
+      ],
       "budget":100000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
       "name":"Two Ronnies Trading",
       "orderstatus":"APPROVED",
       "preferredbillingmethod":"Electronic",
-      "startdate":"2014-11-24T06:00:00.000Z"
+      "startdate":"2014-11-24T06:00:00.000Z",
       "providerdata": {
             "campaignid":"A00123",
             "campaignname":"Goodnight From Him",
@@ -3253,7 +3253,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
       "name":"Contoso",
       "phone":"2065550100",
       "status":"Approved",
-      "url":"http://contoso.com"
+      "url":"http://contoso.com",
       "organizationtype":"advertiser",
       "eids": [
                 {
@@ -3331,7 +3331,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
     "name":"Contoso",
     "phone":"2065550100",
     "status":"Approved",
-    "url":"http://contoso.com"
+    "url":"http://contoso.com",
     "organizationtype":"advertiser",
     "eids": [
                 {
@@ -3416,7 +3416,7 @@ Content-Type: application/json Content-Length: 1879
     "name":"Contoso",
     "phone":"2065550100",
     "status":"Approved",
-    "url":"http://contoso.com"
+    "url":"http://contoso.com",
     "organizationtype":"advertiser",
     "eids": [
                 {
@@ -3497,7 +3497,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
               "display": {
                   "pos": 6,
                   "w": 300,
-                  "h": 250,
+                  "h": 250
               }
           }
         },
@@ -3508,7 +3508,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
               "display": {
                   "pos": 6,
                   "w": 160,
-                  "h": 600,
+                  "h": 600
               }
           }
         }
@@ -3522,7 +3522,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
           "site": {
               "name": "Awesome Example Site",
               "domain": "examplesitedomain.com",
-              "amp": 0,
+              "amp": 0
           }
 
       },
@@ -3618,7 +3618,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
             }
         ],
         "tz": "GMT",
-        "url": "http://<domain>/<path>/creativespec.aspx"
+        "url": "http://<domain>/<path>/creativespec.aspx",
         "adunits":[
             {
                 "id": "HDPS",
@@ -3627,7 +3627,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                     "display": {
                         "pos": 7,
                         "w": 1080,
-                        "h": 1920,
+                        "h": 1920
                     }
                 }
             },
@@ -3638,7 +3638,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                     "video": {
                         "pos": 7,
                         "w": 1080,
-                        "h": 1920,
+                        "h": 1920
                     }
                 }
             }
@@ -3694,7 +3694,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                 "display": {
                     "pos": 6,
                     "w": 300,
-                    "h": 250,
+                    "h": 250
                 }
             }
         },
@@ -3705,7 +3705,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                 "display": {
                     "pos": 6,
                     "w": 160,
-                    "h": 600,
+                    "h": 600
                 }
             }
         }
@@ -3719,7 +3719,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
         "site": {
             "name": "Awesome Example Site",
             "domain": "examplesitedomain.com",
-            "amp": 0,
+            "amp": 0
         }
 
     },
