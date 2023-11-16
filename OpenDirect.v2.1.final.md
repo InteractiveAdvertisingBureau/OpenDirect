@@ -47,7 +47,7 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  ProviderData](#object_providerdata)
     - [Object:  Stats](#object_stats)
     - [Object: EID](#object_eid)
-    - [Object: TPID](#object_tpid)
+    - [Object: UID](#object_uid)
     - [Collection Objects](#collection_objects)
     - [General Support Requirements](#general_support_requirements)
     - [Authentication](#authentication)
@@ -668,7 +668,7 @@ Extended identifiers support in the OpenDirect specification allows buyers to us
 
 _* required_
 
-## Object: UID <a name="object_tpid"></a>
+## Object: UID <a name="object_uid"></a>
 
 This object contains a single third party identifier provided as part of extended identifiers. The publisher should ensure that business agreements allow for the sending of this data.
 
@@ -884,9 +884,9 @@ The following examples show the reccomended implememtiation support for the url 
 /organizations?name=\*procter\*
  
 #### Boolean (AND) Logic
-/brands/?eids_name=SPACE&eids_tpids_id=1234 <br/> 
-/organizations?eids_name=SPACE&eids_tpids_id=4567 <br/>
-/organizations?eids_source=https://oohspace.co.uk&eids_tpids_id=8879 
+/brands/?eids_name=SPACE&eids_uids_id=1234 <br/> 
+/organizations?eids_name=SPACE&eids_uids_id=4567 <br/>
+/organizations?eids_source=https://oohspace.co.uk&eids_uids_id=8879 
  
 #### Ability to retrieve all data if pagination is implemented 
 /brands?offset=0&count=50000 <br/>
@@ -919,7 +919,7 @@ AccessToken: <OAuth token>
         {
             "source": "https://oohspace.co.uk",
             "name": "SPACE",
-            "tpids": [
+            "uids": [
                 {
                     "id": "84585608"
                 }
@@ -943,7 +943,7 @@ Content-Length: 379
         {
             "source": "https://oohspace.co.uk",
             "name": "SPACE",
-            "tpids": [
+            "uids": [
                 {
                     "id": "84585608"
                 }
@@ -976,7 +976,7 @@ Content-Length: 2079
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -992,7 +992,7 @@ Content-Length: 2079
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "567"
                         }
@@ -1008,7 +1008,7 @@ Content-Length: 2079
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "8890"
                         }
@@ -1024,7 +1024,7 @@ Content-Length: 2079
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "3562"
                         }
@@ -1040,7 +1040,7 @@ Content-Length: 2079
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
 
                             "id": "84585608"
@@ -1082,7 +1082,7 @@ Content-Length: 187
         {
             "source": "https://oohspace.co.uk",
             "name": "SPACE",
-            "tpids": [
+            "uids": [
                 {
                     "id": "84585608"
                 }
@@ -1103,7 +1103,7 @@ The response must support pagination. See Paging Query Parameters.
     * organizationid
     * eidssource
     * eidsname
-    * eidstpidsid
+    * eidsuidsid
 
 
 #### Rules ####
@@ -1131,7 +1131,7 @@ Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "3562"
                         }
@@ -1147,7 +1147,7 @@ Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
 
                             "id": "84585608"
@@ -2015,7 +2015,7 @@ AccessToken: <OAuth token>
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -2053,7 +2053,7 @@ Content-Length: 108
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -2100,7 +2100,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -2131,7 +2131,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14790"
                         }
@@ -2201,7 +2201,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 158
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -2249,7 +2249,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 358
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -2319,7 +2319,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -2350,7 +2350,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14790"
                         }
@@ -3259,7 +3259,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -3337,7 +3337,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -3422,7 +3422,7 @@ Content-Type: application/json Content-Length: 1879
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
