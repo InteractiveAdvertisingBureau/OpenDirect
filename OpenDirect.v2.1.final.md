@@ -2006,24 +2006,7 @@ AccessToken: <OAuth token>
   "accountid":"23873345",
   "publisherid":"7987654",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+  "advertiserbrandid": "123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2044,24 +2027,7 @@ Content-Length: 108
   "accountid":"23873345",
   "publisherid":"7987654",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+  "advertiserbrandid": "123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2091,24 +2057,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Wakes",
-      "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        }
-      ],
+      "advertiserbrandid":"123456",
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -2122,24 +2071,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Candles",
-      "advertiserbrand": [
-        {
-            "Id": "1174",
-            "Name": "Four Candles",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14790"
-                        }
-                    ]
-                }
-            ]
-        }
-      ],
+      "advertiserbrandid":"123455",
       "budget":100000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -2192,24 +2124,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 158
   "id":"1235872",
   "accountid":"23873345",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        }
-      ],
+  "advertiserbrandid":"123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2240,24 +2155,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 358
   "id":"1235872",
   "accountid":"23873345",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        }
-      ],
+  "advertiserbrandid":"123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2310,24 +2208,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Wakes",
-      "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        }
-      ],
+      "advertiserbrandid":"123456",
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -2341,24 +2222,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Candles",
-      "advertiserbrand": [
-        {
-            "Id": "1174",
-            "Name": "Four Candles",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "uids": [
-                        {
-                            "id": "14790"
-                        }
-                    ]
-                }
-            ]
-        }
-      ],
+      "advertiserbrandid":"123455",
       "budget":100000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
