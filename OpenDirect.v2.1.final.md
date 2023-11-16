@@ -42,7 +42,7 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  Product](#object_product)
     - [Object:  ProductsAvailsSearch](#object_productavailssearch)
     - [Object:  Avails](#object_avails)
-    - [Object:  ProductAvailability](#object_productavailability)
+    - [Object:  AvailsStatus](#object_availsstatus)
     - [Object:  ProductTargeting](#object_producttargeting)
     - [Object:  ProviderData](#object_providerdata)
     - [Object:  Stats](#object_stats)
@@ -500,7 +500,7 @@ A Product resource identifies anything from an ad placement to a Run of Network 
 |**pmp** |This object is the private marketplace container for direct deals between buyers and sellers that may pertain to this Product|[OpenRTB PMP](https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/main/2.6.md#3211---object-pmp-)
 |**producttargeting** | Array of producttargeting objects used to describe the product inventory and sales rules                                                                                  | producttargeting object |
 |**availsgroupby** | Array of producttargeting objects that describe the grouped fields that that the Availability data can be returned in                                                                                  | producttargeting object |
-|**reservedexpirytime** | Defines the day of the week and time of day that represents the cut off point for expiry of a Line for the Product when it is “reserved”. | Date                    |
+|**reservedexpirytime** | Defines a duration that represents the cut off point for expiry of an OrderLine from when it is “reserved”. | ISO-8601                     |
 |**advertiseridaccess**| List of AdvertiserIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
 |**buyeridaccess**| List of BuyerIDs with access to this Product. NULL = all accounts can access this product.                                                | Array                   |
 |**intermediaryidaccess**| List of IntermediaryIDs with access to this Product. NULL = all accounts can access this product.                                           | Array                   |
@@ -537,7 +537,7 @@ Defines the response to a request for product availability and pricing informati
 | **productid***    | ID that identifies the product for which availability and pricing information is provided                                                                        | String(36)              |
 | **accountid***    | The ID of the account that identifies the buyer, advertiser and any other stakeholders.                                                                          | String(36)              |
 | **availability** | The quantity available for booking for the specified date range. Availability for a given date range may vary. In order for products to be returned in a PRODUCT AVAILS SEARCH, product availability must be equal to or less than the value provided in the quantity property of the PRODUCT AVAILS SEARCH object. For example, if quantity is set to 500,000 in PRODUCT AVAILS SEARCH, impression availability for the product must be at least 500,000. However, if only 250,000 impressions are available, the product is not returned. Publishers may set an artificial limit on the maximum number of available impressions. If the quantity field in PRODUCT AVAILS SEARCH is not provided, all products matching other criteria are returned showing maximum availability.                                | Integer                 |
-| **productavailability** | An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of ProductTargeting objects                                | productavailability Object                  |
+| **availsstatus** | An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of ProductTargeting objects                                | productavailability Object                  |
 | **currency**     | The currency used to specify Price. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | String (3) \[ISO-4217\] |
 | **price***        | The product’s price                                                                                                                  | Decimal                 |
 | **startdate***          | The requested start date for inventory delivery                                                                                                                    | ISO-8601           |
@@ -545,7 +545,7 @@ Defines the response to a request for product availability and pricing informati
 
 _* required_
 
-## Object: ProductAvailability <a name="object_productavailability"></a>
+## Object: AvailsStatus <a name="object_availsstatus"></a>
 
 An object that groups the inventory availbility into Available, Partially Available and Unavailable arrays of producttargeting objects
 
@@ -710,7 +710,7 @@ For GET calls that return a collection of resources, such as /accounts/{id}/orde
 | /accounts/{id}/orders/{id}/lines<br />/accounts/{id}/orders/lines?$filter | lines | Lines Assignment |
 | /accounts/{id}/orders/{id}/lines/{id}/placements<br />/accounts/{id}/orders/lines{id}/placements?$filter | placements | Placement Assignment |
 | /products<br />/products/search (POST) | products | Product Assignment |
-| /products/avails (POST) | avails | ProductAvails Assignment
+| /products/avails (POST) | avails | Avails
 
 The following shows an example response for _**/accounts**_.
 ```json
@@ -3825,13 +3825,11 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
 
 ### /products/avails
 
-Gets pricing and avails information (see ProductAvails) for the specified products (see ProductAvailsSearch). The response must support pagination. See Paging Query Parameters.
+Gets pricing and avails information (see Avails) for the specified products. The response must support pagination. See Paging Query Parameters.
 
 #### Verbs
 
-* **POST**: (required) Gets the availability and pricing information for a specified list of products based on flight dates, quantity and targeting. The body of the request contains the list of products and flight details (See ProductAvailsSearch). The body of the response contains a collection of 
-
-ProductAvails objects (one for each product specified in the request).
+* **POST**: (required) Gets the availability and pricing information for a specified list of products based on flight dates, quantity and targeting. The body of the request contains the list of products and flight details (See ProductAvailsSearch). The body of the response contains a collection of Avails objects (one for each product specified in the request).
 
 #### Rules
 
@@ -3951,7 +3949,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
         {
             "currency": "GBP",
             "productid": "456366",
-            "productavailability": [
+            "availsstatus": [
                 {
                     "status": "available",
                     "reason": "",
@@ -5023,9 +5021,9 @@ To search the product catalog, send a POST request to /products/search. The body
 
 To get product availability and pricing information for specific products, send a POST request to /products/avails. You should make this call only to determine actual availability just before adding and booking a line; you should not use this call to present availability as part of a product catalog.
 
-* The body of the request is a ProductAvailsSearch object. The client must specify a date range, quantity, list of product IDs and may optionally specify frequency and targeting information. To get custom rates and availability for an advertiser, include the account ID, which identifies the advertiser and agency.
+* The body of the request is an Avails object. The client must specify a date range, quantity, list of product IDs and may optionally specify frequency and targeting information. To get custom rates and availability for an advertiser, include the account ID, which identifies the advertiser and agency.
 
-The response includes a collection object that contains an array of ProductAvails objects. Each ProductAvails object contains the available quantity and pricing information for a product. The number of available impressions returned will be either the specified quantity, if the requested quantity is available, or less if there is fewer quantity available.
+The response includes a collection object that contains an array of Avails objects. Each Avails object contains the available quantity and pricing information for a product. The number of available impressions returned will be either the specified quantity, if the requested quantity is available, or less if there is fewer quantity available.
 
 Note that the caller should not use this call to determine the maximum available impressions. Instead, they should use /products or /products/search which returns the estimated daily availability and base pricing details. If they use the avails search for product catalog purposes, they will likely display inaccurate pricing information to the user. For example, the pricing for 500,000,000 impressions may be less than the pricing for 100,000 impressions, which may lead the user to mistakenly believe that they’re getting the impressions for $5.00 CPM instead of $15.00 CPM.
 
