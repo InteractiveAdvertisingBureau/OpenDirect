@@ -1203,7 +1203,7 @@ Content-Length: 379
     "buyerid":"34587",
     "intermediaryid":"9876543",
     "name":"Brand A",
-    "status":"approved",
+    "status":"Approved",
     "id":"23873345"
 }
 ```
@@ -1228,7 +1228,7 @@ Content-Length: 187
             "advertiserid":"1234987",
             "buyerid":"1234987",
             "name":"Brand B",
-            "status":"pending",
+            "status":"Pending",
             "id":"9876542"
         },
         {
@@ -1236,7 +1236,7 @@ Content-Length: 187
             "buyerid":"34587",
             "intermediaryid":"9876543",
             "name":"Brand A",
-            "status":"approved",
+            "status":"Approved",
             "id":"23873345"
         }
     ]
@@ -1269,7 +1269,7 @@ Content-Length: 187
     "buyerid":"34587",
     "intermediaryid":"9876543",
     "name":"Brand A",
-    "status":"approved",
+    "status":"Approved",
     "id":"23873345"
 }
 ```
@@ -1309,7 +1309,7 @@ Content-Length: 187
             "advertiserid":"1234987",
             "buyerid":"1234987",
             "name":"Brand B",
-            "status":"pending",
+            "status":"Pending",
             "id":"9876542"
         },
         {
@@ -1317,7 +1317,7 @@ Content-Length: 187
             "buyerid":"34587",
             "intermediaryid":"9876543",
             "name":"Brand A",
-            "status":"approved",
+            "status":"Approved",
             "id":"23873345"
         }
     ]
