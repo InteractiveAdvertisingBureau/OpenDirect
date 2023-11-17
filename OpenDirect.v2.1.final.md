@@ -987,7 +987,7 @@ Content-Length: 2079
         {
             "id": "1174",
             "name": "PGTips",
-            "organizationId": "345",
+            "organizationid": "345",
             "eids": [
                 {
                     "source": "https://oohspace.co.uk",
@@ -1003,7 +1003,7 @@ Content-Length: 2079
         {
             "id": "1175",
             "name": "Lynx",
-            "organizationId": "345",
+            "organizationid": "345",
             "eids": [
                 {
                     "source": "https://oohspace.co.uk",
@@ -1019,7 +1019,7 @@ Content-Length: 2079
         {
             "id": "1176",
             "name": "Walls",
-            "organizationId": "345",
+            "organizationid": "345",
             "eids": [
                 {
                     "source": "https://oohspace.co.uk",
@@ -1075,10 +1075,10 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Length: 187
 {
-    "Id": "1234",
-    "Name": "Walkers",
-    "OrganizationId": "889",
-    "Eids": [
+    "id": "1234",
+    "name": "Walkers",
+    "organizationid": "889",
+    "eids": [
         {
             "source": "https://oohspace.co.uk",
             "name": "SPACE",
@@ -3111,7 +3111,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
           "type":"Billing"
         }
       ],
-      "Fax":"2065551212",
+      "fax":"2065551212",
       "id":"12345678",
       "cat": [ 599, 602, 611 ],
       "name":"Contoso",
@@ -3189,7 +3189,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
             "type":"Billing"
         }
     ],
-    "Fax":"2065551212",
+    "fax":"2065551212",
     "id":"12345678",
     "cat": [ 599, 602, 611 ],
     "name":"Contoso",
@@ -3274,7 +3274,7 @@ Content-Type: application/json Content-Length: 1879
             "type":"Billing"
         }
     ],
-    "Fax":"2065551212",
+    "fax":"2065551212",
     "id":"12345678",
     "cat": [ 599, 602, 611 ],
     "name":"Contoso",
