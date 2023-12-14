@@ -47,7 +47,7 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  ProviderData](#object_providerdata)
     - [Object:  Stats](#object_stats)
     - [Object: EID](#object_eid)
-    - [Object: TPID](#object_tpid)
+    - [Object: UID](#object_uid)
     - [Collection Objects](#collection_objects)
     - [General Support Requirements](#general_support_requirements)
     - [Authentication](#authentication)
@@ -668,7 +668,7 @@ Extended identifiers support in the OpenDirect specification allows buyers to us
 
 _* required_
 
-## Object: UID <a name="object_tpid"></a>
+## Object: UID <a name="object_uid"></a>
 
 This object contains a single third party identifier provided as part of extended identifiers. The publisher should ensure that business agreements allow for the sending of this data.
 
@@ -884,9 +884,9 @@ The following examples show the reccomended implememtiation support for the url 
 /organizations?name=\*procter\*
  
 #### Boolean (AND) Logic
-/brands/?eids_name=SPACE&eids_tpids_id=1234 <br/> 
-/organizations?eids_name=SPACE&eids_tpids_id=4567 <br/>
-/organizations?eids_source=https://oohspace.co.uk&eids_tpids_id=8879 
+/brands/?eids_name=SPACE&eids_uids_id=1234 <br/> 
+/organizations?eids_name=SPACE&eids_uids_id=4567 <br/>
+/organizations?eids_source=https://oohspace.co.uk&eids_uids_id=8879 
  
 #### Ability to retrieve all data if pagination is implemented 
 /brands?offset=0&count=50000 <br/>
@@ -919,7 +919,7 @@ AccessToken: <OAuth token>
         {
             "source": "https://oohspace.co.uk",
             "name": "SPACE",
-            "tpids": [
+            "uids": [
                 {
                     "id": "84585608"
                 }
@@ -943,7 +943,7 @@ Content-Length: 379
         {
             "source": "https://oohspace.co.uk",
             "name": "SPACE",
-            "tpids": [
+            "uids": [
                 {
                     "id": "84585608"
                 }
@@ -976,7 +976,7 @@ Content-Length: 2079
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -987,12 +987,12 @@ Content-Length: 2079
         {
             "id": "1174",
             "name": "PGTips",
-            "organizationId": "345",
+            "organizationid": "345",
             "eids": [
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "567"
                         }
@@ -1003,12 +1003,12 @@ Content-Length: 2079
         {
             "id": "1175",
             "name": "Lynx",
-            "organizationId": "345",
+            "organizationid": "345",
             "eids": [
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "8890"
                         }
@@ -1019,12 +1019,12 @@ Content-Length: 2079
         {
             "id": "1176",
             "name": "Walls",
-            "organizationId": "345",
+            "organizationid": "345",
             "eids": [
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "3562"
                         }
@@ -1040,7 +1040,7 @@ Content-Length: 2079
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
 
                             "id": "84585608"
@@ -1075,14 +1075,14 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Length: 187
 {
-    "Id": "1234",
-    "Name": "Walkers",
-    "OrganizationId": "889",
-    "Eids": [
+    "id": "1234",
+    "name": "Walkers",
+    "organizationid": "889",
+    "eids": [
         {
             "source": "https://oohspace.co.uk",
             "name": "SPACE",
-            "tpids": [
+            "uids": [
                 {
                     "id": "84585608"
                 }
@@ -1103,7 +1103,7 @@ The response must support pagination. See Paging Query Parameters.
     * organizationid
     * eidssource
     * eidsname
-    * eidstpidsid
+    * eidsuidsid
 
 
 #### Rules ####
@@ -1131,7 +1131,7 @@ Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "3562"
                         }
@@ -1147,7 +1147,7 @@ Content-Length: 187
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
 
                             "id": "84585608"
@@ -1203,7 +1203,7 @@ Content-Length: 379
     "buyerid":"34587",
     "intermediaryid":"9876543",
     "name":"Brand A",
-    "status":"approved",
+    "status":"Approved",
     "id":"23873345"
 }
 ```
@@ -1228,7 +1228,7 @@ Content-Length: 187
             "advertiserid":"1234987",
             "buyerid":"1234987",
             "name":"Brand B",
-            "status":"pending",
+            "status":"Pending",
             "id":"9876542"
         },
         {
@@ -1236,7 +1236,7 @@ Content-Length: 187
             "buyerid":"34587",
             "intermediaryid":"9876543",
             "name":"Brand A",
-            "status":"approved",
+            "status":"Approved",
             "id":"23873345"
         }
     ]
@@ -1269,7 +1269,7 @@ Content-Length: 187
     "buyerid":"34587",
     "intermediaryid":"9876543",
     "name":"Brand A",
-    "status":"approved",
+    "status":"Approved",
     "id":"23873345"
 }
 ```
@@ -1309,7 +1309,7 @@ Content-Length: 187
             "advertiserid":"1234987",
             "buyerid":"1234987",
             "name":"Brand B",
-            "status":"pending",
+            "status":"Pending",
             "id":"9876542"
         },
         {
@@ -1317,7 +1317,7 @@ Content-Length: 187
             "buyerid":"34587",
             "intermediaryid":"9876543",
             "name":"Brand A",
-            "status":"approved",
+            "status":"Approved",
             "id":"23873345"
         }
     ]
@@ -2006,24 +2006,7 @@ AccessToken: <OAuth token>
   "accountid":"23873345",
   "publisherid":"7987654",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+  "advertiserbrandid": "123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2044,24 +2027,7 @@ Content-Length: 108
   "accountid":"23873345",
   "publisherid":"7987654",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+  "advertiserbrandid": "123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2091,24 +2057,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Wakes",
-      "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+      "advertiserbrandid":"123456",
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -2122,31 +2071,14 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Candles",
-      "advertiserbrand": [
-        {
-            "Id": "1174",
-            "Name": "Four Candles",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14790"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+      "advertiserbrandid":"123455",
       "budget":100000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
       "name":"Two Ronnies Trading",
       "orderstatus":"APPROVED",
       "preferredbillingmethod":"Electronic",
-      "startdate":"2014-11-24T06:00:00.000Z"
+      "startdate":"2014-11-24T06:00:00.000Z",
       "providerdata": {
             "campaignid":"A00123",
             "campaignname":"Goodnight From Him",
@@ -2192,24 +2124,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 158
   "id":"1235872",
   "accountid":"23873345",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+  "advertiserbrandid":"123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2240,24 +2155,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 358
   "id":"1235872",
   "accountid":"23873345",
   "brand":"Four Wakes",
-  "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+  "advertiserbrandid":"123456",
   "budget":50000,
   "currency":"USD",
   "enddate":"2014-12-24T18:00:00.000Z",
@@ -2310,24 +2208,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Wakes",
-      "advertiserbrand": [
-        {
-            "Id": "1173",
-            "Name": "Four Wakes",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14789"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+      "advertiserbrandid":"123456",
       "budget":50000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
@@ -2341,31 +2222,14 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 187
       "accountid":"23873345",
       "publisherid":"7987654",
       "brand":"Four Candles",
-      "advertiserbrand": [
-        {
-            "Id": "1174",
-            "Name": "Four Candles",
-            "OrganizationId": "345",
-            "eids": [
-                {
-                    "source": "https://oohspace.co.uk",
-                    "name": "SPACE",
-                    "tpids": [
-                        {
-                            "id": "14790"
-                        }
-                    ]
-                }
-            ]
-        },
-      ]
+      "advertiserbrandid":"123455",
       "budget":100000,
       "currency":"USD",
       "enddate":"2014-12-24T18:00:00.000Z",
       "name":"Two Ronnies Trading",
       "orderstatus":"APPROVED",
       "preferredbillingmethod":"Electronic",
-      "startdate":"2014-11-24T06:00:00.000Z"
+      "startdate":"2014-11-24T06:00:00.000Z",
       "providerdata": {
             "campaignid":"A00123",
             "campaignname":"Goodnight From Him",
@@ -3247,19 +3111,19 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
           "type":"Billing"
         }
       ],
-      "Fax":"2065551212",
+      "fax":"2065551212",
       "id":"12345678",
       "cat": [ 599, 602, 611 ],
       "name":"Contoso",
       "phone":"2065550100",
       "status":"Approved",
-      "url":"http://contoso.com"
+      "url":"http://contoso.com",
       "organizationtype":"advertiser",
       "eids": [
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -3325,19 +3189,19 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1879
             "type":"Billing"
         }
     ],
-    "Fax":"2065551212",
+    "fax":"2065551212",
     "id":"12345678",
     "cat": [ 599, 602, 611 ],
     "name":"Contoso",
     "phone":"2065550100",
     "status":"Approved",
-    "url":"http://contoso.com"
+    "url":"http://contoso.com",
     "organizationtype":"advertiser",
     "eids": [
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -3410,19 +3274,19 @@ Content-Type: application/json Content-Length: 1879
             "type":"Billing"
         }
     ],
-    "Fax":"2065551212",
+    "fax":"2065551212",
     "id":"12345678",
     "cat": [ 599, 602, 611 ],
     "name":"Contoso",
     "phone":"2065550100",
     "status":"Approved",
-    "url":"http://contoso.com"
+    "url":"http://contoso.com",
     "organizationtype":"advertiser",
     "eids": [
                 {
                     "source": "https://oohspace.co.uk",
                     "name": "SPACE",
-                    "tpids": [
+                    "uids": [
                         {
                             "id": "14789"
                         }
@@ -3497,7 +3361,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
               "display": {
                   "pos": 6,
                   "w": 300,
-                  "h": 250,
+                  "h": 250
               }
           }
         },
@@ -3508,7 +3372,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
               "display": {
                   "pos": 6,
                   "w": 160,
-                  "h": 600,
+                  "h": 600
               }
           }
         }
@@ -3522,7 +3386,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
           "site": {
               "name": "Awesome Example Site",
               "domain": "examplesitedomain.com",
-              "amp": 0,
+              "amp": 0
           }
 
       },
@@ -3618,7 +3482,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
             }
         ],
         "tz": "GMT",
-        "url": "http://<domain>/<path>/creativespec.aspx"
+        "url": "http://<domain>/<path>/creativespec.aspx",
         "adunits":[
             {
                 "id": "HDPS",
@@ -3627,7 +3491,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                     "display": {
                         "pos": 7,
                         "w": 1080,
-                        "h": 1920,
+                        "h": 1920
                     }
                 }
             },
@@ -3638,7 +3502,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                     "video": {
                         "pos": 7,
                         "w": 1080,
-                        "h": 1920,
+                        "h": 1920
                     }
                 }
             }
@@ -3694,7 +3558,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                 "display": {
                     "pos": 6,
                     "w": 300,
-                    "h": 250,
+                    "h": 250
                 }
             }
         },
@@ -3705,7 +3569,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
                 "display": {
                     "pos": 6,
                     "w": 160,
-                    "h": 600,
+                    "h": 600
                 }
             }
         }
@@ -3719,7 +3583,7 @@ HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
         "site": {
             "name": "Awesome Example Site",
             "domain": "examplesitedomain.com",
-            "amp": 0,
+            "amp": 0
         }
 
     },
