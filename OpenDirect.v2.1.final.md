@@ -41,6 +41,7 @@ OpenDirect Specification the IAB Tech Lab is licensed under a Creative Commons A
     - [Object:  Placement](#object_placement)
     - [Object:  Product](#object_product)
     - [Object:  ProductsAvailsSearch](#object_productavailssearch)
+    - [Object:  ProductSearch](#object_productsearch)
     - [Object:  Avails](#object_avails)
     - [Object:  AvailsStatus](#object_availsstatus)
     - [Object:  ProductTargeting](#object_producttargeting)
@@ -525,6 +526,18 @@ Defines search criteria used for requesting product availability and pricing wit
 | **grouping**           | Defines the ProductTargeting object metrics that the availability output is grouped as                                                                                           | producttargeting object array |
 | **startdate***          | The desired start date for inventory delivery                                                                                                                    | ISO-8601           |
 | **enddate***            | The desired end date for inventory delivery                                                                                                                      | ISO-8601           |
+
+_* required_
+
+## Object: ProductSearch <a name="object_productsearch"></a>
+
+Defines search criteria used for finding appropriate products in the product catalouge 
+
+| Attribute          | Description                                                                                                                                                      | Type               |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| **targeting**          | The segments to target. For example, behavioral, age, and gender segments.                                 | [AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
+| **producttargeting**          | The Inventory, Delivery, Investement and Distribution ProductTargeting objects to be targeted for the product search request                                             | producttargeting object array |
+| **currency**           | The currency used to specify product pricing. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | Max 3 Char         |
 
 _* required_
 
