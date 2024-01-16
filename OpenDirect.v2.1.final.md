@@ -535,11 +535,9 @@ Defines search criteria used for finding appropriate products in the product cat
 
 | Attribute          | Description                                                                                                                                                      | Type               |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| **targeting**          | The segments to target. For example, behavioral, age, and gender segments.                                 | [AdCOM **Segment** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_segment) array |
-| **producttargeting**          | The Inventory, Delivery, Investement and Distribution ProductTargeting objects to be targeted for the product search request                                             | producttargeting object array |
-| **currency**           | The currency used to specify product pricing. Currency is set for the PRODUCT resource specified in section 2.7 and uses CURRENCY reference data specified in section 4.6. | Max 3 Char         |
+| **productsearch***          | Defines the product proporties and values used to find matching criteria within products in the product catalogue                         | [Object:  Product](#object_product) array |
 
-_* required_
+_* required
 
 ## Object: Avails <a name="object_avails"></a>
 
