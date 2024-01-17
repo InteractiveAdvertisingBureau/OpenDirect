@@ -537,7 +537,7 @@ Defines search criteria used for finding appropriate products in the product cat
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | **productsearch***          | Defines the product proporties and values used to find matching criteria within products in the product catalogue                         | [Object:  Product](#object_product) array |
 
-_* required
+_* required_
 
 ## Object: Avails <a name="object_avails"></a>
 
