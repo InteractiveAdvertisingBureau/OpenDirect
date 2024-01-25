@@ -531,13 +531,37 @@ _* required_
 
 ## Object: ProductSearch <a name="object_productsearch"></a>
 
-Defines search criteria used for finding appropriate products in the product catalouge 
+An object that is used to identify search criteria used for finding appropriate products in the product catalouge 
 
-| Attribute          | Description                                                                                                                                                      | Type               |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| **productsearch***          | Defines the product proporties and values used to find matching criteria within products in the product catalogue                         | [Object:  Product](#object_product) array |
+|Attribute|Description|Type
+|---|---|---|
+|**publisherid** |The Id of the Publisher providing this Product|string _(36)_
+|**name** |The product’s name.|string _(100)_
+|**description** |The product’s description. |string _(255)_
+|**activedate** |The date and time, in UTC, that the product may become part of the bookable inventory.|string (date-time)
+|**allownocreative** |A Boolean value that indicates whether line items assigned to this order may be booked before creative is assigned.<p> A value of TRUE allows lines to be booked without creative assigned.<p> Default value is FALSE and prevents lines from being booked when no creative is assigned.|boolean
+|**currency** |Identifies the currency for BasePrice and MinSpend.<p>Using ,ISO-4217 currency code|string _(3)_
+|**baseprice** |The product’s base retail price; this is not the rate card price.<p>The actual price may be more if targeting is specified.|number
+|**deliverytype** |Defines the possible types of delivery.<br>• Exclusive – 100% share of voice.<br>• Guaranteed – Guaranteed delivery of all booked display and/or impressions<br>• Non-Guaranteed - Non-Guaranteed delivery of all booked display and/or impressions<br>| enum (exclusive, guaranteed, non-guaranteed)
+|**estdailyavails** |An estimated range of available daily impressions.<p>The ranges should be of the form: Thousands, Tens of Thousands, Hundreds of Thousands, and so on.|string
+|**domain** |Common definition for a domain name.| string _(1024)_
+|**languages** |A list of creative languages that the product supports from ISO-639-1|string array
+|**leadtime** |The number of days (n) from today that a line that reference this product can begin running; the line’s start date must be equal to or later than today + n.|integer
+|**minspend** |The minimum order value of this Product in the specified currency|number
+|**minflight**|The minimum number of days that the product must be booked for. The line must enforce the duration.|integer
+|**maxflight**|The maximum number of days that the product may be booked for. The line must enforce the duration.|integer
+|**producttags**|List of tags used for searching the product catalog.| string  array
+|**ratetype**|Defines a unit of measure that a cost (i.e. BasePrice) is expressed in. The API may support all or a subset of the specified values.|enum (CPM, CPMV, CPC, CPD, FlatRate)
+|**adunit** | Details of the Ad Units comprising this Product | [AdUnit](#object_adunit) array
+|**alladunits** |Describes whether all child Ad Units are severed together as a group or just one of the Ad Units is served|integer
+|**retirementdate** |The date and time, in UTC, that the product may be removed from the bookable inventory.|string (date-time)
+|**tz** |The time zone that the product runs in.|string
+|**context** |Indicates the type of content being used or consumed by the user in which ads may appear. This table has values derived from the TAG Inventory Quality Guidelines (IQG). | [AdCOM **Context** Object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#list--content-contexts-)|
+|**producttargeting** | Array of producttargeting objects used to describe the product inventory and sales rules                                                                                  | producttargeting object |
+|**availsgroupby** | Array of producttargeting objects that describe the grouped fields that that the Availability data can be returned in                                                                                  | producttargeting object |
+|**reservedexpirytime** | Defines a duration that represents the cut off point for expiry of an OrderLine from when it is “reserved”. | ISO-8601                     |
+|**ext**|Optional vendor-specific extensions. |ext object|
 
-_* required_
 
 ## Object: Avails <a name="object_avails"></a>
 
