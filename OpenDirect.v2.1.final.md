@@ -3633,14 +3633,11 @@ Gets a list of Products from the product catalog that matches the specified filt
 
 #### Verbs
 
-* **POST**: (required) Gets a list of products from the publisher’s product catalog based on the criteria specified in the body of the request. For a list of the filter criteria that a caller may specify, see ProductSearch. The body of the response contains a collection of Product objects that match the filter criteria.
+* **POST**: (required) Gets a list of products from the publisher’s product catalog based on the criteria specified in the body of the request. The body of the request is a ProductSearch object that contains the search criteria. For example, the client may search the catalog for products that use a specific ad format. The response includes a collection object that contains an array Product objects that match the search criteria. If no products match the search criteria, the array is empty.
 
 #### Rules
 
-Product selection uses a logical AND between fields and a logical OR between field values. For example, the product is selected if it supports the Flash OR Image OR Text ad format, AND supports USD currency, AND specifies the foo OR bar product tag.
-
-_**Note: Where possible, use a simple GET call with filter that supports logical AND/OR functions. For example:**_
-> GET https://\<host>/\<path>/\<version>/products?publisherid=7987654&producttags=Foo
+Product search can use a logical AND or OR between productsearch object arrays. For example, the product is selected if it supports the Flash OR Image OR Text ad format, AND supports USD currency, AND specifies the foo OR bar product tag.
 
 #### Example Request
 
@@ -3648,77 +3645,94 @@ _**Note: Where possible, use a simple GET call with filter that supports logical
 POST https://<host>/<path>/<version>/products/search HTTP/1.1 Accept: application/json
 AccessToken: <OAuth token>
 {
-    "spec": {
-        "display": {
-            "w": 300,
-            "h": 250,
+    "$or": [
+        {
+            "adunit": {
+                "spec": {
+                    "display": {
+                        "w": 300,
+                        "h": 250
+                    }
+                }
+            }
+        },
+        {
+            "adunit": {
+                "spec": {
+                    "display": {
+                        "w": 600,
+                        "h": 500
+                    }
+                }
+            }
         }
-    }
+    ]
 }
 ```
 
 #### Example Response
 
 ```json
-HTTP/1.1 200 OK Content-Type: application/json Content-Length: 5899
+HTTP/1.1 200 OK Content-Type: application/json Content-Length: 1066
 {
-  "products":[
-    {
-      "id":"456366",
-      "publisherid":"7987654",
-      "name":"Unique Product Name",
-      "descripion":"Mrec and Skyscraper combination",
-      "producttags":"Foo Bar Zoo",
-      "ratetype":"CPM",
-      "currency":"USD",
-      "baseprice":25.00,
-      "deliveryyype":"Guaranteed",
-      "domain":"mydomain.com",
-      "estdailyavails":"Hundreds of Thousands",
-      "icon":"http://<domain>/<path>/icon.jpg",
-      "languages":["EN"],
-      "minspend":1000.00,
-      "adunits":[
+    "products": [
         {
-          "id": "1",
-          "name": "MRec",
-          "spec": {
-              "display": {
-                  "pos": 6,
-                  "w": 300,
-                  "h": 250,
-              }
-          }
-        },
-        {
-          "id": "2",
-          "name": "Skyscraper",
-          "spec": {
-              "display": {
-                  "pos": 6,
-                  "w": 160,
-                  "h": 600,
-              }
-          }
+            "id": "456366",
+            "publisherid": "7987654",
+            "name": "Unique Product Name",
+            "description": "Mrec and Skyscraper combination",
+            "producttags": "Foo Bar Zoo",
+            "ratetype": "CPM",
+            "currency": "USD",
+            "baseprice": 25.00,
+            "deliverytype": "guaranteed",
+            "domain": "mydomain.com",
+            "estdailyavails": "Hundreds of Thousands",
+            "icon": "http://<domain>/<path>/icon.jpg",
+            "languages": [
+                "EN"
+            ],
+            "minspend": 1000.00,
+            "adunit": [
+                {
+                    "id": "1",
+                    "name": "MRec",
+                    "spec": {
+                        "display": {
+                            "pos": 6,
+                            "w": 300,
+                            "h": 250
+                        }
+                    }
+                },
+                {
+                    "id": "2",
+                    "name": "Skyscraper",
+                    "spec": {
+                        "display": {
+                            "pos": 6,
+                            "w": 160,
+                            "h": 600
+                        }
+                    }
+                }
+            ],
+            "alladunits": 1,
+            "context": {
+                "regs": {
+                    "gdpr": 0,
+                    "coppa": 0
+                },
+                "site": {
+                    "name": "Awesome Example Site",
+                    "domain": "examplesitedomain.com",
+                    "amp": 0
+                }
+            },
+            "tz": "Eastern Standard Time",
+            "url": "http://<domain>/<path>/creativespec.aspx"
         }
-      ],
-      "alladunits":1,
-      "context":{
-          "regs": {
-              "gdpr": 0,
-              "coppa": 0
-          },
-          "site": {
-              "name": "Awesome Example Site",
-              "domain": "examplesitedomain.com",
-              "amp": 0,
-          }
-
-      },
-      "tz":"Eastern Standard Time",
-      "url":"http://<domain>/<path>/creativespec.aspx"
-    }
-  ]
+    ]
 }
 ```
 
