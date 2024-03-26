@@ -222,7 +222,7 @@ _* required_
 
 
 ## Object:  AdUnit <a name="object_adunit"></a>
-Ad Unit contains exactly one AdCOM Ad Specification
+Ad Unit contains exactly one AdCOM Placement
 
 
 |Attribute|Description|Type|
