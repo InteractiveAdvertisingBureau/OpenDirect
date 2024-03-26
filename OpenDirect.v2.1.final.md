@@ -333,7 +333,7 @@ See Assignment for instructions on updating a creative.
 | **accountid*** | The ID of the account that owns the creative. |string _(36)_|
 | **name** | Name used to identify this Creative |string _(255)_|
 | **ad** | The metadata and content of this creative Ad|[AdCOM **Ad** object](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#object_ad)|
-| **creativeapprovals** | Any array of pairs describing the approval status for each publisher in the form PublisherId : Status where the approval status is either:<p>- PENDING<p>- APPROVED<p>- REJECTED | Key/Value array |
+| **creativeapprovals** | Any array of pairs describing the approval status for each publisher in the form PublisherId : Status where the approval status is either:<p>- PENDING<p>- APPROVED<p>- REJECTED | enum (PENDING, APPROVED, REJECTED) |
 |**ext**|Optional vendor-specific extensions. |ext object|
 
 _* required_
@@ -586,7 +586,7 @@ An object that groups the inventory availbility into Available, Partially Availa
 
 | Attribute | Description                                                                                                                                               | Type   |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **status***    | Summary definition of the inventory described in the Targeting Array as <ul><li>Available</li><li>Partially Available</li><li>Unavailable</li></ul> | String |
+| **status***    | Summary definition of the inventory described in the Targeting Array as <ul><li>Available</li><li>Partially Available</li><li>Unavailable</li></ul> | enum(Available, Partially Available, Unavailable) |
 | **reason**    | State the reason if Partially Available or Unavailable from the list <ul><li>Booked</li><li>Optioned</li><li>Excluded</li><li>OutOfCharge</li><li>Prohibited</li><li>Manual Trade Only</li><li>InvalidPeriodLength</li><li>InvalidFrameID</li><li>InvalidBudget</li><li>InvalidPrice</li><li>ClientDuplication</li><li>LocationDuplication</li><li>LocationJuxta</li></ul>| String |
 | **comment**   | Free text for an availability comment                                                                                                                     | String |
 | **context**   | Array of ProductTargeting objects describing the context of any Partially Available or Unavailable status e.g. this could be a frame that is causing a duplication error | Object |
