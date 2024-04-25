@@ -124,7 +124,7 @@ design and build their interfaces for offering automated guaranteed inventory.
 As OpenDirect becomes more adopted in the marketplace, the movement of premium inventory
 becomes more fluid.
 
-## What’s New in Version 2.0 <a name="whats_new"></a>
+## What’s New in Version 2.1 <a name="whats_new"></a>
 
 OpenDirect 1.0 was released in January 2015. While a handful of companies have already started adopting the API, more features are needed to encourage wider adoption.
 
@@ -133,6 +133,15 @@ added  more context, clarification, bug fixes, and feature updates
 
 Version 2.0
 Adopts the OpenMedia/AdCOM object definitions for consistency between protocols in addition to a basic messaging protocol for communication between buyers and sellers.
+
+Version 2.1
+Formally embraces product targeting for ‘real world media’ with support for:
+* Deal targeting as frames that see audience, or audience that see frames
+* Investment as fixed, frame or CPT pricing
+* Pacing a campaign over a period of time, location, budget and audience distribution.
+* Temporal delivery standards such as  spot/break length, share of time
+* Identification and transparency for third party inventory, audience, location and venue standards to support global media trading.
+* Upsite/playout/posting/display statistics made available at account, order and orderline level.
 
 ## OpenMedia Mission <a name="openmedia_mission"></a>
 
